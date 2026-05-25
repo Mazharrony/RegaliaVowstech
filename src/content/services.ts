@@ -1,0 +1,620 @@
+export type ServiceSlug =
+  | "branding"
+  | "marketing"
+  | "social-media"
+  | "content-ads"
+  | "live-streaming"
+  | "web-mobile"
+  | "custom-cms-inventory"
+  | "corporate-automation"
+  | "ai-automation"
+  | "events-expo";
+
+export type ServicePackage = {
+  /** Short badge label, e.g. "Templates", "Standard", "Premium", "Bespoke". */
+  tier: string;
+  /** Package name. */
+  name: string;
+  /**
+   * Price expression in AED, e.g. "1–2k", "500–1.5k", "4.5k".
+   * Leave undefined for "on request" packages.
+   */
+  priceFrom?: string;
+  /** Billing rhythm. */
+  cadence?: "project" | "month" | "one-time";
+  /** Small line under the price for add-ons, e.g. "+ AED 700 / mo maintenance". */
+  note?: string;
+  /** Short positioning sentence. */
+  summary: string;
+  /** Bullet list of inclusions. */
+  includes: string[];
+  /** Visually emphasise this card in the grid. */
+  highlight?: boolean;
+};
+
+export type Service = {
+  slug: ServiceSlug;
+  number: string;
+  title: string;
+  tagline: string;
+  summary: string;
+  deliverables: string[];
+  process: { step: string; title: string; body: string }[];
+  packages: ServicePackage[];
+  faqs: { q: string; a: string }[];
+};
+
+export const services: Service[] = [
+  {
+    slug: "branding",
+    number: "01",
+    title: "Branding & Identity",
+    tagline: "Identity systems with intent.",
+    summary:
+      "Strategy, naming, visual systems and brand guidelines that hold up across a logo, a packaging line and a 30-second film.",
+    deliverables: [
+      "Brand strategy & positioning",
+      "Naming & verbal identity",
+      "Logo & visual system",
+      "Typography & colour systems",
+      "Brand guidelines & toolkits",
+      "Launch collateral",
+    ],
+    process: [
+      { step: "01", title: "Immersion", body: "Stakeholder interviews, audit, competitive review." },
+      { step: "02", title: "Strategy", body: "Positioning, voice, narrative platform." },
+      { step: "03", title: "Identity", body: "Logo, type, colour and motion." },
+      { step: "04", title: "Rollout", body: "Guidelines, templates, on-brand launch assets." },
+    ],
+    packages: [
+      {
+        tier: "Bespoke",
+        name: "Brand Programme",
+        cadence: "project",
+        summary:
+          "Every brand engagement is scoped to the ambition — from a quick visual refresh to a full naming and identity build.",
+        includes: [
+          "Discovery & strategy session",
+          "Logo & visual system",
+          "Type, colour & layout system",
+          "Brand guidelines",
+          "Launch collateral set",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "How long does a brand engagement take?", a: "Most identity programmes run six to twelve weeks depending on scope and team availability." },
+      { q: "Can you work with our internal designers?", a: "Yes — we frequently embed with in-house teams and hand off systems they can extend." },
+    ],
+  },
+  {
+    slug: "marketing",
+    number: "02",
+    title: "Digital & Local Marketing",
+    tagline: "Performance and presence — earned and paid.",
+    summary:
+      "Search, social and Google Ads programmes tuned for GCC audiences — clear pricing, weekly optimisation and measurable outcomes.",
+    deliverables: [
+      "Channel strategy & media planning",
+      "SEO & content programmes",
+      "Paid social ads (Meta, TikTok, Snap)",
+      "Google Ads (Search, Performance Max, YouTube)",
+      "Landing pages & creative variants",
+      "Measurement & analytics dashboards",
+    ],
+    process: [
+      { step: "01", title: "Audit", body: "Funnel, channels, creative and attribution review." },
+      { step: "02", title: "Plan", body: "Audiences, channel mix, creative territories." },
+      { step: "03", title: "Launch", body: "Setup, creative production, campaign go-live." },
+      { step: "04", title: "Optimise", body: "Weekly readouts, iteration, scale." },
+    ],
+    packages: [
+      {
+        tier: "SEO",
+        name: "Search Engine Optimisation",
+        priceFrom: "500–1.5k",
+        cadence: "month",
+        summary:
+          "On-page, technical and content SEO that compounds your organic traffic month after month.",
+        includes: [
+          "Keyword & competitor research",
+          "On-page + technical fixes",
+          "Monthly content & link plan",
+          "Search Console + GA4 reporting",
+          "Local SEO (Google Business)",
+        ],
+      },
+      {
+        tier: "Social Ads",
+        name: "Social Media Marketing",
+        priceFrom: "700–2k",
+        cadence: "month",
+        note: "+ ad spend · AED 700 one-time setup",
+        summary:
+          "Paid social campaigns on Meta, TikTok and Snap — strategy, creative and weekly optimisation.",
+        includes: [
+          "One-time account setup",
+          "Audience & creative strategy",
+          "Ad creative production",
+          "Pixel + conversions setup",
+          "Weekly optimisation",
+          "Monthly performance report",
+        ],
+        highlight: true,
+      },
+      {
+        tier: "Google Ads",
+        name: "Google Ads Management",
+        priceFrom: "700–2k",
+        cadence: "month",
+        note: "+ ad spend · AED 700 one-time setup",
+        summary:
+          "Search, Performance Max and YouTube campaigns built around your conversion goals.",
+        includes: [
+          "One-time account setup",
+          "Keyword + bidding strategy",
+          "Ad copy + extensions",
+          "Conversion tracking",
+          "Weekly optimisation",
+          "Monthly performance report",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "Is ad spend included?", a: "No — ad spend is paid directly to the platform. Our fee covers strategy, creative, setup, optimisation and reporting." },
+      { q: "How long is the minimum engagement?", a: "We recommend a three-month minimum so the algorithms (and our optimisations) have time to compound." },
+    ],
+  },
+  {
+    slug: "social-media",
+    number: "03",
+    title: "Social Media Management",
+    tagline: "Always-on presence that compounds.",
+    summary:
+      "Strategy, calendars and community management across the platforms that matter for your audience.",
+    deliverables: [
+      "Channel strategy & audience mapping",
+      "Content calendars & publishing",
+      "Community management & DMs",
+      "Short-form video (reels / TikTok)",
+      "Monthly insight reports",
+      "Creative iteration & refresh",
+    ],
+    process: [
+      { step: "01", title: "Position", body: "Voice, pillars, audience and channel-fit." },
+      { step: "02", title: "Plan", body: "Monthly calendar, formats and creative briefs." },
+      { step: "03", title: "Publish", body: "Cadence, community, light amplification." },
+      { step: "04", title: "Iterate", body: "Monthly readouts and creative refresh." },
+    ],
+    packages: [
+      {
+        tier: "Starter",
+        name: "Always-On Starter",
+        priceFrom: "700",
+        cadence: "month",
+        summary: "Two platforms, eight posts a month — consistent presence on a tight budget.",
+        includes: [
+          "2 platforms managed",
+          "8 posts / month",
+          "Basic community replies",
+          "Monthly insight report",
+        ],
+      },
+      {
+        tier: "Standard",
+        name: "Studio Cadence",
+        priceFrom: "1.2k",
+        cadence: "month",
+        summary: "Three platforms, stories and short-form video — the sweet spot for most brands.",
+        includes: [
+          "3 platforms managed",
+          "16 posts + 8 stories / month",
+          "2 short-form videos / month",
+          "Active community management",
+          "Monthly trend brief",
+        ],
+        highlight: true,
+      },
+      {
+        tier: "Pro",
+        name: "Pro Newsroom",
+        priceFrom: "2k",
+        cadence: "month",
+        summary: "Four platforms, full reels and daily community ops.",
+        includes: [
+          "4 platforms managed",
+          "24 posts + 12 stories / month",
+          "6 reels / TikToks / month",
+          "Daily community management",
+          "Influencer outreach (light)",
+          "Bi-weekly creative review",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "Which platforms do you run?", a: "Instagram, TikTok, LinkedIn, YouTube, X, Snap and Facebook — primary mix is tuned to your audience." },
+      { q: "Do you handle paid ads too?", a: "Yes — see our Digital & Local Marketing service for paid social and Google Ads management." },
+    ],
+  },
+  {
+    slug: "content-ads",
+    number: "04",
+    title: "Photo & Video Production",
+    tagline: "Photo, video and reels — built to perform.",
+    summary:
+      "In-house photography and videography for events, products, brand films and social-first content with platform-ready edits.",
+    deliverables: [
+      "Event & brand photography",
+      "Highlight films & brand videos",
+      "Social-first reels & vertical cuts",
+      "Product / catalogue photography",
+      "Colour grading & sound mixing",
+      "Platform-ready exports",
+    ],
+    process: [
+      { step: "01", title: "Brief", body: "Goals, deliverables, look & feel, location." },
+      { step: "02", title: "Pre-pro", body: "Shotlist, schedule, crew, equipment." },
+      { step: "03", title: "Shoot", body: "On-location capture by photo + video specialists." },
+      { step: "04", title: "Post", body: "Edit, grade, sound, platform exports." },
+    ],
+    packages: [
+      {
+        tier: "Basic",
+        name: "Basic Package",
+        priceFrom: "1k",
+        cadence: "project",
+        summary:
+          "One media specialist handling both photo and video — perfect for small events and content drops.",
+        includes: [
+          "1 media specialist (photo + video)",
+          "10 edited photos",
+          "1 highlight video covering key moments",
+          "Standard turnaround",
+        ],
+      },
+      {
+        tier: "Professional",
+        name: "Professional Package",
+        priceFrom: "1.5k",
+        cadence: "project",
+        summary:
+          "A dedicated photographer plus videographer — the most-picked tier for brand events.",
+        includes: [
+          "1 photographer + 1 videographer",
+          "All edited images delivered",
+          "1 highlight video (horizontal, web-ready)",
+          "— or 1 social media reel (vertical, IG / TikTok)",
+        ],
+        highlight: true,
+      },
+      {
+        tier: "Premium",
+        name: "Premium Package",
+        priceFrom: "2.2k",
+        cadence: "project",
+        summary:
+          "A larger crew and both deliverable formats — built for launches and flagship moments.",
+        includes: [
+          "1 photographer + 2 videographers",
+          "All edited images delivered",
+          "1 highlight video (horizontal, web-ready)",
+          "1 social media reel (vertical, IG / TikTok)",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "How long does delivery take?", a: "Photo selects in 48 hours, full edits and the highlight video within 7–10 days of the shoot." },
+      { q: "Can we add extra videographers or shoot days?", a: "Yes — every package can scale up with extra crew, locations or shoot days." },
+    ],
+  },
+  {
+    slug: "live-streaming",
+    number: "05",
+    title: "Live Streaming Production",
+    tagline: "Multi-camera live, switched on the fly.",
+    summary:
+      "4K live production for conferences, launches and broadcasts — multi-camera shoot, switcher, and on-the-fly editing with a live feed.",
+    deliverables: [
+      "Multi-camera 4K live production",
+      "On-site 4K switcher",
+      "Real-time editing & live feed",
+      "Optional broadcast distribution",
+      "Recording & archive deliverables",
+    ],
+    process: [
+      { step: "01", title: "Plan", body: "Run-of-show, camera positions, distribution plan." },
+      { step: "02", title: "Setup", body: "Cameras, switcher, monitors and connectivity on site." },
+      { step: "03", title: "Live", body: "Operate, switch and edit live with full crew." },
+      { step: "04", title: "Wrap", body: "Hand off recordings and archive cuts." },
+    ],
+    packages: [
+      {
+        tier: "Studio Live",
+        name: "Live Stream — Package 1",
+        priceFrom: "4.5k",
+        cadence: "project",
+        note: "Dubai",
+        summary:
+          "Three 4K cameras with operators, a 4K switcher and on-the-fly editing with a live feed.",
+        includes: [
+          "3 × 4K cameras with operators",
+          "4K switcher",
+          "Live editing + live feed",
+          "Crew of 4 (3 camera + 1 switcher)",
+          "Recording delivered after the event",
+        ],
+      },
+      {
+        tier: "Broadcast Live",
+        name: "Live Stream — Package 2",
+        priceFrom: "5.5k",
+        cadence: "project",
+        note: "Dubai · includes broadcast",
+        summary:
+          "Everything in Package 1, plus live broadcasting to your destination of choice.",
+        includes: [
+          "3 × 4K cameras with operators",
+          "4K switcher",
+          "Live editing + live feed",
+          "Crew of 4 (3 camera + 1 switcher)",
+          "Live broadcast distribution",
+          "Recording delivered after the event",
+        ],
+        highlight: true,
+      },
+    ],
+    faqs: [
+      { q: "Do prices include travel outside Dubai?", a: "Listed prices are for productions in Dubai. We quote travel, accommodation and per diem separately for shoots elsewhere." },
+      { q: "Where can you broadcast to?", a: "YouTube, Facebook, LinkedIn, TikTok, Twitch, Vimeo and most RTMP destinations — including private streaming endpoints." },
+    ],
+  },
+  {
+    slug: "web-mobile",
+    number: "06",
+    title: "Website & Mobile Applications",
+    tagline: "Fast, accessible products people love opening.",
+    summary:
+      "From ready-made templates to heavily-developed custom e-commerce and native mobile apps — engineered for speed, SEO and graceful evolution.",
+    deliverables: [
+      "Marketing & e-commerce websites",
+      "Custom UI/UX design",
+      "Native iOS & Android apps",
+      "Payments & shipping integrations",
+      "SEO + analytics setup",
+      "Hosting, maintenance & support",
+    ],
+    process: [
+      { step: "01", title: "Define", body: "Goals, audiences, technical constraints." },
+      { step: "02", title: "Design", body: "Flows, IA, UI design and prototypes." },
+      { step: "03", title: "Build", body: "Frontend, backend, integrations, QA." },
+      { step: "04", title: "Launch", body: "Deployment, monitoring, iteration." },
+    ],
+    packages: [
+      {
+        tier: "Templates",
+        name: "Template Website",
+        priceFrom: "1–2k",
+        cadence: "one-time",
+        summary:
+          "A polished, mobile-ready site built on a proven template — live in days, not months.",
+        includes: [
+          "Ready-made template setup",
+          "Up to 6 pages",
+          "Mobile responsive",
+          "Contact form + WhatsApp",
+          "Basic SEO setup",
+          "Hosting handover",
+        ],
+      },
+      {
+        tier: "Custom Ecom",
+        name: "Custom E-commerce",
+        priceFrom: "5–10k",
+        cadence: "one-time",
+        note: "+ AED 700 / month maintenance",
+        summary:
+          "A heavily-developed custom e-commerce site with payments, shipping and an admin you'll actually enjoy using.",
+        includes: [
+          "Custom UI/UX design",
+          "Custom e-commerce build",
+          "Payments + shipping integrations",
+          "Admin dashboard",
+          "SEO + analytics + pixels",
+          "Bilingual (EN/AR) ready",
+          "Monthly maintenance retainer",
+        ],
+        highlight: true,
+      },
+      {
+        tier: "Bespoke",
+        name: "Native Apps & Platforms",
+        cadence: "project",
+        summary:
+          "iOS, Android and bespoke web platforms — scoped to your product and roadmap.",
+        includes: [
+          "Native iOS + Android apps",
+          "Backend platform & APIs",
+          "Real-time + offline support",
+          "App Store + Play Store launch",
+          "Ongoing engineering retainer",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "What's the difference between templates and custom?", a: "Templates ship fast on a proven layout — perfect for small businesses. Custom e-commerce is designed and built for your brand, with deeper integrations and admin tooling." },
+      { q: "What does maintenance cover?", a: "Hosting, security patches, plugin updates, content tweaks (up to 2 hours/month) and uptime monitoring." },
+    ],
+  },
+  {
+    slug: "custom-cms-inventory",
+    number: "07",
+    title: "Custom CMS & Inventory",
+    tagline: "Software that fits the way your team actually works.",
+    summary:
+      "Bespoke content, catalogue and inventory platforms built around real workflows — multi-warehouse, multi-channel, multi-currency.",
+    deliverables: [
+      "Headless CMS implementations",
+      "Inventory & warehouse management",
+      "POS & e-commerce integrations",
+      "Role-based admin dashboards",
+      "Reporting & exports",
+      "API design & integrations",
+    ],
+    process: [
+      { step: "01", title: "Discover", body: "Map current process and pain points." },
+      { step: "02", title: "Model", body: "Data, roles, workflows, edge cases." },
+      { step: "03", title: "Build", body: "Iterative delivery with weekly demos." },
+      { step: "04", title: "Adopt", body: "Migration, training, change support." },
+    ],
+    packages: [
+      {
+        tier: "Bespoke",
+        name: "Tailored Platform",
+        cadence: "project",
+        summary:
+          "Every CMS and inventory build is sized to your catalogue, channels and team — we scope after a discovery call.",
+        includes: [
+          "Discovery & process mapping",
+          "Data + role modelling",
+          "Custom admin dashboards",
+          "POS / e-com / ERP integrations",
+          "Migration + training",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "Can you integrate with our ERP?", a: "Yes — we regularly connect to SAP, Oracle, Odoo and custom systems via APIs and middleware." },
+      { q: "Do you migrate existing data?", a: "Yes, including reconciliation and validation runs before go-live." },
+    ],
+  },
+  {
+    slug: "corporate-automation",
+    number: "08",
+    title: "Corporate Automation",
+    tagline: "Take the manual out of the back office.",
+    summary:
+      "Workflow, document and approval automations that compound: from finance close to onboarding to procurement.",
+    deliverables: [
+      "Process discovery & mapping",
+      "Workflow & approval automation",
+      "Document generation & e-signature",
+      "Internal portals & self-service tools",
+      "RPA & integration glue",
+      "KPI dashboards",
+    ],
+    process: [
+      { step: "01", title: "Map", body: "Shadow teams, capture the real workflow." },
+      { step: "02", title: "Prioritise", body: "Rank by hours saved and risk reduced." },
+      { step: "03", title: "Automate", body: "Ship in small, observable releases." },
+      { step: "04", title: "Measure", body: "Track time saved and error reduction." },
+    ],
+    packages: [
+      {
+        tier: "Bespoke",
+        name: "Automation Programme",
+        cadence: "project",
+        summary:
+          "We scope automation programmes after mapping your processes — pick one workflow or run an org-wide rollout.",
+        includes: [
+          "Process discovery & mapping",
+          "Workflow & approval automation",
+          "Document generation + e-sign",
+          "Integrations with your stack",
+          "KPI dashboard",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "Do we need to rip and replace tools?", a: "Rarely — we usually wrap and connect what you already use." },
+      { q: "How do you handle compliance?", a: "Audit trails, role-based access and data residency are baked in from day one." },
+    ],
+  },
+  {
+    slug: "ai-automation",
+    number: "09",
+    title: "AI-Powered Automation",
+    tagline: "Practical AI that earns its keep.",
+    summary:
+      "LLM and ML applications focused on measurable outcomes: assistants, copilots, document understanding, vision and forecasting.",
+    deliverables: [
+      "AI strategy & opportunity mapping",
+      "Conversational assistants & copilots",
+      "Document understanding pipelines",
+      "Computer vision applications",
+      "Forecasting & anomaly detection",
+      "Evaluation, guardrails & observability",
+    ],
+    process: [
+      { step: "01", title: "Frame", body: "Define use cases with measurable ROI." },
+      { step: "02", title: "Prototype", body: "Ship a working pilot in weeks." },
+      { step: "03", title: "Harden", body: "Evaluation, guardrails, latency, cost." },
+      { step: "04", title: "Scale", body: "Roll out across teams with monitoring." },
+    ],
+    packages: [
+      {
+        tier: "Bespoke",
+        name: "AI Engagement",
+        cadence: "project",
+        summary:
+          "From a single pilot to a platform-grade rollout — we scope after framing the use case and the data.",
+        includes: [
+          "Opportunity & ROI framing",
+          "Working pilot or production build",
+          "Evaluation + guardrails",
+          "Observability + monitoring",
+          "Data residency engineering",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "Whose models do you use?", a: "Whichever fits — OpenAI, Anthropic, Google, open-source. We choose for accuracy, latency and cost." },
+      { q: "Where does our data live?", a: "We design for the data residency and privacy posture your business requires." },
+    ],
+  },
+  {
+    slug: "events-expo",
+    number: "10",
+    title: "Event & Expo Branding",
+    tagline: "Stands and stages that pull a crowd.",
+    summary:
+      "Concept, branding, stand design and on-ground production for expos, conferences and brand activations across the region.",
+    deliverables: [
+      "Event concept & creative direction",
+      "Stand design & 3D visualisation",
+      "Production & on-site management",
+      "Signage, AV & interactive installations",
+      "Brand collateral & giveaways",
+      "Post-event analytics",
+    ],
+    process: [
+      { step: "01", title: "Concept", body: "Brief, narrative, creative territories." },
+      { step: "02", title: "Design", body: "Stand, materials, journey, content." },
+      { step: "03", title: "Produce", body: "Fabrication, logistics, installation." },
+      { step: "04", title: "Deliver", body: "On-site team, takedown, debrief." },
+    ],
+    packages: [
+      {
+        tier: "Bespoke",
+        name: "Event Production",
+        cadence: "project",
+        summary:
+          "From a compact stand to a multi-zone pavilion — every event is quoted after we understand size, scope and ambition.",
+        includes: [
+          "Concept + 3D visuals",
+          "Stand design + fabrication",
+          "AV + interactive installs",
+          "On-site management",
+          "Post-event debrief",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "Do you handle production end-to-end?", a: "Yes — design, fabrication, logistics, install, on-site management and dismantle." },
+      { q: "Which expos have you worked at?", a: "GITEX, ADIPEC, Arab Health, Gulfood and a long list of brand-owned activations." },
+    ],
+  },
+];
+
+export function getService(slug: string) {
+  return services.find((s) => s.slug === slug);
+}
