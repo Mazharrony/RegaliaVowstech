@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { getServices } from "@/content/services";
+import { CTASection } from "@/components/sections/home/CTASection";
 
 export async function generateMetadata() {
   const t = await getTranslations("nav");
@@ -19,6 +20,7 @@ export default async function ServicesIndexPage({
   const tNav = await getTranslations("nav");
   const tIndex = await getTranslations("servicesIndex");
   const services = getServices(locale);
+  const industries = tIndex.raw("industries") as string[];
 
   return (
     <>
@@ -63,6 +65,43 @@ export default async function ServicesIndexPage({
           ))}
         </ul>
       </section>
+
+      <section className="border-t hairline bg-[var(--color-bg-alt)]">
+        <div className="container-x py-20 md:py-28">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-6">
+              <Reveal>
+                <p className="eyebrow mb-5 inline-flex items-center gap-2">
+                  <span className="inline-block h-px w-8 bg-[var(--color-accent)]" />
+                  {tIndex("industriesEyebrow")}
+                </p>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="display-2 max-w-[16ch] text-balance">
+                  {tIndex("industriesEyebrow")}
+                </h2>
+              </Reveal>
+            </div>
+            <Reveal delay={0.15} className="lg:col-span-6">
+              <p className="text-[var(--color-muted)] md:text-lg">
+                {tIndex("industriesBody")}
+              </p>
+            </Reveal>
+          </div>
+
+          <ul className="mt-12 flex flex-wrap gap-2 md:mt-16 md:gap-3">
+            {industries.map((label, i) => (
+              <Reveal key={label} delay={i * 0.04}>
+                <li className="rounded-full border hairline px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] transition-colors hover:border-[var(--color-ink)] hover:text-[var(--color-ink)] md:px-5 md:py-2.5">
+                  {label}
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <CTASection />
     </>
   );
 }

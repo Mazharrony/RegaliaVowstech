@@ -22,12 +22,12 @@ export default async function HomePage({
     <>
       <Hero />
       <ClientsMarquee />
+      <AboutTeaser />
       <ServicesGrid />
+      <SelectedWork />
       <Metrics />
       <ProcessStrip />
-      <LatestInsights/>
-      <SelectedWork />
-      <ProcessStrip />
+      <LatestInsights />
       <Testimonials />
       <CTASection />
     </>

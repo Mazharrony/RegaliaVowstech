@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { work } from "@/content/work";
+import { CTASection } from "@/components/sections/home/CTASection";
 
 export async function generateMetadata() {
   const t = await getTranslations("nav");
@@ -17,6 +18,13 @@ export default async function WorkIndexPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const tNav = await getTranslations("nav");
+  const tIndex = await getTranslations("workIndex");
+
+  const industryCounts = work.reduce<Record<string, number>>((acc, w) => {
+    acc[w.industry] = (acc[w.industry] ?? 0) + 1;
+    return acc;
+  }, {});
+  const industries = Object.entries(industryCounts).sort((a, b) => b[1] - a[1]);
 
   return (
     <>
@@ -26,12 +34,39 @@ export default async function WorkIndexPage({
         </Reveal>
         <Reveal delay={0.1}>
           <h1 className="display-1 max-w-5xl text-balance">
-            Recent launches, in their own words.
+            {tIndex("headline")}
           </h1>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p className="mt-10 max-w-2xl text-[var(--color-muted)] md:text-lg">
+            {tIndex("body")}
+          </p>
         </Reveal>
       </section>
 
-      <section className="container-x grid gap-10 pb-24 md:grid-cols-2 md:pb-32">
+      <section className="border-t hairline">
+        <div className="container-x flex flex-wrap items-center gap-x-6 gap-y-4 py-8 md:py-10">
+          <p className="eyebrow inline-flex items-center gap-2">
+            <span className="inline-block h-px w-6 bg-[var(--color-accent)]" />
+            {tIndex("industriesEyebrow")}
+          </p>
+          <ul className="flex flex-wrap gap-2">
+            <li className="rounded-full bg-[var(--color-ink)] px-3.5 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[var(--color-bg)]">
+              {tIndex("industriesAll")} · {work.length}
+            </li>
+            {industries.map(([label, count]) => (
+              <li
+                key={label}
+                className="rounded-full border hairline px-3.5 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[var(--color-muted)]"
+              >
+                {label} · {count}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="container-x grid gap-10 border-t hairline pb-24 pt-12 md:grid-cols-2 md:pb-32 md:pt-16">
         {work.map((w, i) => (
           <Reveal key={w.slug} delay={(i % 2) * 0.05}>
             <Link href={`/work/${w.slug}`} className="group block">
@@ -73,6 +108,8 @@ export default async function WorkIndexPage({
           </Reveal>
         ))}
       </section>
+
+      <CTASection />
     </>
   );
 }

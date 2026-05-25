@@ -65,6 +65,26 @@ export default async function ContactPage({
                 <p className="eyebrow mb-3">{t("hours")}</p>
                 <p className="font-serif text-xl">{t("hoursValue")}</p>
               </div>
+              <div>
+                <p className="eyebrow mb-3">{t("responseTime")}</p>
+                <p className="font-serif text-xl">{t("responseTimeValue")}</p>
+              </div>
+              <div>
+                <p className="eyebrow mb-4 inline-flex items-center gap-2">
+                  <span className="inline-block h-px w-6 bg-[var(--color-accent)]" />
+                  {t("nextStepsEyebrow")}
+                </p>
+                <ol className="space-y-4 text-sm text-[var(--color-muted)]">
+                  {[1, 2, 3].map((n) => (
+                    <li key={n} className="flex gap-4 border-b hairline pb-4">
+                      <span className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-accent)]">
+                        {String(n).padStart(2, "0")}
+                      </span>
+                      <span className="text-[var(--color-ink)]">{t(`nextStep${n}`)}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
           </Reveal>
 

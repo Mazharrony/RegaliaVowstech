@@ -1,37 +1,11 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/Reveal";
+import { CTASection } from "@/components/sections/home/CTASection";
 
 export async function generateMetadata() {
   const t = await getTranslations("nav");
   return { title: t("process") };
 }
-
-const phases = [
-  {
-    n: "01",
-    title: "Discover",
-    body: "We start with listening. Stakeholder interviews, audits and research that turn ambition into a sharp, signed-off brief.",
-    deliverables: ["Stakeholder interviews", "Audit & competitive review", "Opportunity map", "Signed brief"],
-  },
-  {
-    n: "02",
-    title: "Define",
-    body: "Strategy, narrative and a roadmap the whole team can rally around. We make the trade-offs visible and the bets explicit.",
-    deliverables: ["Strategy & positioning", "Information architecture", "Roadmap & estimates", "Success metrics"],
-  },
-  {
-    n: "03",
-    title: "Design & Build",
-    body: "Identity, interfaces, software and physical builds — shaped in tight loops with weekly demos and a single shared backlog.",
-    deliverables: ["Design system", "Production build", "Integration & QA", "Launch readiness review"],
-  },
-  {
-    n: "04",
-    title: "Launch & Evolve",
-    body: "Go-live, measurement, optimisation and the next chapter. We stay close after launch, not just before it.",
-    deliverables: ["Go-live", "Analytics & monitoring", "Iteration backlog", "Quarterly reviews"],
-  },
-];
 
 export default async function ProcessPage({
   params,
@@ -41,6 +15,24 @@ export default async function ProcessPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const tNav = await getTranslations("nav");
+  const t = await getTranslations("processPage");
+
+  const phases = [1, 2, 3, 4].map((n) => ({
+    n: String(n).padStart(2, "0"),
+    title: t(`phase${n}Title`),
+    body: t(`phase${n}Body`),
+    deliverables: [
+      t(`phase${n}D1`),
+      t(`phase${n}D2`),
+      t(`phase${n}D3`),
+      t(`phase${n}D4`),
+    ],
+  }));
+
+  const engagements = [1, 2, 3].map((n) => ({
+    title: t(`engagement${n}Title`),
+    body: t(`engagement${n}Body`),
+  }));
 
   return (
     <>
@@ -50,13 +42,12 @@ export default async function ProcessPage({
         </Reveal>
         <Reveal delay={0.1}>
           <h1 className="display-1 max-w-5xl text-balance">
-            A clear path from brief to launch — and beyond.
+            {t("headline")}
           </h1>
         </Reveal>
         <Reveal delay={0.2}>
           <p className="mt-10 max-w-2xl text-lg text-[var(--color-muted)] md:text-xl">
-            Four phases, run in tight loops. Every phase ships something useful,
-            so momentum compounds and nothing waits until the end.
+            {t("body")}
           </p>
         </Reveal>
       </section>
@@ -73,7 +64,7 @@ export default async function ProcessPage({
                 <p className="text-lg text-[var(--color-muted)] md:text-xl">{p.body}</p>
               </Reveal>
               <Reveal delay={0.15} className="lg:col-span-3">
-                <p className="eyebrow mb-4">Deliverables</p>
+                <p className="eyebrow mb-4">{t("deliverables")}</p>
                 <ul className="space-y-2 text-sm">
                   {p.deliverables.map((d) => (
                     <li key={d} className="border-b hairline pb-2">{d}</li>
@@ -84,6 +75,49 @@ export default async function ProcessPage({
           </div>
         ))}
       </section>
+
+      <section className="border-t hairline">
+        <div className="container-x py-20 md:py-28">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-6">
+              <Reveal>
+                <p className="eyebrow mb-5 inline-flex items-center gap-2">
+                  <span className="inline-block h-px w-8 bg-[var(--color-accent)]" />
+                  {t("engagementEyebrow")}
+                </p>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="display-2 max-w-[16ch] text-balance">
+                  {t("engagementTitle")}
+                </h2>
+              </Reveal>
+            </div>
+            <Reveal delay={0.15} className="lg:col-span-6">
+              <p className="text-[var(--color-muted)] md:text-lg">
+                {t("engagementBody")}
+              </p>
+            </Reveal>
+          </div>
+
+          <ul className="mt-14 grid gap-6 md:mt-20 md:grid-cols-3">
+            {engagements.map((e, i) => (
+              <Reveal key={e.title} delay={i * 0.08}>
+                <li className="flex h-full flex-col gap-4 rounded-md border hairline p-7 md:p-8">
+                  <span className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                    {String(i + 1).padStart(2, "0")} / 03
+                  </span>
+                  <h3 className="font-serif text-2xl tracking-tight md:text-3xl">
+                    {e.title}
+                  </h3>
+                  <p className="text-[var(--color-muted)]">{e.body}</p>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <CTASection />
     </>
   );
 }

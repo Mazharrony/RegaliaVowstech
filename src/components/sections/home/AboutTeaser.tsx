@@ -23,7 +23,7 @@ export function AboutTeaser() {
       />
 
       <div className="container-wide relative section-pad-lg">
-        <div className="grid gap-16 lg:grid-cols-12 lg:items-start">
+        <div className="grid gap-16 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <Reveal>
               <p className="eyebrow mb-6 inline-flex items-center gap-2">
@@ -52,7 +52,7 @@ export function AboutTeaser() {
             </Reveal>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:col-span-5 lg:mt-2 lg:gap-x-10">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:col-span-5 lg:gap-x-10">
             {(["years", "projects", "clients", "countries"] as const).map((k, i) => (
               <Reveal key={k} delay={0.1 * i}>
                 <div className="border-t border-[var(--color-line-dark)] pt-5">

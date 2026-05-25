@@ -69,7 +69,7 @@ export function Hero() {
           {/* Side meta column */}
           <Reveal
             delay={0.4}
-            className="col-span-12 hidden flex-col items-end justify-end gap-4 lg:col-span-3 lg:flex"
+            className="col-span-12 hidden flex-col items-end justify-end gap-4 md:flex lg:col-span-3"
           >
             <span className="block h-24 w-px bg-[var(--color-line)]" />
             <p className="max-w-[14ch] text-end font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
