@@ -30,7 +30,7 @@
   --radius-lg: 24px;
   --radius-xl: 36px;
 
-  --container-padding: clamp(1.25rem, 3vw, 2.5rem);
+  --container-padding: clamp(1.5rem, 4vw, 3rem);
 
   /* Fluid type scale */
   --step--2: clamp(0.68rem, 0.65rem + 0.15vw, 0.78rem);
@@ -96,7 +96,7 @@
 
   .mega {
     font-family: var(--font-display);
-    font-size: var(--step-8);
+    font-size: clamp(2.25rem, 12vw, var(--step-8));
     line-height: 0.86;
     letter-spacing: -0.055em;
     font-weight: 800;

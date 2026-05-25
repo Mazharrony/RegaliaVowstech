@@ -17,8 +17,8 @@ export async function Footer() {
   return (
     <footer className="relative slab-dark border-t hairline-dark">
       {/* Massive contact card */}
-      <div className="container-wide pb-20 pt-20 md:pb-28 md:pt-28">
-        <div className="grid gap-16 lg:grid-cols-12">
+      <div className="container-wide pb-16 pt-16 md:pb-24 md:pt-24 lg:pb-28 lg:pt-28">
+        <div className="grid gap-12 md:gap-16 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <p className="eyebrow mb-6">{tNav("contact")} · 2026</p>
             <MaskReveal>
@@ -44,7 +44,7 @@ export async function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:col-span-4 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-10 min-[420px]:grid-cols-2 sm:gap-12 lg:col-span-4 lg:grid-cols-2 lg:gap-8">
             <div>
               <p className="eyebrow mb-5">{t("studio")}</p>
               <ul className="space-y-2.5 text-sm">
@@ -91,7 +91,7 @@ export async function Footer() {
         </div>
 
         {/* Meta strip */}
-        <div className="mt-20 grid gap-8 border-t border-[var(--color-line-dark)] pt-8 text-sm text-[var(--color-muted-dark)] md:grid-cols-4">
+        <div className="mt-16 grid gap-8 border-t border-[var(--color-line-dark)] pt-10 text-sm text-[var(--color-muted-dark)] sm:grid-cols-2 md:mt-20 md:grid-cols-4">
           <div>
             <p className="eyebrow mb-2">{company.shortName}</p>
             <p className="text-[var(--color-bg)]">{company.address.line1}</p>
@@ -107,7 +107,7 @@ export async function Footer() {
             <p className="text-[var(--color-bg)]">{tCommon("estYear")}</p>
             <p>GCC + Worldwide</p>
           </div>
-          <div className="flex flex-wrap items-end gap-4 md:justify-end md:gap-8">
+          <div className="flex flex-wrap items-end gap-x-6 gap-y-3 sm:gap-x-4 md:justify-end md:gap-8">
             <Link href="/legal/privacy" className="link-wipe">{tLegal("privacy")}</Link>
             <Link href="/legal/terms" className="link-wipe">{tLegal("terms")}</Link>
             <span>© {year}</span>
@@ -118,13 +118,13 @@ export async function Footer() {
       {/* Oversized wordmark */}
       <div aria-hidden className="pointer-events-none select-none overflow-hidden border-t border-[var(--color-line-dark)]">
         <p
-          className="mega whitespace-nowrap py-8 text-center text-[var(--color-bg)] opacity-[0.92]"
+          className="mega whitespace-nowrap py-6 text-center text-[var(--color-bg)] opacity-[0.92] md:py-8"
           style={{ WebkitTextStroke: "1px var(--color-bg)" }}
         >
           <span className="opacity-90">Regalia</span>
-          <span className="mx-6 text-[var(--color-accent)]">·</span>
+          <span className="mx-3 text-[var(--color-accent)] md:mx-6">·</span>
           <span className="opacity-90">Vows</span>
-          <span className="mx-6 text-[var(--color-accent)]">·</span>
+          <span className="mx-3 text-[var(--color-accent)] md:mx-6">·</span>
           <span className="opacity-90">Tech</span>
         </p>
       </div>
