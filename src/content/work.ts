@@ -14,6 +14,11 @@ export type CaseStudy = {
   metrics: { label: string; value: string }[];
   cover: string;
   color: string;
+  duration?: string;
+  teamSize?: string;
+  location?: string;
+  stack?: string[];
+  testimonial?: { quote: string; author: string; role: string };
 };
 
 export const work: CaseStudy[] = [
@@ -35,6 +40,16 @@ export const work: CaseStudy[] = [
     ],
     cover: "#1a1a1a",
     color: "#b8893a",
+    duration: "9 months",
+    teamSize: "14 specialists",
+    location: "Dubai · Riyadh",
+    stack: ["Next.js 16", "Sanity", "Figma", "Brand book v3"],
+    testimonial: {
+      quote:
+        "They asked the questions the consultants had been billing us to avoid for two years. Six months later the whole group sounded like one company.",
+      author: "Saif Al Nuaimi",
+      role: "Group Brand Director, Nawras Holdings",
+    },
   },
   {
     slug: "majlis-ai-concierge",
@@ -54,6 +69,16 @@ export const work: CaseStudy[] = [
     ],
     cover: "#0c2a2a",
     color: "#d9b87a",
+    duration: "5 months",
+    teamSize: "8 specialists",
+    location: "Dubai · Abu Dhabi",
+    stack: ["OpenAI", "LangChain", "Twilio", "Opera PMS", "WhatsApp Business"],
+    testimonial: {
+      quote:
+        "Guests stopped noticing whether they were talking to a person or the assistant. That was always the bar — and they cleared it.",
+      author: "Lina Habib",
+      role: "VP Operations, Majlis Hospitality",
+    },
   },
   {
     slug: "souqloop-inventory",
@@ -73,6 +98,16 @@ export const work: CaseStudy[] = [
     ],
     cover: "#241a14",
     color: "#e9c98e",
+    duration: "7 months",
+    teamSize: "11 specialists",
+    location: "Dubai · Sharjah",
+    stack: ["Postgres", "Node.js", "React Native", "Zebra MC9300", "Power BI"],
+    testimonial: {
+      quote:
+        "Stock counts that used to take a whole weekend are done in a coffee break. Our buyers finally trust the numbers.",
+      author: "Omar Bin Khalifa",
+      role: "Head of Retail Ops, SouqLoop",
+    },
   },
   {
     slug: "gitex-pavilion",
@@ -92,6 +127,16 @@ export const work: CaseStudy[] = [
     ],
     cover: "#1f1812",
     color: "#c9a24b",
+    duration: "16 weeks",
+    teamSize: "22 specialists",
+    location: "Dubai World Trade Centre",
+    stack: ["Unreal Engine", "TouchDesigner", "Custom CMS", "RFID lead capture"],
+    testimonial: {
+      quote:
+        "Three ministers came back twice. The team built something that performed for both the press shot and the policy conversation.",
+      author: "Dr. Reem Al Hashimi",
+      role: "Programme Lead, Federal Authority",
+    },
   },
   {
     slug: "khaleej-bank-automation",
@@ -111,6 +156,16 @@ export const work: CaseStudy[] = [
     ],
     cover: "#0f1a26",
     color: "#7fa9d6",
+    duration: "10 months",
+    teamSize: "13 specialists",
+    location: "Dubai · Riyadh",
+    stack: ["Azure OpenAI", "Camunda", "Postgres", "Temenos", "Tableau"],
+    testimonial: {
+      quote:
+        "Risk and compliance signed off on day one. That alone told us they had built it with the right room in mind.",
+      author: "Aisha Al Mansoori",
+      role: "Chief Operating Officer, Khaleej Bank",
+    },
   },
   {
     slug: "atlas-launch",
@@ -130,9 +185,31 @@ export const work: CaseStudy[] = [
     ],
     cover: "#10221a",
     color: "#9bd6a3",
+    duration: "6 months",
+    teamSize: "12 specialists",
+    location: "Dubai · Riyadh · Manama",
+    stack: ["Next.js 16", "React Native", "Stripe", "Mapbox", "Mixpanel"],
+    testimonial: {
+      quote:
+        "They built the brand and the product in the same room. You can tell — nothing falls between the seams.",
+      author: "Hussein Bakr",
+      role: "Co-founder, Atlas Mobility",
+    },
   },
 ];
 
 export function getCase(slug: string) {
   return work.find((w) => w.slug === slug);
+}
+
+export function getRelatedCases(slug: string, limit = 2) {
+  const current = getCase(slug);
+  if (!current) return [];
+  const byIndustry = work.filter(
+    (w) => w.slug !== slug && w.industry === current.industry,
+  );
+  const others = work.filter(
+    (w) => w.slug !== slug && w.industry !== current.industry,
+  );
+  return [...byIndustry, ...others].slice(0, limit);
 }

@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { AedSymbol } from "@/components/icons/AedSymbol";
 import { services, getService, getServices, type ServicePackage } from "@/content/services";
+import { work, type CaseStudy } from "@/content/work";
 import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -42,6 +43,11 @@ export default async function ServiceDetailPage({
   const localized = getServices(locale);
   const idx = localized.findIndex((s) => s.slug === slug);
   const next = localized[(idx + 1) % localized.length];
+
+  const relatedWork: CaseStudy[] = work
+    .filter((w) => w.services.includes(slug as CaseStudy["services"][number]))
+    .slice(0, 3);
+  const audiences = tPage.raw("audiences") as { title: string; body: string }[];
 
   return (
     <>
@@ -176,6 +182,93 @@ export default async function ServiceDetailPage({
           </dl>
         </div>
       </section>
+
+      {/* Who it's for */}
+      <section className="border-t hairline">
+        <div className="container-x grid gap-10 py-20 md:py-28 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <p className="eyebrow mb-4">{tPage("audienceEyebrow")}</p>
+            <h2 className="display-3">{tPage("audienceTitle")}</h2>
+            <p className="mt-6 max-w-md text-[var(--color-muted)] md:text-lg">
+              {tPage("audienceBody")}
+            </p>
+          </div>
+          <ul className="grid gap-px bg-[var(--color-line)] lg:col-span-8 md:grid-cols-2">
+            {audiences.map((a, i) => (
+              <Reveal key={a.title} delay={i * 0.04}>
+                <li className="flex h-full flex-col gap-3 bg-[var(--color-bg)] p-8">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="font-serif text-xl md:text-2xl">{a.title}</h3>
+                  <p className="text-[var(--color-muted)] md:text-lg">{a.body}</p>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Closing pull-quote */}
+      <section className="border-t hairline bg-[var(--color-bg-alt)]">
+        <div className="container-x grid gap-10 py-20 md:py-28 lg:grid-cols-12">
+          <Reveal className="lg:col-span-4">
+            <p className="eyebrow">{tPage("closingQuoteEyebrow")}</p>
+          </Reveal>
+          <Reveal delay={0.1} className="lg:col-span-8">
+            <figure>
+              <blockquote className="font-serif text-2xl leading-snug md:text-4xl">
+                <span aria-hidden className="mr-1 text-[var(--color-muted)]">“</span>
+                {tPage("closingQuote")}
+                <span aria-hidden className="ml-1 text-[var(--color-muted)]">”</span>
+              </blockquote>
+              <figcaption className="mt-8 border-t hairline pt-6">
+                <p className="font-medium">{tPage("closingQuoteAuthor")}</p>
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                  {tPage("closingQuoteRole")}
+                </p>
+              </figcaption>
+            </figure>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Related work */}
+      {relatedWork.length > 0 && (
+        <section className="border-t hairline">
+          <div className="container-x py-20 md:py-28">
+            <Reveal>
+              <p className="eyebrow mb-4">{tPage("relatedWorkEyebrow")}</p>
+              <h2 className="display-3 mb-12 max-w-2xl">{tPage("relatedWorkTitle")}</h2>
+            </Reveal>
+            <div className="grid gap-px bg-[var(--color-line)] md:grid-cols-3">
+              {relatedWork.map((r, i) => (
+                <Reveal key={r.slug} delay={i * 0.05}>
+                  <Link
+                    href={`/work/${r.slug}`}
+                    className="group flex h-full flex-col gap-6 bg-[var(--color-bg)] p-8 transition-colors hover:bg-[var(--color-bg-alt)]"
+                  >
+                    <div
+                      aria-hidden
+                      className="aspect-[16/10] w-full"
+                      style={{ background: r.cover }}
+                    />
+                    <div className="flex items-baseline justify-between gap-4">
+                      <div className="min-w-0">
+                        <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                          {r.client} · {r.industry}
+                        </p>
+                        <h3 className="mt-3 font-serif text-xl md:text-2xl">{r.title}</h3>
+                      </div>
+                      <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" />
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Next service */}
       <section className="border-t hairline">

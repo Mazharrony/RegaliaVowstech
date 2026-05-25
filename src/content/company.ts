@@ -2,10 +2,10 @@ export const company = {
   name: "Regalia Vows Tech",
   shortName: "RVT",
   email: "hello@regaliavowstech.com",
-  phone: "+971 4 000 0000",
+  phone: "+971 56 264 6341",
   address: {
-    line1: "Studio 14, Al Quoz Creative Zone",
-    line2: "Dubai, United Arab Emirates",
+    line1: "14 66 Street, Al Souq Al Kabeer",
+    line2: "Al Fahidi Plaza, Dubai, UAE",
   },
   founded: 2019,
   socials: [

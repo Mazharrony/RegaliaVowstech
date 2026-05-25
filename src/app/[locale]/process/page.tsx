@@ -34,6 +34,13 @@ export default async function ProcessPage({
     body: t(`engagement${n}Body`),
   }));
 
+  const compareRows = t.raw("compareRows") as {
+    label: string;
+    project: string;
+    retainer: string;
+    sprint: string;
+  }[];
+
   return (
     <>
       <section className="container-x pb-12 pt-20 md:pb-24 md:pt-32">
@@ -114,6 +121,53 @@ export default async function ProcessPage({
               </Reveal>
             ))}
           </ul>
+
+          <Reveal>
+            <div className="mt-20 md:mt-28">
+              <p className="eyebrow mb-4">{t("compareEyebrow")}</p>
+              <h3 className="display-3 max-w-2xl">{t("compareTitle")}</h3>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="mt-10 overflow-x-auto">
+              <table className="w-full min-w-[640px] border-collapse text-sm">
+                <thead>
+                  <tr className="border-b hairline text-start">
+                    <th
+                      scope="col"
+                      className="py-4 pe-4 text-start font-mono text-[0.7rem] font-normal uppercase tracking-[0.22em] text-[var(--color-muted)]"
+                    >
+                      {t("compareDimension")}
+                    </th>
+                    {engagements.map((e) => (
+                      <th
+                        key={e.title}
+                        scope="col"
+                        className="py-4 pe-4 text-start font-mono text-[0.7rem] font-normal uppercase tracking-[0.22em]"
+                      >
+                        {e.title}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {compareRows.map((row) => (
+                    <tr key={row.label} className="border-b hairline align-top">
+                      <th
+                        scope="row"
+                        className="py-5 pe-4 text-start font-mono text-xs font-normal uppercase tracking-[0.18em] text-[var(--color-muted)]"
+                      >
+                        {row.label}
+                      </th>
+                      <td className="py-5 pe-4">{row.project}</td>
+                      <td className="py-5 pe-4">{row.retainer}</td>
+                      <td className="py-5 pe-4">{row.sprint}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
         </div>
       </section>
 

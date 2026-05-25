@@ -20,7 +20,8 @@
     "copyEmail": "Copy email",
     "emailCopied": "Email copied",
     "menu": "Menu",
-    "close": "Close"
+    "close": "Close",
+    "skipToContent": "Skip to content"
   },
   "nav": {
     "home": "Home",
@@ -121,7 +122,28 @@
     "nextStepsEyebrow": "What happens next",
     "nextStep1": "We read your brief and confirm receipt the same day.",
     "nextStep2": "A senior from the studio replies with a few clarifying questions and proposes a 30-minute discovery call.",
-    "nextStep3": "We send a scoped proposal with timelines, deliverables and indicative pricing — usually within a week of the call."
+    "nextStep3": "We send a scoped proposal with timelines, deliverables and indicative pricing — usually within a week of the call.",
+    "channelsEyebrow": "Faster channels",
+    "channelsTitle": "Or skip the form.",
+    "channelsBody": "If you'd rather talk first, two shortcuts:",
+    "whatsappLabel": "WhatsApp the studio",
+    "whatsappBody": "Quickest for short questions and rate enquiries.",
+    "whatsappCta": "Open WhatsApp",
+    "whatsappMessage": "Hi Regalia Vows Tech — I'd like to talk about a project.",
+    "bookingLabel": "Book a 30-min intro",
+    "bookingBody": "Pick a slot, email us the day and time and we'll confirm with a calendar invite.",
+    "bookingCta": "Email to schedule",
+    "bookingSubject": "Intro call — booking request",
+    "bookingBodyText": "Hi Regalia Vows Tech,%0D%0A%0D%0AI'd like to book a 30-minute intro call.%0D%0A%0D%0APreferred days/times:%0D%0AProject in one line:%0D%0ACompany:%0D%0A%0D%0AThanks.",
+    "faqEyebrow": "Before you write",
+    "faqTitle": "Questions we get most weeks.",
+    "faqs": [
+      { "q": "How fast can you start?", "a": "For sprints, usually within two weeks of the signed brief. For project and retainer engagements, four to six weeks from sign-off — we keep capacity intentionally short so the team can stay deep on each engagement." },
+      { "q": "Do you work outside the UAE?", "a": "Yes. About a third of our work is regional (KSA, Qatar, Egypt) and we have shipped pieces for clients in London, Singapore and New York. The studio runs on UAE hours but we accommodate one regular meeting in your timezone." },
+      { "q": "What does a typical engagement cost?", "a": "Sprints start at AED 24,000. Project engagements typically range AED 60,000–180,000 depending on scope. Retainers begin at AED 18,000 / month with a six-month minimum. We'll send indicative pricing with the first proposal." },
+      { "q": "Can you work in Arabic and English in parallel?", "a": "Always. Every deliverable is built bilingual from the first line of copy — type, layout, motion and tone tested in both languages before launch. We don't treat Arabic as a translation pass." },
+      { "q": "Do you sign NDAs?", "a": "Yes, and we sign them before the first proper conversation if your work needs it. We're comfortable with standard mutual NDAs and can usually turn one around in a day." }
+    ]
   },
   "legal": {
     "privacy": "Privacy",
@@ -130,7 +152,14 @@
   "notFound": {
     "title": "This page slipped past us.",
     "body": "The link you followed may be outdated or the page may have moved.",
-    "back": "Back to home"
+    "back": "Back to home",
+    "destinationsEyebrow": "Try one of these",
+    "destinations": [
+      { "label": "Services", "href": "/services", "description": "Brand, web, AI and motion under one roof." },
+      { "label": "Work", "href": "/work", "description": "Recent launches with the receipts." },
+      { "label": "Journal", "href": "/insights", "description": "Short field notes from the studio." },
+      { "label": "Contact", "href": "/contact", "description": "Tell us what you’re shipping." }
+    ]
   },
   "servicesIndex": {
     "headline": "Ten disciplines, working as one studio.",
@@ -161,7 +190,23 @@
     "from": "From",
     "mostPicked": "Most picked",
     "scopedToBrief": "scoped to brief",
-    "startWith": "Start with {tier}"
+    "startWith": "Start with {tier}",
+    "audienceEyebrow": "Who it’s for",
+    "audienceTitle": "Engagements that take this shape, usually.",
+    "audienceBody": "We do our best work for teams that have stopped pretending the brief is simple and are ready to spend the time it deserves.",
+    "audiences": [
+      { "title": "Founders rebuilding from positioning out.", "body": "You’ve outgrown the launch identity and the next round needs a system the next CMO won’t want to replace on day one." },
+      { "title": "Heads of marketing inheriting fragmented systems.", "body": "Five vendors, six tones of voice and a logo nobody quite trusts — you need one studio to take responsibility for the whole arc." },
+      { "title": "CTOs scoping greenfield platforms.", "body": "You want a partner who can ship production code and still care about the kerning on the loading state." },
+      { "title": "Brand leads preparing a regional rollout.", "body": "You need a system that survives twelve markets and three local agencies — and you’d rather not be the one explaining it twice a week." }
+    ],
+    "closingQuoteEyebrow": "From a recent engagement",
+    "closingQuote": "They came in for a website and walked out with a brand operating system. Eighteen months later we’re still finding new uses for the work they delivered.",
+    "closingQuoteAuthor": "Group Marketing Director",
+    "closingQuoteRole": "GCC holding group, 12 brands",
+    "relatedWorkEyebrow": "Recent work",
+    "relatedWorkTitle": "How this looks in production.",
+    "relatedWorkEmpty": "Case studies for this service are landing soon."
   },
   "workIndex": {
     "eyebrow": "Selected work",
@@ -169,6 +214,15 @@
     "body": "Each piece below shipped to market — brands, platforms, automations and stands built in tight loops with operators who knew exactly what they wanted, and a few who needed help finding it.",
     "industriesEyebrow": "Browse by industry",
     "industriesAll": "All work",
+    "yearsEyebrow": "Year",
+    "yearsAll": "All years",
+    "sortEyebrow": "Sort",
+    "sortNewest": "Newest",
+    "sortOldest": "Oldest",
+    "emptyTitle": "Nothing matches yet.",
+    "emptyBody": "Clear a filter or two and the list will come back.",
+    "emptyReset": "Reset filters",
+    "resultsCount": "{count, plural, one {# project} other {# projects}}",
     "ctaTitle": "Your launch could be next.",
     "ctaBody": "Tell us what you’re shipping. We’ll come back with a sharp first take and an honest scope."
   },
@@ -178,7 +232,12 @@
     "body": "Short pieces on the craft and the business of running it — how we hire, what we ship, the trade-offs that show up only after launch. Written by the people doing the work.",
     "featuredEyebrow": "Featured",
     "allArticles": "All articles",
-    "readArticle": "Read article"
+    "readArticle": "Read article",
+    "filterEyebrow": "Filter by topic",
+    "filterAll": "All topics",
+    "emptyTitle": "Nothing under this topic yet.",
+    "emptyBody": "Switch back to all topics and the list will reappear.",
+    "emptyReset": "Show all"
   },
   "processPage": {
     "eyebrow": "Method",
@@ -217,7 +276,17 @@
     "engagement2Title": "Retainer",
     "engagement2Body": "An ongoing partnership for teams that ship constantly — content, performance, product iterations and brand stewardship under one roof.",
     "engagement3Title": "Sprint",
-    "engagement3Body": "Two to six focused weeks to crack a specific problem — a positioning sprint, a prototype, a campaign concept. Pressure-tested and ready to scale."
+    "engagement3Body": "Two to six focused weeks to crack a specific problem — a positioning sprint, a prototype, a campaign concept. Pressure-tested and ready to scale.",
+    "compareEyebrow": "At a glance",
+    "compareTitle": "How the three compare.",
+    "compareDimension": "Dimension",
+    "compareRows": [
+      { "label": "Best for", "project": "A defined launch with a clear scope", "retainer": "Teams shipping continuously", "sprint": "Unblocking one sharp question" },
+      { "label": "Typical duration", "project": "8–16 weeks", "retainer": "6 months+, rolling", "sprint": "2–6 weeks" },
+      { "label": "Commitment", "project": "Statement of work", "retainer": "Quarterly retainer", "sprint": "Fixed-fee engagement" },
+      { "label": "Pricing", "project": "From AED 60k", "retainer": "From AED 18k / month", "sprint": "From AED 24k" },
+      { "label": "Ideal starting point", "project": "Briefing call + audit", "retainer": "Diagnostic + 90-day plan", "sprint": "Focus brief + kickoff workshop" }
+    ]
   },
   "privacyPage": {
     "eyebrow": "Privacy notice",
@@ -260,5 +329,89 @@
       { "title": "11. Changes to these terms", "body": "We may update these terms when our practice or the law changes. The current version is the one published on this page; the date at the top reflects the last revision. Substantive changes that affect existing engagements will always be agreed in writing on the project contract." },
       { "title": "12. Governing law", "body": "These terms are governed by the laws of the United Arab Emirates as applied in the Emirate of Dubai. Any dispute is to be resolved by the courts of Dubai, unless the parties have agreed an alternative forum in the relevant project contract." }
     ]
+  },
+  "aboutPage": {
+    "eyebrow": "Studio",
+    "headline": "An independent studio at the seam of craft, code and commerce.",
+    "intro": "Regalia Vows Tech is a Dubai-based studio of designers, engineers, producers and strategists. We work with public bodies, scale-ups and groups across the GCC on the launches that will define their next chapter — and we treat a logo with the same obsessive care as a 200-square-metre stand.",
+    "founderEyebrow": "A note from the founder",
+    "founderTitle": "We started this studio for the projects nobody else would take whole.",
+    "founderBody": "For years we watched briefs get carved up between five vendors who never met. The brand agency couldn’t talk to the engineers; the engineers couldn’t talk to the events team; the events team built something the brand team would never have signed off. Regalia Vows Tech exists to keep those teams in one room — ours — and to take responsibility for the whole arc, from the first sketch to the moment the lights come up on the stand.",
+    "founderName": "Mazhar Ali",
+    "founderRole": "Founder & Studio Lead",
+    "storyEyebrow": "Story",
+    "storyTitle": "A short history.",
+    "timeline": [
+      { "year": "2019", "text": "Studio founded in Dubai with three disciplines under one roof — brand, web and live experience." },
+      { "year": "2020", "text": "First federal brief delivered remotely through the pandemic; remote-first practice formalised." },
+      { "year": "2021", "text": "First regional brand programmes for federal clients and a 12-brand holding group." },
+      { "year": "2022", "text": "Content production studio added — short-form film, photography and editorial built in-house." },
+      { "year": "2023", "text": "Software practice formalised — CMS, automation and AI shipping into production for finance and retail." },
+      { "year": "2024", "text": "GITEX pavilion build for a federal authority draws 22,000 visitors; team grows past 30." },
+      { "year": "2025", "text": "Sixty teams partnered across fourteen countries; opened a second floor in Al Fahidi." },
+      { "year": "2026", "text": "AI practice scaled to four shipping concierge platforms; second studio location under design in Riyadh." }
+    ],
+    "valuesEyebrow": "Values",
+    "valuesTitle": "What we hold to.",
+    "values": [
+      { "title": "Craft", "body": "Detail is the difference between work that ships and work that lasts. We sweat the kerning, the hover state and the dB level — because the audience always feels the things we hoped they’d miss." },
+      { "title": "Clarity", "body": "Plain writing, clear scopes and decisions made in the room. If we can’t explain it to your CFO in a sentence, we haven’t finished thinking about it. The work is only ever as honest as the brief that drives it." },
+      { "title": "Curiosity", "body": "We hire for it. We protect time for it. We hand it to clients. The teams who let us bring questions to the table get the strongest work; the teams who answer ‘because we’ve always done it that way’ get exactly that." },
+      { "title": "Care", "body": "For people, for data, for the work and for the launches that follow. We pick up the phone post-launch, we own the bugs we ship and we never treat handover as someone else’s problem." },
+      { "title": "Courage", "body": "Strong work needs a brave room. We tell you when an idea isn’t worth pursuing, when a deadline is wishful thinking and when the safer route is the wrong one. You can disagree — and often should." },
+      { "title": "Continuity", "body": "Most of our clients have worked with us for more than two years. Long arcs let us think in seasons rather than sprints, and that’s where compounding really shows up — in the brand, the platform and the people." }
+    ],
+    "principlesEyebrow": "Operating principles",
+    "principlesTitle": "Five rules we run on.",
+    "principlesBody": "They sound obvious. They aren’t, in practice. We test new hires and new clients against these — and we walk away from work that needs us to break them.",
+    "principles": [
+      { "title": "One studio, one room.", "body": "No sub-sub-contractors. Designers, engineers and producers sit in the same standup and share one backlog." },
+      { "title": "Show, don’t deck.", "body": "Weekly demos of the real thing. The slide that summarises the work is always shorter than the work itself." },
+      { "title": "Decide on dates.", "body": "Every decision has a person and a date. Open loops are tracked in writing and closed in days, not quarters." },
+      { "title": "Measure what matters.", "body": "Every brief carries two or three metrics worth defending to a CFO. Vanity numbers stay out of the deck." },
+      { "title": "Stay after launch.", "body": "We instrument what we ship, watch it land and tune it. The next quarter is part of this engagement, not the next pitch." }
+    ],
+    "recognitionEyebrow": "Recognition",
+    "recognitionTitle": "Spoken for, in the right rooms.",
+    "recognitionBody": "Selected awards, features and stages from the last 24 months.",
+    "recognition": [
+      "Awwwards · Site of the Day",
+      "Communication Arts · Webpicks",
+      "GITEX Global · Speaker",
+      "Dubai Design Week · Exhibitor",
+      "Brand Impact Awards · Shortlist",
+      "It’s Nice That · Featured studio",
+      "Campaign Middle East · Studio to watch",
+      "AGDA · Speaker series"
+    ]
+  },
+  "casePage": {
+    "challengeEyebrow": "Challenge",
+    "approachEyebrow": "Approach",
+    "outcomeEyebrow": "Outcome",
+    "projectMetaEyebrow": "Project",
+    "metaYear": "Year",
+    "metaDuration": "Duration",
+    "metaTeam": "Team",
+    "metaLocation": "Location",
+    "metaIndustry": "Industry",
+    "stackEyebrow": "Stack",
+    "quoteEyebrow": "From the client",
+    "relatedEyebrow": "Related work",
+    "relatedTitle": "Other launches in this neighbourhood."
+  },
+  "insightPage": {
+    "tocTitle": "In this piece",
+    "shareEyebrow": "Share",
+    "shareCopy": "Copy link",
+    "shareCopied": "Link copied",
+    "shareTwitter": "Share on X",
+    "shareLinkedin": "Share on LinkedIn",
+    "tagsEyebrow": "Tags",
+    "authorEyebrow": "Written by",
+    "relatedEyebrow": "Keep reading",
+    "relatedTitle": "More from the journal.",
+    "backToJournal": "Back to journal",
+    "readingTimeSuffix": "min read"
   }
 }
