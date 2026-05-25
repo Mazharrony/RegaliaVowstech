@@ -122,9 +122,9 @@ export async function Footer() {
           style={{ WebkitTextStroke: "1px var(--color-bg)" }}
         >
           <span className="opacity-90">Regalia</span>
-          <span className="mx-3 text-[var(--color-accent)] md:mx-6">·</span>
+          <span className="mx-1.5 text-[var(--color-accent)] sm:mx-3 md:mx-6">·</span>
           <span className="opacity-90">Vows</span>
-          <span className="mx-3 text-[var(--color-accent)] md:mx-6">·</span>
+          <span className="mx-1.5 text-[var(--color-accent)] sm:mx-3 md:mx-6">·</span>
           <span className="opacity-90">Tech</span>
         </p>
       </div>
