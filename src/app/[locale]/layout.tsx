@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Inter, JetBrains_Mono } from "next/font/google";
+import {
+  Inter_Tight,
+  Inter,
+  JetBrains_Mono,
+  IBM_Plex_Sans_Arabic,
+} from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -26,6 +31,13 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   display: "swap",
+});
+
+const plexArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: "--font-arabic",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const viewport: Viewport = {
@@ -70,7 +82,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${interTight.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${interTight.variable} ${inter.variable} ${jetbrainsMono.variable} ${plexArabic.variable}`}
     >
       <body className="relative min-h-screen bg-[var(--color-bg)] text-[var(--color-ink)] antialiased">
         <NextIntlClientProvider>

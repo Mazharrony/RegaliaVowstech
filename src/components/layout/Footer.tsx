@@ -1,15 +1,17 @@
 import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowUpRight } from "lucide-react";
 import { company } from "@/content/company";
-import { services } from "@/content/services";
+import { getServices } from "@/content/services";
 import { MaskReveal } from "@/components/motion/MaskReveal";
 
 export async function Footer() {
+  const locale = await getLocale();
   const t = await getTranslations("footer");
   const tNav = await getTranslations("nav");
   const tLegal = await getTranslations("legal");
   const tCommon = await getTranslations("common");
+  const services = getServices(locale);
   const year = new Date().getFullYear();
 
   return (

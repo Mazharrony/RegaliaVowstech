@@ -18,11 +18,11 @@
   --color-line-dark: #262626;
   --color-muted-dark: #a3a3a3;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
   /* font-serif token is repointed to Inter Tight — kept as a name for back-compat */
-  --font-serif: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-serif: var(--font-display), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-arabic), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), var(--font-arabic), ui-monospace, monospace;
 
   --radius-xs: 4px;
   --radius-sm: 8px;

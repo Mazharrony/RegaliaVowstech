@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useMemo, useRef } from "react";
 import { toast } from "sonner";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { submitContact, type ContactState } from "@/lib/actions/contact";
-import { services } from "@/content/services";
+import { getServices } from "@/content/services";
 import { AedSymbol } from "@/components/icons/AedSymbol";
 
 const budgets = [
@@ -17,6 +17,8 @@ const budgets = [
 
 export function ContactForm() {
   const t = useTranslations("contact");
+  const locale = useLocale();
+  const services = useMemo(() => getServices(locale), [locale]);
   const [state, action, pending] = useActionState<ContactState | null, FormData>(
     submitContact,
     null
@@ -98,7 +100,7 @@ export function ContactForm() {
           {services.map((s) => (
             <option key={s.slug} value={s.title}>{s.title}</option>
           ))}
-          <option value="Multiple / not sure">Multiple / not sure</option>
+          <option value="Multiple / not sure">{t("multipleNotSure")}</option>
         </select>
       </label>
 

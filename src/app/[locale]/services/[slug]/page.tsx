@@ -4,7 +4,7 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { AedSymbol } from "@/components/icons/AedSymbol";
-import { services, getService, type ServicePackage } from "@/content/services";
+import { services, getService, getServices, type ServicePackage } from "@/content/services";
 import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -16,10 +16,10 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const service = getService(slug);
+  const { locale, slug } = await params;
+  const service = getService(slug, locale);
   if (!service) return {};
   return {
     title: service.title,
@@ -34,12 +34,14 @@ export default async function ServiceDetailPage({
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const service = getService(slug);
+  const service = getService(slug, locale);
   if (!service) notFound();
 
   const tCommon = await getTranslations("common");
-  const idx = services.findIndex((s) => s.slug === slug);
-  const next = services[(idx + 1) % services.length];
+  const tPage = await getTranslations("servicePage");
+  const localized = getServices(locale);
+  const idx = localized.findIndex((s) => s.slug === slug);
+  const next = localized[(idx + 1) % localized.length];
 
   return (
     <>
@@ -73,14 +75,13 @@ export default async function ServiceDetailPage({
         <div className="container-x py-20 md:py-28">
           <div className="grid items-end gap-6 md:grid-cols-12">
             <div className="md:col-span-7">
-              <p className="eyebrow mb-4">Packages</p>
+              <p className="eyebrow mb-4">{tPage("packages")}</p>
               <h2 className="display-3 text-balance">
-                Pick a starting point. Tailor as you grow.
+                {tPage("packagesTitle")}
               </h2>
             </div>
             <p className="text-sm text-[var(--color-muted)] md:col-span-5 md:text-base">
-              Indicative pricing in AED. Final scope, timelines and deliverables
-              are confirmed after a discovery call.
+              {tPage("packagesBody")}
             </p>
           </div>
 
@@ -96,14 +97,13 @@ export default async function ServiceDetailPage({
           >
             {service.packages.map((pkg, i) => (
               <Reveal key={pkg.tier} delay={i * 0.06}>
-                <PackageCard pkg={pkg} />
+                <PackageCard pkg={pkg} t={tPage} />
               </Reveal>
             ))}
           </div>
 
           <p className="mt-10 max-w-2xl text-xs text-[var(--color-muted)] md:text-sm">
-            Prices exclude 5% VAT. Project packages are one-time. Monthly
-            packages assume a 6-month minimum engagement.
+            {tPage("vatNote")}
           </p>
         </div>
       </section>
@@ -112,8 +112,8 @@ export default async function ServiceDetailPage({
       <section className="border-t hairline">
         <div className="container-x grid gap-10 py-20 md:py-28 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="eyebrow mb-4">What you get</p>
-            <h2 className="display-3">Deliverables</h2>
+            <p className="eyebrow mb-4">{tPage("whatYouGet")}</p>
+            <h2 className="display-3">{tPage("deliverables")}</h2>
           </div>
           <ul className="lg:col-span-8">
             {service.deliverables.map((d, i) => (
@@ -134,8 +134,8 @@ export default async function ServiceDetailPage({
       <section className="border-t hairline bg-[var(--color-bg-alt)]">
         <div className="container-x grid gap-10 py-20 md:py-28 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="eyebrow mb-4">How it runs</p>
-            <h2 className="display-3">Process</h2>
+            <p className="eyebrow mb-4">{tPage("howItRuns")}</p>
+            <h2 className="display-3">{tPage("process")}</h2>
           </div>
           <div className="grid gap-6 lg:col-span-8 md:grid-cols-2">
             {service.process.map((p, i) => (
@@ -159,8 +159,8 @@ export default async function ServiceDetailPage({
       <section className="border-t hairline">
         <div className="container-x grid gap-10 py-20 md:py-28 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="eyebrow mb-4">Common questions</p>
-            <h2 className="display-3">FAQ</h2>
+            <p className="eyebrow mb-4">{tPage("commonQuestions")}</p>
+            <h2 className="display-3">{tPage("faq")}</h2>
           </div>
           <dl className="lg:col-span-8">
             {service.faqs.map((f) => (
@@ -198,15 +198,21 @@ export default async function ServiceDetailPage({
   );
 }
 
-function PackageCard({ pkg }: { pkg: ServicePackage }) {
+function PackageCard({
+  pkg,
+  t,
+}: {
+  pkg: ServicePackage;
+  t: (key: string, values?: Record<string, string | number>) => string;
+}) {
   const isHighlight = !!pkg.highlight;
   const cadenceLabel =
     pkg.cadence === "month"
-      ? "/ month"
+      ? t("perMonth")
       : pkg.cadence === "one-time"
-        ? "one-time"
+        ? t("oneTime")
         : pkg.cadence === "project"
-          ? "/ project"
+          ? t("perProject")
           : "";
   const hasPrice = !!pkg.priceFrom;
 
@@ -230,7 +236,7 @@ function PackageCard({ pkg }: { pkg: ServicePackage }) {
         </p>
         {isHighlight && (
           <span className="rounded-full bg-[var(--color-accent)] px-2.5 py-1 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-[var(--color-bg)]">
-            Most picked
+            {t("mostPicked")}
           </span>
         )}
       </div>
@@ -263,7 +269,7 @@ function PackageCard({ pkg }: { pkg: ServicePackage }) {
                   isHighlight ? "text-white/70" : "text-[var(--color-muted)]",
                 ].join(" ")}
               >
-                From
+                {t("from")}
               </span>
               <AedSymbol
                 className={[
@@ -300,7 +306,7 @@ function PackageCard({ pkg }: { pkg: ServicePackage }) {
         ) : (
           <div className="flex items-baseline gap-2">
             <span className="font-serif text-2xl tracking-tight md:text-3xl">
-              On request
+              {t("onRequest")}
             </span>
             <span
               className={[
@@ -308,7 +314,7 @@ function PackageCard({ pkg }: { pkg: ServicePackage }) {
                 isHighlight ? "text-white/70" : "text-[var(--color-muted)]",
               ].join(" ")}
             >
-              scoped to brief
+              {t("scopedToBrief")}
             </span>
           </div>
         )}
@@ -342,7 +348,7 @@ function PackageCard({ pkg }: { pkg: ServicePackage }) {
             : "bg-[var(--color-ink)] text-[var(--color-bg)] hover:bg-[var(--color-accent)]",
         ].join(" ")}
       >
-        {hasPrice ? `Start with ${pkg.tier}` : "Request a quote"}
+        {hasPrice ? t("startWith", { tier: pkg.tier }) : t("requestQuote")}
         <ArrowUpRight className="h-4 w-4" />
       </Link>
     </div>

@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
-import { services } from "@/content/services";
+import { getServices } from "@/content/services";
 
 export async function generateMetadata() {
   const t = await getTranslations("nav");
@@ -17,6 +17,8 @@ export default async function ServicesIndexPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const tNav = await getTranslations("nav");
+  const tIndex = await getTranslations("servicesIndex");
+  const services = getServices(locale);
 
   return (
     <>
@@ -26,13 +28,12 @@ export default async function ServicesIndexPage({
         </Reveal>
         <Reveal delay={0.1}>
           <h1 className="display-1 max-w-5xl text-balance">
-            Seven disciplines, working as one studio.
+            {tIndex("headline")}
           </h1>
         </Reveal>
         <Reveal delay={0.2}>
           <p className="mt-10 max-w-2xl text-[var(--color-muted)] md:text-lg">
-            From a fresh identity to AI in production to the expo stand that
-            wins the floor — we run the whole arc, and we run it tightly.
+            {tIndex("body")}
           </p>
         </Reveal>
       </section>

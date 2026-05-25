@@ -1,19 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useState, useMemo } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
-import { services } from "@/content/services";
+import { getServices } from "@/content/services";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { easings } from "@/lib/utils";
 
 export function ServicesGrid() {
+  const locale = useLocale();
   const t = useTranslations("home");
   const tCommon = useTranslations("common");
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState<string | null>(null);
+  const services = useMemo(() => getServices(locale), [locale]);
 
   return (
     <section className="section-pad relative">

@@ -615,6 +615,46 @@ export const services: Service[] = [
   },
 ];
 
-export function getService(slug: string) {
-  return services.find((s) => s.slug === slug);
+import { servicesAr } from "./services.ar";
+
+type Locale = "en" | "ar" | (string & {});
+
+function localize(service: Service, locale?: Locale): Service {
+  if (locale !== "ar") return service;
+  const ar = servicesAr[service.slug];
+  if (!ar) return service;
+  return {
+    ...service,
+    title: ar.title,
+    tagline: ar.tagline,
+    summary: ar.summary,
+    deliverables: ar.deliverables,
+    process: service.process.map((p, i) => ({
+      step: p.step,
+      title: ar.process[i]?.title ?? p.title,
+      body: ar.process[i]?.body ?? p.body,
+    })),
+    packages: service.packages.map((pkg, i) => {
+      const arPkg = ar.packages[i];
+      if (!arPkg) return pkg;
+      return {
+        ...pkg,
+        tier: arPkg.tier,
+        name: arPkg.name,
+        summary: arPkg.summary,
+        includes: arPkg.includes,
+        note: arPkg.note ?? pkg.note,
+      };
+    }),
+    faqs: ar.faqs.length ? ar.faqs : service.faqs,
+  };
+}
+
+export function getServices(locale?: Locale): Service[] {
+  return services.map((s) => localize(s, locale));
+}
+
+export function getService(slug: string, locale?: Locale): Service | undefined {
+  const found = services.find((s) => s.slug === slug);
+  return found ? localize(found, locale) : undefined;
 }

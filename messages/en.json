@@ -111,6 +111,7 @@
     "error": "Something went wrong. Please try again or email us directly.",
     "selectService": "Select a service",
     "selectBudget": "Select a range",
+    "multipleNotSure": "Multiple / not sure",
     "office": "Studio",
     "hours": "Hours",
     "hoursValue": "Sun – Thu · 09:00 – 18:00 GST",
@@ -124,5 +125,30 @@
     "title": "This page slipped past us.",
     "body": "The link you followed may be outdated or the page may have moved.",
     "back": "Back to home"
+  },
+  "servicesIndex": {
+    "headline": "Ten disciplines, working as one studio.",
+    "body": "From a fresh identity to AI in production to the expo stand that wins the floor — we run the whole arc, and we run it tightly."
+  },
+  "servicePage": {
+    "packages": "Packages",
+    "packagesTitle": "Pick a starting point. Tailor as you grow.",
+    "packagesBody": "Indicative pricing in AED. Final scope, timelines and deliverables are confirmed after a discovery call.",
+    "vatNote": "Prices exclude 5% VAT. Project packages are one-time. Monthly packages assume a 6-month minimum engagement.",
+    "whatYouGet": "What you get",
+    "deliverables": "Deliverables",
+    "howItRuns": "How it runs",
+    "process": "Process",
+    "commonQuestions": "Common questions",
+    "faq": "FAQ",
+    "onRequest": "On request",
+    "requestQuote": "Request a quote",
+    "perMonth": "/ month",
+    "perProject": "/ project",
+    "oneTime": "one-time",
+    "from": "From",
+    "mostPicked": "Most picked",
+    "scopedToBrief": "scoped to brief",
+    "startWith": "Start with {tier}"
   }
 }
