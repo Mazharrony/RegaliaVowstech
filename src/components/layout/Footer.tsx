@@ -105,7 +105,7 @@ export async function Footer() {
           <div>
             <p className="eyebrow mb-2">{tCommon("estYear").split(" ")[0]}</p>
             <p className="text-[var(--color-bg)]">{tCommon("estYear")}</p>
-            <p>GCC + Worldwide</p>
+            <p>UAE-first · Dubai</p>
           </div>
           <div className="flex flex-wrap items-end gap-x-6 gap-y-3 sm:gap-x-4 md:justify-end md:gap-8">
             <Link href="/legal/privacy" className="link-wipe">{tLegal("privacy")}</Link>

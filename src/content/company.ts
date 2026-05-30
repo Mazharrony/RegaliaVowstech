@@ -7,7 +7,7 @@ export const company = {
     line1: "14 66 Street, Al Souq Al Kabeer",
     line2: "Al Fahidi Plaza, Dubai, UAE",
   },
-  founded: 2019,
+  founded: 2022,
   socials: [
     { label: "Instagram", href: "https://instagram.com/regaliavowstech" },
     { label: "LinkedIn", href: "https://www.linkedin.com/company/regaliavowstech" },
@@ -15,43 +15,36 @@ export const company = {
     { label: "Dribbble", href: "https://dribbble.com/regaliavowstech" },
   ],
   stats: {
-    years: "6+",
-    projects: "120+",
-    clients: "60+",
-    countries: "14",
+    years: "2022",
+    projects: "10+",
+    clients: "EN · AR",
+    countries: "UAE",
   },
 };
 
 export const clients = [
-  "Nawras Holdings",
-  "Majlis Hospitality",
-  "SouqLoop",
-  "Khaleej Bank",
-  "Atlas Mobility",
-  "Federal Authority",
-  "Anwar Group",
-  "Cedar Foods",
-  "Oryx Logistics",
-  "Falcon Health",
+  "Regalia Vows",
+  "Core Champs",
+  "Avion Realty",
 ];
 
 export const testimonials = [
   {
     quote:
-      "They moved from brief to launch faster than any partner we've worked with — without ever cutting a corner.",
-    author: "Sara Al Marri",
-    role: "Group Marketing Director, Nawras Holdings",
+      "They built the editorial site we'd been describing for two years in our heads. Every section reads like a chapter — and the bilingual model finally feels right.",
+    author: "Studio founder",
+    role: "Luxury weddings · Dubai",
   },
   {
     quote:
-      "The AI concierge they shipped is now the first thing our guests interact with. It's quietly become one of our most loved touchpoints.",
-    author: "Rami Haddad",
-    role: "Chief Experience Officer, Majlis Hospitality",
+      "The verification system is doing the quiet heavy lifting. Customers scan, get an instant answer, and our anti-counterfeit story actually has receipts now.",
+    author: "Operations lead",
+    role: "Premium nutrition · International",
   },
   {
     quote:
-      "A studio that treats engineering and design as one discipline. We've stopped pitching alternatives.",
-    author: "Hessa Al Mazrouei",
-    role: "Head of Digital, Federal Authority",
+      "Brand, site and lead funnel handled in one room. We stopped chasing three vendors and our enquiries went up the same quarter.",
+    author: "Marketing director",
+    role: "Real estate · Dubai",
   },
 ];

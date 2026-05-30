@@ -24,7 +24,6 @@ export default async function AboutPage({
   const timeline = t.raw("timeline") as TimelineEntry[];
   const values = t.raw("values") as ValueEntry[];
   const principles = t.raw("principles") as PrincipleEntry[];
-  const recognition = t.raw("recognition") as string[];
 
   return (
     <>
@@ -161,21 +160,20 @@ export default async function AboutPage({
         <div className="container-x py-20 md:py-28">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <p className="eyebrow mb-4">{t("recognitionEyebrow")}</p>
-              <h2 className="display-3">{t("recognitionTitle")}</h2>
+              <p className="eyebrow mb-4">Contact</p>
+              <h2 className="display-3">Start a conversation.</h2>
               <p className="mt-6 max-w-md text-[var(--color-muted)] md:text-lg">
-                {t("recognitionBody")}
+                Tell us what you’re building. We reply within one business day.
               </p>
             </div>
-            <ul className="grid gap-px self-start bg-[var(--color-line)] lg:col-span-8 sm:grid-cols-2">
-              {recognition.map((label, i) => (
-                <Reveal key={label} delay={i * 0.03}>
-                  <li className="flex h-full items-center bg-[var(--color-bg)] px-6 py-5 font-mono text-xs uppercase tracking-[0.16em] text-[var(--color-muted)]">
-                    {label}
-                  </li>
-                </Reveal>
-              ))}
-            </ul>
+            <div className="lg:col-span-8 flex flex-col gap-4 self-start">
+              <a href={`mailto:${company.email}`} className="font-serif text-2xl underline-offset-4 hover:underline md:text-3xl">
+                {company.email}
+              </a>
+              <a href={`tel:${company.phone.replace(/\s/g, "")}`} className="font-mono text-sm uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                {company.phone}
+              </a>
+            </div>
           </div>
         </div>
       </section>

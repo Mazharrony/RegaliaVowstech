@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     template: "%s — Regalia Vows Tech",
   },
   description:
-    "A Dubai-based studio partnering with ambitious teams on branding, marketing, software, automation and unforgettable expo experiences.",
+    "A Dubai-based studio partnering with UAE founders and operators on branding, websites, applied AI and content — a small, senior team that takes the whole arc.",
   openGraph: {
     type: "website",
     siteName: "Regalia Vows Tech",

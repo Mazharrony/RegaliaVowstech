@@ -11,8 +11,8 @@
     "allServices": "All capabilities",
     "nextService": "Next discipline",
     "nextCase": "Next case",
-    "based": "Dubai · Working worldwide",
-    "estYear": "Est. 2019",
+    "based": "Dubai, UAE",
+    "estYear": "Est. 2022",
     "language": "Language",
     "english": "English",
     "arabic": "العربية",
@@ -41,7 +41,7 @@
   "home": {
     "heroEyebrow": "Independent studio · Dubai",
     "heroMeta1": "Brand · Technology · Experience",
-    "heroMeta2": "Est. 2019 · GCC + Worldwide",
+    "heroMeta2": "Est. 2022 · Dubai, UAE",
     "heroLead": "We build",
     "heroLine2": "that move markets.",
     "heroSwap1": "brands",
@@ -49,8 +49,8 @@
     "heroSwap3": "campaigns",
     "heroSwap4": "automations",
     "heroSwap5": "experiences",
-    "heroBody": "Identity systems, software, AI, social, content and event experiences — engineered in one studio for ambitious teams across the GCC and beyond.",
-    "clientsEyebrow": "Trusted by ambitious teams across the region",
+    "heroBody": "Identity systems, software, AI, social, content and event experiences — engineered in one studio for ambitious teams in the UAE.",
+    "clientsEyebrow": "Recent clients we've shipped for",
     "servicesEyebrow": "Capabilities",
     "servicesTitle": "Nine disciplines. One studio.",
     "servicesBody": "Brand, marketing, social, content production, software, automation and live experiences — engineered to work as one.",
@@ -76,10 +76,10 @@
     "ctaEmailLabel": "Or write to us directly"
   },
   "stats": {
-    "years": "Years in practice",
-    "projects": "Projects delivered",
-    "clients": "Clients partnered",
-    "countries": "Countries served"
+    "years": "Studio established",
+    "projects": "Engagements shipped",
+    "clients": "Languages delivered",
+    "countries": "Primary market"
   },
   "process": {
     "1Title": "Discover",
@@ -145,7 +145,7 @@
     "faqTitle": "Questions we get most weeks.",
     "faqs": [
       { "q": "How fast can you start?", "a": "For sprints, usually within two weeks of the signed brief. For project and retainer engagements, four to six weeks from sign-off — we keep capacity intentionally short so the team can stay deep on each engagement." },
-      { "q": "Do you work outside the UAE?", "a": "Yes. About a third of our work is regional (KSA, Qatar, Egypt) and we have shipped pieces for clients in London, Singapore and New York. The studio runs on UAE hours but we accommodate one regular meeting in your timezone." },
+      { "q": "Do you work outside the UAE?", "a": "The studio is based in Dubai and our focus is the UAE market. We occasionally take on international projects when the brief is a strong fit — for those we run on UAE hours and align one regular meeting in your timezone." },
       { "q": "What does a typical engagement cost?", "a": "Sprints start at AED 24,000. Project engagements typically range AED 60,000–180,000 depending on scope. Retainers begin at AED 18,000 / month with a six-month minimum. We'll send indicative pricing with the first proposal." },
       { "q": "Can you work in Arabic and English in parallel?", "a": "Always. Every deliverable is built bilingual from the first line of copy — type, layout, motion and tone tested in both languages before launch. We don't treat Arabic as a translation pass." },
       { "q": "Do you sign NDAs?", "a": "Yes, and we sign them before the first proper conversation if your work needs it. We're comfortable with standard mutual NDAs and can usually turn one around in a day." }
@@ -207,9 +207,9 @@
       { "title": "Brand leads preparing a regional rollout.", "body": "You need a system that survives twelve markets and three local agencies — and you’d rather not be the one explaining it twice a week." }
     ],
     "closingQuoteEyebrow": "From a recent engagement",
-    "closingQuote": "They came in for a website and walked out with a brand operating system. Eighteen months later we’re still finding new uses for the work they delivered.",
-    "closingQuoteAuthor": "Group Marketing Director",
-    "closingQuoteRole": "GCC holding group, 12 brands",
+    "closingQuote": "They came in for a website and walked out with a brand operating system we’re still finding new uses for.",
+    "closingQuoteAuthor": "Marketing director",
+    "closingQuoteRole": "UAE consumer brand",
     "relatedWorkEyebrow": "Recent work",
     "relatedWorkTitle": "How this looks in production.",
     "relatedWorkEmpty": "Case studies for this service are landing soon."
@@ -339,23 +339,20 @@
   "aboutPage": {
     "eyebrow": "Studio",
     "headline": "An independent studio at the seam of craft, code and commerce.",
-    "intro": "Regalia Vows Tech is a Dubai-based studio of designers, engineers, producers and strategists. We work with public bodies, scale-ups and groups across the GCC on the launches that will define their next chapter — and we treat a logo with the same obsessive care as a 200-square-metre stand.",
+    "intro": "Regalia Vows Tech is a small, senior studio in Dubai. We work with UAE founders and operators on the launches that will define their next chapter — and we treat a logo with the same obsessive care as a production-grade web platform.",
     "founderEyebrow": "A note from the founder",
     "founderTitle": "We started this studio for the projects nobody else would take whole.",
-    "founderBody": "For years we watched briefs get carved up between five vendors who never met. The brand agency couldn’t talk to the engineers; the engineers couldn’t talk to the events team; the events team built something the brand team would never have signed off. Regalia Vows Tech exists to keep those teams in one room — ours — and to take responsibility for the whole arc, from the first sketch to the moment the lights come up on the stand.",
+    "founderBody": "For years I watched briefs get carved up between vendors who never met. The brand agency couldn’t talk to the engineers; the engineers couldn’t talk to the people running the launch; nobody owned the whole arc. Regalia Vows Tech exists to keep all of that under one roof — a small, senior team in Dubai that takes responsibility for the brand, the platform and what happens after launch.",
     "founderName": "Mazhar Ali",
     "founderRole": "Founder & Studio Lead",
     "storyEyebrow": "Story",
     "storyTitle": "A short history.",
     "timeline": [
-      { "year": "2019", "text": "Studio founded in Dubai with three disciplines under one roof — brand, web and live experience." },
-      { "year": "2020", "text": "First federal brief delivered remotely through the pandemic; remote-first practice formalised." },
-      { "year": "2021", "text": "First regional brand programmes for federal clients and a 12-brand holding group." },
-      { "year": "2022", "text": "Content production studio added — short-form film, photography and editorial built in-house." },
-      { "year": "2023", "text": "Software practice formalised — CMS, automation and AI shipping into production for finance and retail." },
-      { "year": "2024", "text": "GITEX pavilion build for a federal authority draws 22,000 visitors; team grows past 30." },
-      { "year": "2025", "text": "Sixty teams partnered across fourteen countries; opened a second floor in Al Fahidi." },
-      { "year": "2026", "text": "AI practice scaled to four shipping concierge platforms; second studio location under design in Riyadh." }
+      { "year": "2022", "text": "Studio founded in Dubai as a small, senior team — brand, web and motion under one roof." },
+      { "year": "2023", "text": "First UAE founder engagements shipped; bilingual EN/AR delivery model formalised." },
+      { "year": "2024", "text": "Real estate and lifestyle brand sites delivered for Dubai-based operators." },
+      { "year": "2025", "text": "Editorial bilingual site shipped for a Dubai luxury brand; first international engagement (US-facing brand site with product authentication system)." },
+      { "year": "2026", "text": "Studio focus refined around brand, web and applied AI for UAE founders — with selected international work when the brief fits." }
     ],
     "valuesEyebrow": "Values",
     "valuesTitle": "What we hold to.",
@@ -365,7 +362,7 @@
       { "title": "Curiosity", "body": "We hire for it. We protect time for it. We hand it to clients. The teams who let us bring questions to the table get the strongest work; the teams who answer ‘because we’ve always done it that way’ get exactly that." },
       { "title": "Care", "body": "For people, for data, for the work and for the launches that follow. We pick up the phone post-launch, we own the bugs we ship and we never treat handover as someone else’s problem." },
       { "title": "Courage", "body": "Strong work needs a brave room. We tell you when an idea isn’t worth pursuing, when a deadline is wishful thinking and when the safer route is the wrong one. You can disagree — and often should." },
-      { "title": "Continuity", "body": "Most of our clients have worked with us for more than two years. Long arcs let us think in seasons rather than sprints, and that’s where compounding really shows up — in the brand, the platform and the people." }
+      { "title": "Continuity", "body": "We work with a small number of clients each year and we stay close after launch — long arcs let us think in seasons rather than sprints, and that’s where compounding really shows up." }
     ],
     "principlesEyebrow": "Operating principles",
     "principlesTitle": "Five rules we run on.",
@@ -376,19 +373,6 @@
       { "title": "Decide on dates.", "body": "Every decision has a person and a date. Open loops are tracked in writing and closed in days, not quarters." },
       { "title": "Measure what matters.", "body": "Every brief carries two or three metrics worth defending to a CFO. Vanity numbers stay out of the deck." },
       { "title": "Stay after launch.", "body": "We instrument what we ship, watch it land and tune it. The next quarter is part of this engagement, not the next pitch." }
-    ],
-    "recognitionEyebrow": "Recognition",
-    "recognitionTitle": "Spoken for, in the right rooms.",
-    "recognitionBody": "Selected awards, features and stages from the last 24 months.",
-    "recognition": [
-      "Awwwards · Site of the Day",
-      "Communication Arts · Webpicks",
-      "GITEX Global · Speaker",
-      "Dubai Design Week · Exhibitor",
-      "Brand Impact Awards · Shortlist",
-      "It’s Nice That · Featured studio",
-      "Campaign Middle East · Studio to watch",
-      "AGDA · Speaker series"
     ]
   },
   "casePage": {

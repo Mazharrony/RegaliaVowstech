@@ -4,7 +4,6 @@ import { ClientsMarquee } from "@/components/sections/home/ClientsMarquee";
 import { ServicesGrid } from "@/components/sections/home/ServicesGrid";
 import { AboutTeaser } from "@/components/sections/home/AboutTeaser";
 import { SelectedWork } from "@/components/sections/home/SelectedWork";
-import { Metrics } from "@/components/sections/home/Metrics";
 import { ProcessStrip } from "@/components/sections/home/ProcessStrip";
 import { LatestInsights } from "@/components/sections/home/LatestInsights";
 import { Testimonials } from "@/components/sections/home/Testimonials";
@@ -25,7 +24,6 @@ export default async function HomePage({
       <AboutTeaser />
       <ServicesGrid />
       <SelectedWork />
-      <Metrics />
       <ProcessStrip />
       <LatestInsights />
       <Testimonials />

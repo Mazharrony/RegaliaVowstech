@@ -25,16 +25,16 @@ export type Insight = {
 export const insights: Insight[] = [
   {
     slug: "ai-that-earns-its-keep",
-    title: "AI that earns its keep: a checklist for the GCC boardroom.",
+    title: "AI that earns its keep: a checklist for the UAE founder.",
     excerpt:
-      "Ten questions every executive should ask before greenlighting an AI initiative — and what good answers sound like.",
+      "Ten questions every UAE founder should ask before greenlighting an AI initiative — and what good answers sound like.",
     category: "AI & Automation",
     date: "2026-03-04",
     readMinutes: 6,
     author: "Mazhar Ali",
     authorRole: "Founder & Studio Lead",
     authorBio:
-      "Mazhar leads the studio's AI practice and has shipped concierge, document and approval systems for hospitality, banking and federal clients across the GCC.",
+      "Mazhar leads the studio's applied-AI work — most recently a per-unit product authentication system for a premium nutrition brand.",
     coverColor: "#0c2a2a",
     accentColor: "#d9b87a",
     tags: ["AI", "Strategy", "Boardroom", "Measurement"],
@@ -44,7 +44,7 @@ export const insights: Insight[] = [
         id: "start-with-the-line-item",
         heading: "Start with the line item.",
         paragraphs: [
-          "Every brand in the region has an AI line item this year. Most will quietly disappear next year. The difference between AI that earns its keep and AI that becomes a sunk cost is usually decided before a single line of code is written.",
+          "Every brand has an AI line item this year. Most will quietly disappear next year. The difference between AI that earns its keep and AI that becomes a sunk cost is usually decided before a single line of code is written.",
           "Start with the smallest possible problem with the largest measurable outcome. If you cannot describe — in one sentence — the hour saved, the error avoided or the revenue unlocked, you do not have a use case. You have a hope.",
         ],
       },
@@ -58,17 +58,17 @@ export const insights: Insight[] = [
       },
       {
         id: "ten-questions",
-        heading: "Ten questions to ask in the boardroom.",
+        heading: "Ten questions to ask before you greenlight.",
         paragraphs: [
           "What is the single sentence outcome? Who owns it? What data does the model see, and where does that data live today? What is the worst answer the model could give, and what stops it leaving the building? Who reviews edge cases in the first 90 days? How will we measure it? Where does it integrate? What is the rollback plan? What does a five-year operating cost look like? And — honestly — would we still build this if it were a person doing the job?",
-          "The answers tell you more than any vendor demo. The shape of the answers tells you whether the organisation is ready.",
+          "The answers tell you more than any vendor demo. The shape of the answers tells you whether the team is ready.",
         ],
       },
       {
         id: "ship-the-smallest-version",
         heading: "Ship the smallest version that proves the case.",
         paragraphs: [
-          "Most failed AI initiatives in the region failed on ambition, not technology. Start with the smallest production-grade slice and let it run live for a quarter. Instrument it. Compare it to the human baseline. Then, and only then, scale.",
+          "Most failed AI initiatives failed on ambition, not technology. Start with the smallest production-grade slice and let it run live for a quarter. Instrument it. Compare it to the human baseline. Then, and only then, scale.",
         ],
       },
     ],
@@ -84,7 +84,7 @@ export const insights: Insight[] = [
     author: "Mazhar Ali",
     authorRole: "Founder & Studio Lead",
     authorBio:
-      "Mazhar has led brand programmes for federal authorities, hospitality groups and consumer launches across the GCC and South Asia.",
+      "Mazhar leads brand-led web work for UAE founders — most recently a bilingual editorial site for a Dubai luxury wedding studio.",
     coverColor: "#1a1a1a",
     accentColor: "#b8893a",
     tags: ["Branding", "Editorial", "Type", "Systems"],
@@ -119,14 +119,14 @@ export const insights: Insight[] = [
     slug: "designing-for-the-souq",
     title: "Designing software for the way the souq actually works.",
     excerpt:
-      "Inventory systems fail when they ignore the choreography of the shop floor. A field guide from twelve retail builds.",
+      "Retail and listings tools fail when they ignore the choreography of the floor. A short field guide from UAE work.",
     category: "Product",
     date: "2026-01-18",
     readMinutes: 7,
     author: "Mazhar Ali",
     authorRole: "Founder & Studio Lead",
     authorBio:
-      "Mazhar has led retail platform builds for souq groups, mall operators and category leaders across the GCC.",
+      "Mazhar designs and builds web platforms for Dubai operators — real estate, retail and lifestyle brands that need software shaped to how they actually work.",
     coverColor: "#241a14",
     accentColor: "#e9c98e",
     tags: ["Product", "Retail", "Field research", "Inventory"],
@@ -136,8 +136,8 @@ export const insights: Insight[] = [
         id: "start-on-the-floor",
         heading: "Start on the floor, not in the diagram.",
         paragraphs: [
-          "Visit any of the busy retail corridors across the GCC and you'll see software contorted to fit a workflow no engineer ever watched. The best inventory systems start with a notebook on the shop floor, not a database diagram.",
-          "Spend three days behind the till before you write a line of schema. Watch where the queue forms. Watch where staff write things on paper. Watch what the manager opens first in the morning.",
+          "Walk any busy retail corridor in Dubai and you'll see software contorted to fit a workflow no engineer ever watched. The best operational tools start with a notebook on the floor, not a database diagram.",
+          "Spend a few days behind the counter before you write a line of schema. Watch where the queue forms. Watch where staff write things on paper. Watch what the manager opens first in the morning.",
         ],
       },
       {

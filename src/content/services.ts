@@ -93,7 +93,7 @@ export const services: Service[] = [
     title: "Digital & Local Marketing",
     tagline: "Performance and presence — earned and paid.",
     summary:
-      "Search, social and Google Ads programmes tuned for GCC audiences — clear pricing, weekly optimisation and measurable outcomes.",
+      "Search, social and Google Ads programmes tuned for UAE audiences — clear pricing, weekly optimisation and measurable outcomes.",
     deliverables: [
       "Channel strategy & media planning",
       "SEO & content programmes",
@@ -610,7 +610,7 @@ export const services: Service[] = [
     ],
     faqs: [
       { q: "Do you handle production end-to-end?", a: "Yes — design, fabrication, logistics, install, on-site management and dismantle." },
-      { q: "Which expos have you worked at?", a: "GITEX, ADIPEC, Arab Health, Gulfood and a long list of brand-owned activations." },
+      { q: "Which expos do you build for?", a: "We brief and quote per event — GITEX, ADIPEC, Arab Health, Gulfood and brand-owned activations are all in scope. Tell us the show and we'll come back with a fit assessment." },
     ],
   },
 ];
