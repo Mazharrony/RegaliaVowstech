@@ -64,18 +64,18 @@ export default async function InsightsPage({
             >
               <MaskReveal className="lg:col-span-7">
                 <div
-                  className="relative aspect-[16/10] overflow-hidden rounded-md"
-                  style={{ background: "linear-gradient(135deg,#1a1a1a 0%,#2a1f14 100%)" }}
+                  className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-xl)]"
+                  style={{ background: "linear-gradient(135deg,var(--color-surface-elevated) 0%,var(--color-surface-muted) 100%)" }}
                 >
                   <div
                     aria-hidden
                     className="absolute inset-0 transition-transform duration-1000 group-hover:scale-[1.03]"
                     style={{
                       background:
-                        "radial-gradient(at 30% 30%, rgba(184,137,58,0.28), transparent 55%), radial-gradient(at 80% 80%, rgba(184,137,58,0.16), transparent 60%)",
+                        "radial-gradient(at 30% 30%, color-mix(in srgb, var(--color-accent) 28%, transparent), transparent 55%), radial-gradient(at 80% 80%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 60%)",
                     }}
                   />
-                  <span className="absolute start-6 top-6 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-accent)]">
+                  <span className="absolute start-6 top-6 inline-flex h-7 items-center rounded-full bg-[var(--color-accent-tint)] px-3 text-[0.72rem] font-semibold tracking-[-0.005em] text-[var(--color-accent)]">
                     {featured.category}
                   </span>
                 </div>

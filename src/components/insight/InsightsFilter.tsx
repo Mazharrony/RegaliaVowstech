@@ -64,8 +64,8 @@ export function InsightsFilter({
                 aria-pressed={category === null}
                 className={
                   category === null
-                    ? "rounded-full bg-[var(--color-ink)] px-3.5 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[var(--color-bg)]"
-                    : "rounded-full border hairline px-3.5 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+                    ? "inline-flex h-8 items-center rounded-full bg-[var(--color-ink)] px-3.5 text-[0.75rem] font-semibold tracking-[-0.005em] text-[var(--color-bg)]"
+                    : "inline-flex h-8 items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-muted)] px-3.5 text-[0.75rem] font-medium tracking-[-0.005em] text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
                 }
               >
                 {t("filterAll")} · {posts.length}
@@ -81,8 +81,8 @@ export function InsightsFilter({
                     aria-pressed={active}
                     className={
                       active
-                        ? "rounded-full bg-[var(--color-ink)] px-3.5 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[var(--color-bg)]"
-                        : "rounded-full border hairline px-3.5 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+                        ? "inline-flex h-8 items-center rounded-full bg-[var(--color-ink)] px-3.5 text-[0.75rem] font-semibold tracking-[-0.005em] text-[var(--color-bg)]"
+                        : "inline-flex h-8 items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-muted)] px-3.5 text-[0.75rem] font-medium tracking-[-0.005em] text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
                     }
                   >
                     {label} · {count}
@@ -101,7 +101,7 @@ export function InsightsFilter({
           <button
             type="button"
             onClick={() => setCategory(null)}
-            className="mt-6 rounded-full border hairline px-4 py-2 font-mono text-[0.65rem] uppercase tracking-[0.22em] transition-colors hover:bg-[var(--color-ink)] hover:text-[var(--color-bg)]"
+            className="btn-ios btn-ios-secondary btn-ios-sm mt-6"
           >
             {t("emptyReset")}
           </button>

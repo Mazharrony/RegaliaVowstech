@@ -30,7 +30,13 @@
     "about": "Studio",
     "process": "Process",
     "insights": "Journal",
-    "contact": "Contact"
+    "contact": "Contact",
+    "more": "More",
+    "moreEyebrow": "More from the studio",
+    "servicesDesc": "Nine disciplines, engineered to work as one.",
+    "aboutDesc": "Who we are and how we think.",
+    "processDesc": "How we move from brief to launch.",
+    "contactDesc": "Start a conversation — we reply within a day."
   },
   "home": {
     "heroEyebrow": "Independent studio · Dubai",

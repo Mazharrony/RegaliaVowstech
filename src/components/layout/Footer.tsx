@@ -30,14 +30,14 @@ export async function Footer() {
             <div className="mt-12 flex flex-col gap-4">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-4 self-start border-b border-[var(--color-muted-dark)] pb-2 font-serif text-2xl text-[var(--color-bg)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] md:text-3xl"
+                className="group inline-flex items-center gap-3 self-start border-b border-[color-mix(in_srgb,var(--color-bg)_22%,transparent)] pb-2 font-serif text-2xl font-semibold tracking-[-0.02em] text-[var(--color-bg)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] md:text-3xl"
               >
                 {company.email}
                 <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Link>
               <a
                 href={`tel:${company.phone.replace(/\s/g, "")}`}
-                className="font-mono text-[0.78rem] uppercase tracking-[0.22em] text-[var(--color-muted-dark)] transition-colors hover:text-[var(--color-bg)]"
+                className="text-[0.92rem] font-medium tracking-[-0.005em] text-[color-mix(in_srgb,var(--color-bg)_68%,transparent)] transition-colors hover:text-[var(--color-bg)]"
               >
                 {company.phone}
               </a>
@@ -91,7 +91,7 @@ export async function Footer() {
         </div>
 
         {/* Meta strip */}
-        <div className="mt-16 grid gap-8 border-t border-[var(--color-line-dark)] pt-10 text-sm text-[var(--color-muted-dark)] sm:grid-cols-2 md:mt-20 md:grid-cols-4">
+        <div className="mt-16 grid gap-8 border-t border-[color-mix(in_srgb,var(--color-bg)_15%,transparent)] pt-10 text-[0.92rem] text-[color-mix(in_srgb,var(--color-bg)_60%,transparent)] sm:grid-cols-2 md:mt-20 md:grid-cols-4">
           <div>
             <p className="eyebrow mb-2">{company.shortName}</p>
             <p className="text-[var(--color-bg)]">{company.address.line1}</p>
@@ -116,16 +116,15 @@ export async function Footer() {
       </div>
 
       {/* Oversized wordmark */}
-      <div aria-hidden className="pointer-events-none select-none overflow-hidden border-t border-[var(--color-line-dark)]">
+      <div aria-hidden className="pointer-events-none select-none overflow-hidden border-t border-[color-mix(in_srgb,var(--color-bg)_15%,transparent)]">
         <p
-          className="mega whitespace-nowrap py-6 text-center text-[var(--color-bg)] opacity-[0.92] md:py-8"
-          style={{ WebkitTextStroke: "1px var(--color-bg)" }}
+          className="mega whitespace-nowrap py-6 text-center text-[var(--color-bg)] opacity-[0.95] md:py-8"
         >
-          <span className="opacity-90">Regalia</span>
+          <span className="opacity-95">Regalia</span>
           <span className="mx-1.5 text-[var(--color-accent)] sm:mx-3 md:mx-6">·</span>
-          <span className="opacity-90">Vows</span>
+          <span className="opacity-95">Vows</span>
           <span className="mx-1.5 text-[var(--color-accent)] sm:mx-3 md:mx-6">·</span>
-          <span className="opacity-90">Tech</span>
+          <span className="opacity-95">Tech</span>
         </p>
       </div>
     </footer>

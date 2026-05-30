@@ -312,10 +312,10 @@ function PackageCard({
   return (
     <div
       className={[
-        "group flex h-full flex-col rounded-md border p-7 transition-colors md:p-8",
+        "group flex h-full flex-col rounded-[var(--radius-xl)] border p-7 transition-colors md:p-8",
         isHighlight
           ? "border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--color-bg)]"
-          : "border-[var(--color-line)] bg-[var(--color-bg)] text-[var(--color-ink)] hover:border-[var(--color-ink)]",
+          : "surface-card text-[var(--color-ink)]",
       ].join(" ")}
     >
       <div className="flex items-center justify-between gap-3">
@@ -328,7 +328,7 @@ function PackageCard({
           {pkg.tier}
         </p>
         {isHighlight && (
-          <span className="rounded-full bg-[var(--color-accent)] px-2.5 py-1 font-mono text-[0.6rem] uppercase tracking-[0.18em] text-[var(--color-bg)]">
+          <span className="inline-flex h-6 items-center rounded-full bg-[var(--color-accent)] px-2.5 text-[0.66rem] font-semibold tracking-[-0.005em] text-[var(--color-ink)]">
             {t("mostPicked")}
           </span>
         )}
@@ -435,10 +435,8 @@ function PackageCard({
       <Link
         href="/contact"
         className={[
-          "mt-8 inline-flex items-center justify-between gap-3 rounded-full px-5 py-3 font-mono text-[0.7rem] uppercase tracking-[0.22em] transition-colors",
-          isHighlight
-            ? "bg-[var(--color-accent)] text-[var(--color-bg)] hover:bg-[var(--color-bg)] hover:text-[var(--color-ink)]"
-            : "bg-[var(--color-ink)] text-[var(--color-bg)] hover:bg-[var(--color-accent)]",
+          "btn-ios mt-8 w-full justify-between",
+          isHighlight ? "btn-ios-primary" : "btn-ios-ink",
         ].join(" ")}
       >
         {hasPrice ? t("startWith", { tier: pkg.tier }) : t("requestQuote")}

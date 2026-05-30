@@ -16,7 +16,7 @@ type Props = {
 export function MagneticButton({
   children,
   className,
-  strength = 18,
+  strength = 10,
   as = "button",
   href,
   onClick,
@@ -42,7 +42,8 @@ export function MagneticButton({
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      transition={{ type: "spring", stiffness: 200, damping: 18 }}
+      whileTap={reduce ? undefined : { scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 260, damping: 22, mass: 0.8 }}
       className={cn(
         "inline-flex items-center justify-center gap-2 will-change-transform",
         className

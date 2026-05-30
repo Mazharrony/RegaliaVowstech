@@ -27,10 +27,10 @@ export function CTASection() {
     <section className="slab-dark relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-32 top-1/2 hidden h-[480px] w-[480px] -translate-y-1/2 rounded-full md:block"
+        className="pointer-events-none absolute -left-32 top-1/2 hidden h-[520px] w-[520px] -translate-y-1/2 rounded-full md:block"
         style={{
-          background: "radial-gradient(circle at center, rgba(184,137,58,0.25), transparent 70%)",
-          filter: "blur(40px)",
+          background: "radial-gradient(circle at center, color-mix(in srgb, var(--color-accent) 35%, transparent), transparent 70%)",
+          filter: "blur(60px)",
         }}
       />
 
@@ -56,26 +56,24 @@ export function CTASection() {
           </Reveal>
 
           <Reveal delay={0.3} className="lg:col-span-7 lg:flex lg:justify-end">
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/contact"
-                className="group glow-accent inline-flex items-center gap-3 rounded-full bg-[var(--color-accent)] px-7 py-4 font-mono text-[0.72rem] uppercase tracking-[0.22em] text-[var(--color-ink-deep)] transition-all hover:bg-[var(--color-bg)]"
+                className="btn-ios btn-ios-primary btn-ios-lg"
               >
                 {tCommon("startProject")}
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ArrowUpRight className="h-4 w-4" />
               </Link>
               <button
                 type="button"
                 onClick={copyEmail}
-                className="group inline-flex items-center gap-3 rounded-full border border-[var(--color-muted-dark)] px-6 py-4 font-mono text-[0.72rem] uppercase tracking-[0.22em] text-[var(--color-bg)] transition-colors hover:border-[var(--color-bg)]"
+                className="btn-ios btn-ios-ghost btn-ios-lg"
               >
-                <span className="truncate normal-case tracking-normal">
-                  {company.email}
-                </span>
+                <span className="truncate">{company.email}</span>
                 {copied ? (
                   <Check className="h-3.5 w-3.5 text-[var(--color-accent)]" />
                 ) : (
-                  <Copy className="h-3.5 w-3.5 opacity-60 transition-opacity group-hover:opacity-100" />
+                  <Copy className="h-3.5 w-3.5 opacity-70" />
                 )}
               </button>
             </div>

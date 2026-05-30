@@ -19,7 +19,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 rounded-full bg-[var(--color-ink)] px-7 py-3.5 font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-bg)] transition-colors hover:bg-[var(--color-accent)]"
+          className="btn-ios btn-ios-primary btn-ios-lg"
         >
           ← {t("back")}
         </Link>

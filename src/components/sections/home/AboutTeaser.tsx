@@ -44,7 +44,7 @@ export function AboutTeaser() {
             <Reveal delay={0.3}>
               <Link
                 href="/about"
-                className="mt-10 inline-flex items-center gap-3 border-b border-[var(--color-muted-dark)] pb-2 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-bg)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+                className="btn-ios btn-ios-secondary mt-10"
               >
                 {tCommon("learnMore")}
                 <ArrowUpRight className="h-3.5 w-3.5" />

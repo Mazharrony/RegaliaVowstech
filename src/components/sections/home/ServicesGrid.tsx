@@ -39,7 +39,7 @@ export function ServicesGrid() {
             </p>
             <Link
               href="/services"
-              className="mt-6 inline-flex items-center gap-2 border-b hairline pb-2 font-mono text-[0.7rem] uppercase tracking-[0.22em]"
+              className="btn-ios btn-ios-secondary btn-ios-sm mt-6"
             >
               {tCommon("allServices")}
               <ArrowUpRight className="h-3.5 w-3.5" />

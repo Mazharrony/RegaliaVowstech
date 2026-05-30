@@ -36,7 +36,7 @@ export function ShareButtons({
   const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
 
   const baseBtn =
-    "inline-flex items-center gap-2 rounded-full border hairline px-4 py-2 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-muted)] transition-colors hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)]";
+    "inline-flex h-9 items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface-muted)] px-4 text-[0.78rem] font-medium tracking-[-0.005em] text-[var(--color-muted)] transition-colors hover:bg-[var(--color-ink)] hover:text-[var(--color-bg)]";
 
   return (
     <div className="flex flex-wrap gap-2">

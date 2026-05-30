@@ -20,13 +20,14 @@ const interTight = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["500", "600", "700", "800", "900"],
+  weight: ["500", "600", "700"],
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -43,7 +44,11 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
 };
 
 export const metadata: Metadata = {
@@ -94,21 +99,23 @@ export default async function LocaleLayout({
         <NextIntlClientProvider>
           <a
             href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[var(--color-ink)] focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.18em] focus:text-[var(--color-bg)]"
+            className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-[var(--color-ink)] focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-[var(--color-bg)]"
           >
             {tCommon("skipToContent")}
           </a>
           <Header />
-          <main id="main" className="relative z-10 pt-16 md:pt-20">{children}</main>
+          <main id="main" className="relative z-10 pt-16 md:pt-[72px]">{children}</main>
           <Footer />
           <Toaster
             position="bottom-right"
             toastOptions={{
               style: {
-                background: "var(--color-ink)",
-                color: "var(--color-bg)",
-                border: "1px solid var(--color-ink-soft)",
+                background: "var(--color-surface-elevated)",
+                color: "var(--color-ink)",
+                border: "1px solid var(--color-line)",
+                borderRadius: "var(--radius-md)",
                 fontFamily: "var(--font-sans)",
+                backdropFilter: "saturate(180%) blur(22px)",
               },
             }}
           />

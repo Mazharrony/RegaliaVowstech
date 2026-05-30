@@ -3,6 +3,10 @@
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import { useTransition } from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+
+const LOCALES = ["en", "ar"] as const;
 
 export function LocaleSwitcher() {
   const locale = useLocale();
@@ -10,22 +14,52 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
-  const toggle = () => {
-    const next = locale === "en" ? "ar" : "en";
+  const setLocale = (next: (typeof LOCALES)[number]) => {
+    if (next === locale) return;
     startTransition(() => {
       router.replace(pathname, { locale: next });
     });
   };
 
   return (
-    <button
-      type="button"
-      onClick={toggle}
-      disabled={isPending}
-      className="font-mono text-xs uppercase tracking-[0.18em] text-ink transition-opacity hover:opacity-60 disabled:opacity-40"
-      aria-label="Switch language"
+    <div
+      role="group"
+      aria-label="Language"
+      className={cn(
+        "relative inline-flex items-center rounded-full p-0.5",
+        "bg-[color-mix(in_srgb,var(--color-ink)_6%,transparent)]",
+        "border border-[var(--color-line)]",
+        isPending && "opacity-60"
+      )}
     >
-      {locale === "en" ? "AR" : "EN"}
-    </button>
+      {LOCALES.map((code) => {
+        const active = code === locale;
+        return (
+          <button
+            key={code}
+            type="button"
+            onClick={() => setLocale(code)}
+            disabled={isPending}
+            aria-pressed={active}
+            className={cn(
+              "relative z-10 inline-flex h-7 min-w-[34px] items-center justify-center rounded-full px-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.06em] transition-colors",
+              active
+                ? "text-[var(--color-ink)]"
+                : "text-[var(--color-muted)] hover:text-[var(--color-ink)]"
+            )}
+          >
+            {active && (
+              <motion.span
+                layoutId="locale-pill"
+                aria-hidden
+                className="absolute inset-0 -z-10 rounded-full bg-[var(--color-surface)] shadow-[0_1px_2px_rgba(0,0,0,0.08),0_4px_12px_-6px_rgba(0,0,0,0.18)]"
+                transition={{ type: "spring", stiffness: 360, damping: 32 }}
+              />
+            )}
+            {code.toUpperCase()}
+          </button>
+        );
+      })}
+    </div>
   );
 }

@@ -36,7 +36,7 @@ export function ContactForm() {
   }, [state, t]);
 
   const inputClass =
-    "w-full border-0 border-b hairline bg-transparent py-4 font-sans text-base text-[var(--color-ink)] placeholder:text-[var(--color-muted)] focus:outline-none focus:border-[var(--color-ink)] transition-colors";
+    "w-full rounded-[var(--radius-md)] border border-[var(--color-line)] bg-[var(--color-surface-muted)] px-4 py-3.5 font-sans text-base text-[var(--color-ink)] placeholder:text-[var(--color-muted)] transition-shadow focus:outline-none focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-accent)_25%,transparent)]";
 
   return (
     <form ref={formRef} action={action} className="space-y-10">
@@ -118,7 +118,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={pending}
-          className="group inline-flex items-center gap-3 rounded-full bg-[var(--color-ink)] px-8 py-4 font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-bg)] transition-colors hover:bg-[var(--color-accent)] disabled:opacity-60"
+          className="btn-ios btn-ios-primary btn-ios-lg"
         >
           {pending ? t("sending") : t("send")}
         </button>
