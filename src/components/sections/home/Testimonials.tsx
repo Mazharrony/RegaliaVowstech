@@ -58,13 +58,16 @@ export function Testimonials() {
                 <blockquote className="display-2 max-w-[22ch] text-balance">
                   {item.quote}
                 </blockquote>
-                <figcaption className="mt-10 flex flex-wrap items-center gap-4">
-                  <span className="font-mono text-[0.72rem] uppercase tracking-[0.22em]">
-                    {item.author}
+                <figcaption className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3">
+                  <span className="font-serif text-[var(--color-ink)]" style={{ fontSize: "var(--step-1)" }}>
+                    {item.name}
                   </span>
-                  <span className="h-px w-12 bg-[var(--color-line)]" />
-                  <span className="text-sm text-[var(--color-muted)]">
+                  <span className="h-px w-8 bg-[var(--color-line)]" />
+                  <span className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-[var(--color-ink-soft)]">
                     {item.role}
+                  </span>
+                  <span className="text-sm text-[var(--color-muted)]">
+                    {item.company} · {item.location}
                   </span>
                 </figcaption>
               </motion.figure>

@@ -4,21 +4,14 @@ import { useTranslations } from "next-intl";
 import { useReducedMotion } from "framer-motion";
 import { clients } from "@/content/company";
 
-export function ClientsMarquee() {
-  const t = useTranslations("home");
-  const reduce = useReducedMotion();
+type RowProps = {
+  items: string[];
+  direction?: "left" | "right";
+  reduce: boolean;
+};
 
-  // Split clients into two rows for opposite directions
-  const rowA = clients;
-  const rowB = [...clients].reverse();
-
-  const Row = ({
-    items,
-    direction = "left",
-  }: {
-    items: string[];
-    direction?: "left" | "right";
-  }) => (
+function Row({ items, direction = "left", reduce }: RowProps) {
+  return (
     <div className="group overflow-hidden">
       <div
         className="flex w-max gap-12 md:gap-16"
@@ -44,6 +37,15 @@ export function ClientsMarquee() {
       </div>
     </div>
   );
+}
+
+export function ClientsMarquee() {
+  const t = useTranslations("home");
+  const reduce = useReducedMotion() ?? false;
+
+  // Split clients into two rows for opposite directions
+  const rowA = clients;
+  const rowB = [...clients].reverse();
 
   return (
     <section className="border-y hairline bg-[var(--color-bg-alt)] py-12 md:py-16">
@@ -54,8 +56,8 @@ export function ClientsMarquee() {
         </span>
       </div>
       <div className="flex flex-col gap-6 md:gap-8">
-        <Row items={rowA} direction="left" />
-        <Row items={rowB} direction="right" />
+        <Row items={rowA} direction="left" reduce={reduce} />
+        <Row items={rowB} direction="right" reduce={reduce} />
       </div>
     </section>
   );
