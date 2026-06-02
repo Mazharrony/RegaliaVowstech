@@ -98,7 +98,9 @@ export default async function ServiceDetailPage({
                 ? "max-w-xl"
                 : service.packages.length === 2
                   ? "md:grid-cols-2"
-                  : "md:grid-cols-3",
+                  : service.packages.length === 4
+                    ? "md:grid-cols-2 lg:grid-cols-4"
+                    : "md:grid-cols-3",
             ].join(" ")}
           >
             {service.packages.map((pkg, i) => (

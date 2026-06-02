@@ -587,15 +587,18 @@ export const services: Service[] = [
     slug: "events-expo",
     number: "10",
     title: "Event & Expo Branding",
-    tagline: "Stands, staff and campaigns that turn footfall into pipeline.",
+    tagline: "Stands, talent and activations that pull a crowd — and convert it.",
     summary:
-      "End-to-end exhibition programs — stand design and build, trained booth staff, live content capture, paid social and search amplification, and lead follow-up that ties the show back to revenue.",
+      "End-to-end exhibition programs — stand design and build, trained booth staff, live entertainment and interactive games, content capture, paid amplification, and lead follow-up that ties the show back to revenue.",
     deliverables: [
       "Concept, narrative & stand design with 3D visuals",
       "Stand fabrication, signage, AV & interactive installs",
       "Printed collateral — brochures, catalogues, leaflets, business cards",
       "Branded giveaways & promotional merchandise",
-      "Trained brand promoters & booth hosts",
+      "Trained brand promoters, booth hosts & models",
+      "Bilingual MCs, hosts & event anchors",
+      "Live artists — DJs, musicians, magicians, caricaturists, mascots",
+      "Custom branded games, leaderboards, photo booths & AR experiences",
       "Live event photography & videography — reels, BTS, testimonials",
       "Pre-event social campaign with countdown content",
       "Paid media across Meta, LinkedIn, TikTok and Google Search & Display",
@@ -606,9 +609,9 @@ export const services: Service[] = [
     ],
     process: [
       { step: "01", title: "Strategy", body: "Goals, audience, KPIs and a read on the show floor." },
-      { step: "02", title: "Build", body: "Stand design, fabrication, collateral and giveaways." },
+      { step: "02", title: "Build", body: "Stand, collateral, giveaways and sourcing talent + gaming." },
       { step: "03", title: "Tease", body: "Countdown content, paid pre-show campaigns, GBP and SEO." },
-      { step: "04", title: "Activate", body: "On-site team, daily content drops, live updates and lead capture." },
+      { step: "04", title: "Activate", body: "On-site team, hosts and artists, games running, daily content and lead capture." },
       { step: "05", title: "Follow-up", body: "Recap content, retargeting, lead nurture and the performance report." },
     ],
     packages: [
@@ -641,14 +644,29 @@ export const services: Service[] = [
         ],
       },
       {
+        tier: "Experience",
+        name: "Crowd Pull",
+        cadence: "project",
+        summary:
+          "Turn the booth into a destination — hosts, artists and branded games that bring the crowd in and keep them there.",
+        includes: [
+          "Everything in Activation",
+          "Bilingual MC / event host",
+          "Live artists — DJ, musician, magician, caricaturist or mascot",
+          "Models & brand ambassadors on rotation",
+          "Custom branded game + leaderboard",
+          "Photo booth or AR experience",
+        ],
+      },
+      {
         tier: "Bespoke",
         name: "Full Campaign",
         cadence: "project",
         note: "+ ad spend billed at cost",
         summary:
-          "The full program — stand, staff, content and a paid media push wrapped around the show with retargeting after.",
+          "The full program — stand, talent, games, content and a paid media push wrapped around the show with retargeting after.",
         includes: [
-          "Everything in Activation",
+          "Everything in Crowd Pull",
           "Paid media — Meta, LinkedIn, TikTok, Google",
           "Retargeting + lead-gen funnels",
           "GBP optimisation & SEO push",
@@ -663,6 +681,8 @@ export const services: Service[] = [
       { q: "Can you run the paid ads and social during the show?", a: "Yes — we run Meta, LinkedIn, TikTok and Google campaigns in the weeks before, during and after the event, with daily live posts from the floor." },
       { q: "How do you capture and hand over leads?", a: "QR codes on the stand and collateral push visitors into a lead form that writes directly into your CRM or a shared sheet, with daily exports during the show." },
       { q: "What does the post-event report include?", a: "Footfall, qualified leads, social reach and engagement lift, website traffic from the show, paid media performance and a read on what to repeat next time." },
+      { q: "Can you book artists, hosts and entertainers?", a: "Yes — bilingual MCs, DJs, musicians, magicians, caricaturists, mascots and brand ambassadors. We brief and rehearse them on your product so the act ties back to the message." },
+      { q: "What kind of games and interactive experiences do you build?", a: "Custom branded games with live leaderboards, prize wheels, AR try-ons, photo booths and touch-screen demos — all wired to your lead-capture flow so playing earns you a contact." },
     ],
   },
 ];
