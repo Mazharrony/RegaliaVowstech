@@ -455,15 +455,6 @@ export function Header() {
               )}
 
               <div className="mt-auto pt-10">
-                <Link
-                  href="/contact"
-                  onClick={() => setOpen(false)}
-                  className="btn-ios btn-ios-primary btn-ios-lg mb-8 w-full justify-between"
-                >
-                  {tCommon("startProject")}
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-
                 <div className="mb-6">
                   <LocaleSwitcher />
                 </div>
