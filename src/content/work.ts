@@ -59,7 +59,7 @@ export const work: CaseStudy[] = [
     client: "Core Champs",
     title: "Brand site and product authentication for a premium nutrition label.",
     year: 2025,
-    services: ["branding", "web-mobile", "ai-automation"],
+    services: ["branding", "web-mobile"],
     industry: "Premium nutrition",
     summary:
       "Marketing site plus a per-unit QR product authentication system for a US-facing premium supplement brand.",

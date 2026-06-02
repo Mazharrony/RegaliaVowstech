@@ -6,8 +6,6 @@ export type ServiceSlug =
   | "live-streaming"
   | "web-mobile"
   | "custom-cms-inventory"
-  | "corporate-automation"
-  | "ai-automation"
   | "events-expo";
 
 export type ServicePackage = {
@@ -500,92 +498,8 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: "corporate-automation",
-    number: "08",
-    title: "Corporate Automation",
-    tagline: "Take the manual out of the back office.",
-    summary:
-      "Workflow, document and approval automations that compound: from finance close to onboarding to procurement.",
-    deliverables: [
-      "Process discovery & mapping",
-      "Workflow & approval automation",
-      "Document generation & e-signature",
-      "Internal portals & self-service tools",
-      "RPA & integration glue",
-      "KPI dashboards",
-    ],
-    process: [
-      { step: "01", title: "Map", body: "Shadow teams, capture the real workflow." },
-      { step: "02", title: "Prioritise", body: "Rank by hours saved and risk reduced." },
-      { step: "03", title: "Automate", body: "Ship in small, observable releases." },
-      { step: "04", title: "Measure", body: "Track time saved and error reduction." },
-    ],
-    packages: [
-      {
-        tier: "Bespoke",
-        name: "Automation Programme",
-        cadence: "project",
-        summary:
-          "We scope automation programmes after mapping your processes — pick one workflow or run an org-wide rollout.",
-        includes: [
-          "Process discovery & mapping",
-          "Workflow & approval automation",
-          "Document generation + e-sign",
-          "Integrations with your stack",
-          "KPI dashboard",
-        ],
-      },
-    ],
-    faqs: [
-      { q: "Do we need to rip and replace tools?", a: "Rarely — we usually wrap and connect what you already use." },
-      { q: "How do you handle compliance?", a: "Audit trails, role-based access and data residency are baked in from day one." },
-    ],
-  },
-  {
-    slug: "ai-automation",
-    number: "09",
-    title: "AI-Powered Automation",
-    tagline: "Practical AI that earns its keep.",
-    summary:
-      "LLM and ML applications focused on measurable outcomes: assistants, copilots, document understanding, vision and forecasting.",
-    deliverables: [
-      "AI strategy & opportunity mapping",
-      "Conversational assistants & copilots",
-      "Document understanding pipelines",
-      "Computer vision applications",
-      "Forecasting & anomaly detection",
-      "Evaluation, guardrails & observability",
-    ],
-    process: [
-      { step: "01", title: "Frame", body: "Define use cases with measurable ROI." },
-      { step: "02", title: "Prototype", body: "Ship a working pilot in weeks." },
-      { step: "03", title: "Harden", body: "Evaluation, guardrails, latency, cost." },
-      { step: "04", title: "Scale", body: "Roll out across teams with monitoring." },
-    ],
-    packages: [
-      {
-        tier: "Bespoke",
-        name: "AI Engagement",
-        cadence: "project",
-        summary:
-          "From a single pilot to a platform-grade rollout — we scope after framing the use case and the data.",
-        includes: [
-          "Opportunity & ROI framing",
-          "Working pilot or production build",
-          "Evaluation + guardrails",
-          "Observability + monitoring",
-          "Data residency engineering",
-        ],
-      },
-    ],
-    faqs: [
-      { q: "Whose models do you use?", a: "Whichever fits — OpenAI, Anthropic, Google, open-source. We choose for accuracy, latency and cost." },
-      { q: "Where does our data live?", a: "We design for the data residency and privacy posture your business requires." },
-    ],
-  },
-  {
     slug: "events-expo",
-    number: "10",
+    number: "08",
     title: "Event & Expo Branding",
     tagline: "Stands, talent and activations that pull a crowd — and convert it.",
     summary:
