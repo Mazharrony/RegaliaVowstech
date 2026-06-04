@@ -21,6 +21,7 @@ type Sort = "newest" | "oldest";
 
 export function WorkFilter({ work }: { work: WorkItem[] }) {
   const t = useTranslations("workIndex");
+  const tCommon = useTranslations("common");
   const [industry, setIndustry] = useState<string | null>(null);
   const [year, setYear] = useState<number | null>(null);
   const [sort, setSort] = useState<Sort>("newest");
@@ -193,7 +194,7 @@ export function WorkFilter({ work }: { work: WorkItem[] }) {
                         key={s}
                         className="rounded-full border hairline px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-muted)]"
                       >
-                        {s.replace(/-/g, " ")}
+                        {tCommon(`serviceTags.${s}`)}
                       </span>
                     ))}
                   </div>

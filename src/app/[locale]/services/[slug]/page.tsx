@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { AedSymbol } from "@/components/icons/AedSymbol";
@@ -40,6 +41,7 @@ export default async function ServiceDetailPage({
 
   const tCommon = await getTranslations("common");
   const tPage = await getTranslations("servicePage");
+  const tModels = await getTranslations("models");
   const localized = getServices(locale);
   const idx = localized.findIndex((s) => s.slug === slug);
   const next = localized[(idx + 1) % localized.length];
@@ -48,6 +50,8 @@ export default async function ServiceDetailPage({
     .filter((w) => w.services.includes(slug as CaseStudy["services"][number]))
     .slice(0, 3);
   const audiences = tPage.raw("audiences") as { title: string; body: string }[];
+  const modelsBadge = tModels("eyebrow");
+  const modelsCta = tModels("viewDetails");
 
   return (
     <>
@@ -73,6 +77,86 @@ export default async function ServiceDetailPage({
               {service.summary}
             </p>
           </Reveal>
+        </div>
+
+        <Reveal delay={0.2}>
+          <div className="relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-[var(--radius-xl)] border hairline md:mt-16 md:aspect-[21/9]">
+            <Image
+              src={service.image}
+              alt={service.title}
+              fill
+              priority
+              sizes="(min-width: 1024px) 1100px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Services */}
+      <section className="border-t hairline">
+        <div className="container-x py-20 md:py-28">
+          <div className="grid items-end gap-6 md:grid-cols-12">
+            <div className="md:col-span-7">
+              <p className="eyebrow mb-4">{tPage("whatYouGet")}</p>
+              <h2 className="display-3 text-balance">{tPage("deliverables")}</h2>
+            </div>
+          </div>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 md:mt-16 lg:grid-cols-3">
+            {service.deliverables.map((d, i) => {
+              const isModelsCard =
+                (slug === "events-expo" || slug === "corporate-events") &&
+                (d.name === "Models & Talent Services" ||
+                  d.name === "خدمات الموديلز والمواهب");
+
+              return (
+                <Reveal
+                  key={d.name}
+                  delay={i * 0.04}
+                  className={isModelsCard ? "sm:col-span-2 lg:col-span-2" : undefined}
+                >
+                  {isModelsCard ? (
+                    <Link href="/models" className="group block h-full">
+                      <div className="flex h-full flex-col rounded-[var(--radius-xl)] border border-[var(--color-ink)] bg-[var(--color-bg-alt)] p-7 transition-colors hover:bg-[var(--color-bg)] md:p-8">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                            {String(i + 1).padStart(2, "0")}
+                          </p>
+                          <span className="inline-flex h-6 items-center rounded-full bg-[var(--color-accent)] px-2.5 text-[0.66rem] font-semibold tracking-[-0.005em] text-[var(--color-ink)]">
+                            {modelsBadge}
+                          </span>
+                        </div>
+                        <h3 className="mt-4 font-serif text-xl tracking-tight md:text-2xl">
+                          {d.name}
+                        </h3>
+                        <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+                          {d.description}
+                        </p>
+                        <div className="mt-auto flex items-center justify-between gap-3 pt-8">
+                          <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                            {modelsCta}
+                          </span>
+                          <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" />
+                        </div>
+                      </div>
+                    </Link>
+                  ) : (
+                    <div className="group flex h-full flex-col rounded-[var(--radius-xl)] border surface-card p-7 transition-colors md:p-8">
+                      <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                        {String(i + 1).padStart(2, "0")}
+                      </p>
+                      <h3 className="mt-4 font-serif text-xl tracking-tight md:text-2xl">
+                        {d.name}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+                        {d.description}
+                      </p>
+                    </div>
+                  )}
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -113,28 +197,6 @@ export default async function ServiceDetailPage({
           <p className="mt-10 max-w-2xl text-xs text-[var(--color-muted)] md:text-sm">
             {tPage("vatNote")}
           </p>
-        </div>
-      </section>
-
-      {/* Deliverables */}
-      <section className="border-t hairline">
-        <div className="container-x grid gap-10 py-20 md:py-28 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <p className="eyebrow mb-4">{tPage("whatYouGet")}</p>
-            <h2 className="display-3">{tPage("deliverables")}</h2>
-          </div>
-          <ul className="lg:col-span-8">
-            {service.deliverables.map((d, i) => (
-              <Reveal key={d} delay={i * 0.04}>
-                <li className="flex items-baseline gap-6 border-b hairline py-5">
-                  <span className="font-mono text-xs text-[var(--color-muted)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-lg md:text-xl">{d}</span>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
         </div>
       </section>
 
@@ -415,24 +477,7 @@ function PackageCard({
         )}
       </div>
 
-      <ul className="mt-7 flex-1 space-y-3">
-        {pkg.includes.map((item) => (
-          <li key={item} className="flex items-start gap-3 text-sm md:text-base">
-            <Check
-              className={[
-                "mt-1 h-3.5 w-3.5 shrink-0",
-                isHighlight
-                  ? "text-[var(--color-accent)]"
-                  : "text-[var(--color-ink)]",
-              ].join(" ")}
-              strokeWidth={2.5}
-            />
-            <span className={isHighlight ? "text-white/90" : "text-[var(--color-ink)]"}>
-              {item}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <div className="mt-7 flex-1" />
 
       <Link
         href="/contact"

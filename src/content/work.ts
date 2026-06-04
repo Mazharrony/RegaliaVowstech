@@ -34,11 +34,11 @@ export const work: CaseStudy[] = [
     challenge:
       "A discerning, referral-led brand needed a site that read like a publication — restrained, cinematic and credible to couples planning seven-figure celebrations.",
     approach:
-      "An editorial system built around long-form case studies, a private enquiry funnel and a bilingual EN/RU content model. Type-driven layouts, slow reveals and a press-quality image pipeline.",
+      "An editorial system built around long-form case studies, a private enquiry funnel and a bilingual EN/AR content model. Type-driven layouts, slow reveals and a press-quality image pipeline.",
     outcome:
       "An editorial brand experience the studio can extend chapter by chapter — case studies, the journal, sectors and venues — without losing the tone.",
     metrics: [
-      { label: "Languages", value: "EN · RU" },
+      { label: "Languages", value: "EN · AR" },
       { label: "Content model", value: "Editorial" },
       { label: "Funnel", value: "Private enquiry" },
     ],

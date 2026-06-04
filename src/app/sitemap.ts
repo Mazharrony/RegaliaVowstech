@@ -14,6 +14,7 @@ const staticPaths = [
   "/process",
   "/insights",
   "/contact",
+  "/models",
   "/legal/privacy",
   "/legal/terms",
 ];

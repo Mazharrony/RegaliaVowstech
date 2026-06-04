@@ -109,7 +109,7 @@ export function SelectedWork() {
                           key={s}
                           className="rounded-full border hairline px-3 py-1 font-mono text-[0.62rem] uppercase tracking-[0.22em] text-[var(--color-muted)]"
                         >
-                          {s.replace(/-/g, " ")}
+                          {tCommon(`serviceTags.${s}`)}
                         </span>
                       ))}
                     </div>

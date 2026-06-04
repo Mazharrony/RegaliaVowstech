@@ -8,10 +8,10 @@ export function Metrics() {
   const t = useTranslations("home");
 
   const stats = [
-    { label: t("metricProjects"), to: 240, suffix: "+" },
-    { label: t("metricBrands"), to: 80, suffix: "+" },
-    { label: t("metricMarkets"), to: 14, suffix: "" },
-    { label: t("metricsImpressions"), to: 1.2, suffix: " B+", decimals: 1 },
+    { label: t("metricProjects"), to: 24, suffix: "+" },
+    { label: t("metricBrands"), to: 12, suffix: "+" },
+    { label: t("metricMarkets"), to: 6, suffix: "" },
+    { label: t("metricYears"), to: 4, suffix: "" },
   ];
 
   return (

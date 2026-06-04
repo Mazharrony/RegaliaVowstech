@@ -21,7 +21,15 @@
     "emailCopied": "Email copied",
     "menu": "Menu",
     "close": "Close",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "serviceTags": {
+      "branding": "Branding",
+      "marketing": "Marketing",
+      "content-ads": "Photo & Video",
+      "web-mobile": "Web & Apps",
+      "events-expo": "Events & Expo",
+      "corporate-events": "Corporate Events"
+    }
   },
   "nav": {
     "home": "Home",
@@ -33,12 +41,14 @@
     "contact": "Contact",
     "more": "More",
     "moreEyebrow": "More from the studio",
-    "servicesDesc": "Nine disciplines, engineered to work as one.",
+    "servicesDesc": "Integrated capabilities, engineered to work as one.",
     "aboutDesc": "Who we are and how we think.",
     "processDesc": "How we move from brief to launch.",
     "contactDesc": "Start a conversation — we reply within a day."
   },
   "home": {
+    "metaTitle": "Regalia Vows Tech — Brand, Technology & Experiences",
+    "metaDescription": "A Dubai-based studio partnering with UAE founders and operators on branding, websites, applied AI and content — a small, senior team that takes the whole arc.",
     "heroEyebrow": "Independent studio · Dubai",
     "heroMeta1": "Brand · Technology · Experience",
     "heroMeta2": "Est. 2022 · Dubai, UAE",
@@ -51,9 +61,10 @@
     "heroSwap5": "experiences",
     "heroBody": "Identity systems, software, AI, social, content and event experiences — engineered in one studio for ambitious teams in the UAE.",
     "clientsEyebrow": "Recent clients we've shipped for",
+    "clientsSubtitle": "Dubai · selected work",
     "servicesEyebrow": "Capabilities",
-    "servicesTitle": "Nine disciplines. One studio.",
-    "servicesBody": "Brand, marketing, social, content production, software, automation and live experiences — engineered to work as one.",
+    "servicesTitle": "Integrated capabilities. One studio.",
+    "servicesBody": "Brand, marketing, content production, websites, commerce and live experiences — engineered to move together.",
     "aboutEyebrow": "The studio",
     "aboutTitle": "An independent studio at the seam of craft, code and commerce.",
     "aboutBody": "We bring together designers, engineers, producers and strategists who treat every project — a logo, an automation engine, a 200-square-metre stand — with the same obsessive care.",
@@ -64,7 +75,7 @@
     "metricProjects": "Projects shipped",
     "metricBrands": "Brands launched",
     "metricMarkets": "Markets activated",
-    "metricsImpressions": "Impressions served",
+    "metricYears": "Years delivering",
     "processEyebrow": "How we work",
     "processTitle": "A clear path from brief to launch.",
     "insightsEyebrow": "Journal",
@@ -168,9 +179,10 @@
     ]
   },
   "servicesIndex": {
-    "headline": "Ten disciplines, working as one studio.",
+    "headline": "Six disciplines, working as one studio.",
     "body": "From a fresh identity to AI in production to the expo stand that wins the floor — we run the whole arc, and we run it tightly.",
     "industriesEyebrow": "Industries we serve",
+    "industriesTitle": "Built for teams shipping into demanding sectors.",
     "industriesBody": "We work most often with operators and founders shipping into these sectors. The toolkit changes; the rigour doesn’t.",
     "industries": ["Hospitality", "Real Estate", "Retail & FMCG", "Finance", "Government", "Healthcare", "Technology", "Events & Culture"],
     "ctaEyebrow": "Ready to start?",
@@ -213,6 +225,26 @@
     "relatedWorkEyebrow": "Recent work",
     "relatedWorkTitle": "How this looks in production.",
     "relatedWorkEmpty": "Case studies for this service are landing soon."
+  },
+  "models": {
+    "eyebrow": "Special service",
+    "title": "Models & Talent Services",
+    "metaDescription": "Carefully selected models, actors, hosts and content creators for advertising, fashion, corporate events and social content across the UAE.",
+    "body": "We provide carefully selected talent for advertising campaigns, fashion shoots, corporate events, product launches, e-commerce photography, social media content, and brand promotions.",
+    "viewDetails": "View service details",
+    "items": [
+      { "name": "Professional Models (Male, Female, Kids & Seniors)", "description": "Versatile faces for every age group and brief." },
+      { "name": "Fashion & Editorial Models", "description": "Runway and editorial talent for fashion shoots and shows." },
+      { "name": "Commercial & Advertising Models", "description": "Relatable, on-brand faces for campaigns and ads." },
+      { "name": "Plus-Size Models", "description": "Inclusive representation for body-positive brands." },
+      { "name": "Fitness Models", "description": "Athletic talent for sportswear, gyms and wellness." },
+      { "name": "E-commerce & Catalog Models", "description": "Consistent looks built for product and catalog shoots." },
+      { "name": "Actors & Performers", "description": "Trained talent for films, skits and live performance." },
+      { "name": "Brand Ambassadors", "description": "Polished representatives who embody your brand on-site." },
+      { "name": "Hosts & Promoters", "description": "Energetic hosts and promoters who work the crowd." },
+      { "name": "Social Media Influencers", "description": "Creators with the reach to amplify your message." },
+      { "name": "Content Creators & YouTubers", "description": "Storytellers who produce content audiences follow." }
+    ]
   },
   "workIndex": {
     "eyebrow": "Selected work",

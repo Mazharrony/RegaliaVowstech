@@ -16,6 +16,7 @@ export function ServicesGrid() {
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState<string | null>(null);
   const services = useMemo(() => getServices(locale), [locale]);
+  const serviceCount = String(services.length).padStart(2, "0");
 
   return (
     <section className="section-pad relative">
@@ -26,7 +27,7 @@ export function ServicesGrid() {
             <Reveal>
               <p className="eyebrow mb-5 inline-flex items-center gap-2">
                 <span className="inline-block h-px w-8 bg-[var(--color-accent)]" />
-                {t("servicesEyebrow")} · 09
+                {t("servicesEyebrow")} · {serviceCount}
               </p>
             </Reveal>
             <Reveal delay={0.1}>

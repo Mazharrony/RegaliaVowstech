@@ -82,7 +82,7 @@ export default async function CaseStudyPage({
                   href={`/services/${s}`}
                   className="rounded-full border border-white/30 px-4 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.18em] transition-colors hover:bg-white hover:text-[var(--color-ink)]"
                 >
-                  {s.replace(/-/g, " ")}
+                  {tCommon(`serviceTags.${s}`)}
                 </Link>
               ))}
             </div>

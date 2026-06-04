@@ -52,7 +52,7 @@ export function ClientsMarquee() {
       <div className="container-x mb-8 flex items-center justify-between gap-4">
         <p className="eyebrow">{t("clientsEyebrow")}</p>
         <span className="hidden font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] md:inline">
-          Dubai · selected work
+          {t("clientsSubtitle")}
         </span>
       </div>
       <div className="flex flex-col gap-6 md:gap-8">

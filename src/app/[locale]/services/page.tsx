@@ -78,7 +78,7 @@ export default async function ServicesIndexPage({
               </Reveal>
               <Reveal delay={0.1}>
                 <h2 className="display-2 max-w-[16ch] text-balance">
-                  {tIndex("industriesEyebrow")}
+                  {tIndex("industriesTitle")}
                 </h2>
               </Reveal>
             </div>
