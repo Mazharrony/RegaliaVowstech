@@ -391,7 +391,7 @@ export const services: Service[] = [
   },
   {
     slug: "content-ads",
-    number: "05",
+    number: "06",
     title: "Photo, Video & Live Streaming",
     tagline: "Photo, video, reels and live broadcast — built to perform.",
     summary:
