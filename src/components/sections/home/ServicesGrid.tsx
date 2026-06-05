@@ -13,10 +13,13 @@ export function ServicesGrid() {
   const locale = useLocale();
   const t = useTranslations("home");
   const tCommon = useTranslations("common");
+  const tModels = useTranslations("models");
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState<string | null>(null);
   const services = useMemo(() => getServices(locale), [locale]);
-  const serviceCount = String(services.length).padStart(2, "0");
+  const primaryServices = useMemo(() => services.filter((s) => s.slug !== "content-ads"), [services]);
+  const contentAds = useMemo(() => services.find((s) => s.slug === "content-ads"), [services]);
+  const serviceCount = String(services.length + 1).padStart(2, "0"); // +1 for models
 
   return (
     <section className="section-pad relative">
@@ -53,7 +56,7 @@ export function ServicesGrid() {
           className="relative border-t hairline"
           onMouseLeave={() => setHovered(null)}
         >
-          {services.map((s) => (
+          {primaryServices.map((s) => (
             <li key={s.slug} className="relative">
               <Link
                 href={`/services/${s.slug}`}
@@ -96,6 +99,90 @@ export function ServicesGrid() {
               </Link>
             </li>
           ))}
+
+          {/* Models & Talent — section 05 */}
+          <li className="relative">
+            <Link
+              href="/models"
+              onMouseEnter={() => setHovered("models")}
+              onFocus={() => setHovered("models")}
+              className="group relative flex items-center justify-between gap-6 border-b hairline py-6 transition-colors md:py-8"
+            >
+              <div className="flex items-baseline gap-6 md:gap-12">
+                <span className="font-mono text-[0.7rem] tabular-nums text-[var(--color-muted)] md:text-sm">
+                  05
+                </span>
+                <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-8">
+                  <h3
+                    className="font-serif tracking-tight text-[var(--color-ink)] transition-transform duration-700 group-hover:translate-x-3 rtl:group-hover:-translate-x-3"
+                    style={{ fontSize: "var(--step-3)" }}
+                  >
+                    {tModels("title")}
+                  </h3>
+                  <p className="hidden text-sm text-[var(--color-muted)] md:block md:max-w-[36ch]">
+                    {tModels("eyebrow")}
+                  </p>
+                </div>
+              </div>
+              <ArrowUpRight className="h-5 w-5 shrink-0 text-[var(--color-muted)] transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[var(--color-accent)] md:h-6 md:w-6" />
+              <AnimatePresence>
+                {!reduce && hovered === "models" && (
+                  <motion.span
+                    aria-hidden
+                    layoutId="cap-accent"
+                    className="absolute inset-y-0 -start-3 w-[3px] bg-[var(--color-accent)]"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: easings.out }}
+                  />
+                )}
+              </AnimatePresence>
+            </Link>
+          </li>
+
+          {/* Photo, Video & Live Streaming — section 06 */}
+          {contentAds && (
+            <li key={contentAds.slug} className="relative">
+              <Link
+                href={`/services/${contentAds.slug}`}
+                onMouseEnter={() => setHovered(contentAds.slug)}
+                onFocus={() => setHovered(contentAds.slug)}
+                className="group relative flex items-center justify-between gap-6 border-b hairline py-6 transition-colors md:py-8"
+              >
+                <div className="flex items-baseline gap-6 md:gap-12">
+                  <span className="font-mono text-[0.7rem] tabular-nums text-[var(--color-muted)] md:text-sm">
+                    {contentAds.number}
+                  </span>
+                  <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-8">
+                    <h3
+                      className="font-serif tracking-tight text-[var(--color-ink)] transition-transform duration-700 group-hover:translate-x-3 rtl:group-hover:-translate-x-3"
+                      style={{ fontSize: "var(--step-3)" }}
+                    >
+                      {contentAds.title}
+                    </h3>
+                    <p className="hidden text-sm text-[var(--color-muted)] md:block md:max-w-[36ch]">
+                      {contentAds.tagline}
+                    </p>
+                  </div>
+                </div>
+                <ArrowUpRight className="h-5 w-5 shrink-0 text-[var(--color-muted)] transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[var(--color-accent)] md:h-6 md:w-6" />
+                <AnimatePresence>
+                  {!reduce && hovered === contentAds.slug && (
+                    <motion.span
+                      aria-hidden
+                      layoutId="cap-accent"
+                      className="absolute inset-y-0 -start-3 w-[3px] bg-[var(--color-accent)]"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.4, ease: easings.out }}
+                    />
+                  )}
+                </AnimatePresence>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </section>
