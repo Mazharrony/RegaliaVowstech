@@ -2,7 +2,6 @@ export type ServiceSlug =
   | "branding"
   | "marketing"
   | "content-ads"
-  | "web-mobile"
   | "events-expo"
   | "corporate-events";
 
@@ -90,10 +89,10 @@ export const services: Service[] = [
   {
     slug: "marketing",
     number: "02",
-    title: "Digital & Local Marketing",
-    tagline: "Performance, presence and community — earned and paid.",
+    title: "Digital Marketing & Web",
+    tagline: "Performance marketing and the websites that convert it.",
     summary:
-      "Integrated SEO, paid media and social media management tuned for UAE audiences — clear pricing, weekly optimisation and measurable outcomes.",
+      "SEO, paid media and social media management plus the websites, e-commerce and platforms behind them — built and run by one team for measurable UAE outcomes.",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=70",
     deliverables: [
@@ -109,12 +108,18 @@ export const services: Service[] = [
       { name: "Lead generation funnels & retargeting", description: "Conversion funnels that capture and re-engage prospects." },
       { name: "Landing pages & creative variants", description: "Purpose-built pages and creatives tuned for results." },
       { name: "Measurement & analytics dashboards", description: "Clear reporting that ties spend back to outcomes." },
+      { name: "Marketing & e-commerce websites", description: "Fast, conversion-focused sites for brand and sales." },
+      { name: "Custom UI/UX design", description: "Interfaces designed around your users and goals." },
+      { name: "Payments & shipping integrations", description: "Checkout, payments and delivery wired end-to-end." },
+      { name: "Headless CMS & admin dashboards", description: "Flexible content systems and role-based tools your team can own." },
+      { name: "POS / ERP & inventory integrations", description: "Connect the platform to the systems and stock flows you already run." },
+      { name: "SEO + analytics setup, hosting & maintenance", description: "Search and tracking configured from day one — then kept fast, secure and current." },
     ],
     process: [
-      { step: "01", title: "Audit", body: "Funnel, channels, creative and attribution review." },
-      { step: "02", title: "Plan", body: "Audiences, channel mix, creative territories." },
-      { step: "03", title: "Launch", body: "Setup, creative production, campaign go-live." },
-      { step: "04", title: "Optimise", body: "Weekly readouts, iteration, scale." },
+      { step: "01", title: "Audit", body: "Funnel, channels, creative, site and attribution review." },
+      { step: "02", title: "Plan", body: "Audiences, channel mix, creative territories and tech requirements." },
+      { step: "03", title: "Build & Launch", body: "Creative production, site build, campaign setup and go-live." },
+      { step: "04", title: "Optimise", body: "Weekly readouts, iteration, maintenance and scale." },
     ],
     packages: [
       {
@@ -166,6 +171,56 @@ export const services: Service[] = [
           "Monthly performance and trend brief",
         ],
       },
+      {
+        tier: "Templates",
+        name: "Template Website",
+        priceFrom: "1–2k",
+        cadence: "one-time",
+        summary:
+          "A polished, mobile-ready site built on a proven template — live in days, not months.",
+        includes: [
+          "Ready-made template setup",
+          "Up to 6 pages",
+          "Mobile responsive",
+          "Contact form + WhatsApp",
+          "Basic SEO setup",
+          "Hosting handover",
+        ],
+      },
+      {
+        tier: "Custom Ecom",
+        name: "Custom E-commerce",
+        priceFrom: "5–10k",
+        cadence: "one-time",
+        note: "+ AED 700 / month maintenance",
+        summary:
+          "A heavily-developed custom e-commerce site with payments, shipping and an admin you'll actually enjoy using.",
+        includes: [
+          "Custom UI/UX design",
+          "Custom e-commerce build",
+          "Payments + shipping integrations",
+          "Admin dashboard",
+          "SEO + analytics + pixels",
+          "Bilingual (EN/AR) ready",
+          "Monthly maintenance retainer",
+        ],
+      },
+      {
+        tier: "Bespoke",
+        name: "Custom Operations Platform",
+        cadence: "project",
+        summary:
+          "Custom CMS, inventory and back-office platforms scoped to your catalogue, channels and workflows.",
+        includes: [
+          "Custom CMS + content workflows",
+          "Inventory + warehouse operations",
+          "POS / e-commerce / ERP integrations",
+          "Backend platform & APIs",
+          "Real-time + offline support",
+          "Data migration + team training",
+          "Ongoing engineering retainer",
+        ],
+      },
     ],
     faqs: [
       { q: "Is ad spend included?", a: "No — ad spend is paid directly to the platform. Our fee covers strategy, creative, setup, optimisation and reporting." },
@@ -173,11 +228,170 @@ export const services: Service[] = [
       { q: "Do you run brand awareness as well as lead-gen?", a: "Yes — we run reach and website-traffic campaigns to build the audience, and conversion-optimised lead-gen and retargeting funnels to close." },
       { q: "Can you handle Google Business Profile?", a: "Yes — we set up, optimise and keep your GBP current so you show up in local search and Maps for the right queries." },
       { q: "Which social platforms do you manage?", a: "Instagram, TikTok, LinkedIn, YouTube, X, Snap and Facebook — we set the channel mix around your audience and goals." },
+      { q: "What's the difference between template and custom websites?", a: "Templates ship fast on a proven layout — perfect for small businesses. Custom e-commerce is designed and built for your brand, with deeper integrations and admin tooling." },
+      { q: "What does website maintenance cover?", a: "Hosting, security patches, plugin updates, content tweaks (up to 2 hours/month) and uptime monitoring." },
+      { q: "Can you integrate with our ERP and migrate legacy data?", a: "Yes — we regularly integrate SAP, Oracle, Odoo and custom systems, including reconciliation and validation before go-live." },
+    ],
+  },
+  {
+    slug: "events-expo",
+    number: "03",
+    title: "Event & Expo Branding",
+    tagline: "Booth, promotion, content and engagement — built around four pillars.",
+    summary:
+      "End-to-end exhibition programs across four pillars — exhibition booth design and branding, exhibition marketing and promotion, content production and media coverage, and brand activation and visitor engagement that turns floor traffic into qualified leads.",
+    image:
+      "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=70",
+    deliverables: [
+      { name: "Exhibition booth design & branding", description: "Custom booth design, exhibition graphics and signage, full booth construction and setup, and promotional materials and giveaways." },
+      { name: "Exhibition marketing & promotion", description: "Social media campaigns, Google advertising, brand awareness activities and digital marketing support around the show." },
+      { name: "Content production & media coverage", description: "Event photography, promotional videos and reels, brand storytelling content, and website and advertising creatives." },
+      { name: "Brand activation & visitor engagement", description: "Professional brand promoters, live product demonstrations, visitor interaction and lead generation, and information and sampling distribution." },
+    ],
+    process: [
+      { step: "01", title: "Booth design & branding", body: "Concept, 3D design, signage, fabrication and on-stand collateral." },
+      { step: "02", title: "Marketing & promotion", body: "Pre-show social, Google ads, awareness activities and digital support." },
+      { step: "03", title: "Content & coverage", body: "Live photo and video, reels, storytelling and ad creatives from the floor." },
+      { step: "04", title: "Activation & engagement", body: "Promoters, demos, lead capture and on-stand sampling through every show day." },
+    ],
+    packages: [
+      {
+        tier: "Standard",
+        name: "Booth Design & Branding",
+        cadence: "project",
+        summary:
+          "Pillar one on its own — a well-designed, well-built stand with the signage and collateral ready for the floor.",
+        includes: [
+          "Custom booth design with 3D visuals",
+          "Exhibition graphics & signage",
+          "Booth construction, setup & dismantle",
+          "Promotional materials & branded giveaways",
+        ],
+      },
+      {
+        tier: "Premium",
+        name: "Booth + Activation",
+        cadence: "project",
+        highlight: true,
+        summary:
+          "Booth design and build plus on-floor brand activation — promoters, live demos, lead capture and sampling that turn visitors into qualified contacts.",
+        includes: [
+          "Everything in Booth Design & Branding",
+          "Professional brand promoters & bilingual hosts",
+          "Live product demonstrations",
+          "QR-driven lead capture into your CRM",
+          "Information & sampling distribution",
+        ],
+      },
+      {
+        tier: "Bespoke",
+        name: "Full Exhibition Program",
+        cadence: "project",
+        note: "+ ad spend billed at cost",
+        summary:
+          "All four pillars wrapped around the show — booth, marketing and promotion, content production and on-floor activation, with reporting after.",
+        includes: [
+          "Everything in Booth + Activation",
+          "Social media campaigns pre, during & post",
+          "Google Search, Display & YouTube ads",
+          "Live event photography, reels & storytelling content",
+          "Website & ad creatives produced on-site",
+          "Post-event performance report",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "How are the four pillars structured?", a: "Booth design & branding, exhibition marketing & promotion, content production & media coverage, and brand activation & visitor engagement — picked individually or run together as one program." },
+      { q: "Do you handle booth production end-to-end?", a: "Yes — design, fabrication, logistics, install, on-site management and dismantle under a single team." },
+      { q: "Which expos do you build for?", a: "We brief and quote per event — GITEX, ADIPEC, Arab Health, Gulfood and brand-owned activations are all in scope. Tell us the show and we'll come back with a fit assessment." },
+      { q: "Do you supply the booth staff and promoters?", a: "Yes — trained professional brand promoters, bilingual hosts and a team lead, briefed on your product and key messages before day one." },
+      { q: "Can you run the marketing and ads around the show?", a: "Yes — social media campaigns, Google Search, Display and YouTube ads, brand awareness activities and digital marketing support in the weeks before, during and after the event." },
+      { q: "What content gets produced on-site?", a: "Daily event photography, promotional videos and reels, brand storytelling pieces and fresh website and advertising creatives — ready for same-day publishing." },
+      { q: "How do you capture and hand over leads?", a: "QR codes on the stand and collateral push visitors into a lead form that writes directly into your CRM or a shared sheet, with daily exports during the show." },
+      { q: "How is sampling and information distribution handled?", a: "Promoters qualify visitors first, then hand over samples, collateral and follow-up material to the right audience — never just left unattended on a table." },
+    ],
+  },
+  {
+    slug: "corporate-events",
+    number: "04",
+    title: "Corporate Events",
+    tagline: "Conferences, launches and internal moments executed end-to-end.",
+    summary:
+      "Corporate event programmes for summits, product launches, townhalls and gala nights — strategy, production, media capture and post-event communications under one team.",
+    image:
+      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1600&q=70",
+    deliverables: [
+      { name: "Stage design & setup", description: "A stage built around your theme and run-of-show." },
+      { name: "Event branding", description: "Cohesive branding across every touchpoint on the day." },
+      { name: "LED screens & displays", description: "High-impact screens sized for the room." },
+      { name: "Sound & lighting", description: "Audio and lighting that set the right atmosphere." },
+      { name: "Banquet management", description: "Seamless catering and banquet coordination." },
+      { name: "Guest experience", description: "A thoughtful flow from arrival to farewell." },
+      { name: "Models & Talent Services", description: "Professional models and hosts who elevate the occasion." },
+      { name: "Corporate gifts", description: "Curated gifts that leave a lasting impression." },
+      { name: "Banners & signage", description: "Wayfinding and branding that guide every guest." },
+      { name: "Photography & videography", description: "Full coverage of the moments that matter." },
+      { name: "Live streaming", description: "Broadcast your event to remote audiences." },
+      { name: "DJ & entertainment", description: "Live entertainment that sets the tone." },
+      { name: "Influencer marketing", description: "Amplify the event through the right voices." },
+    ],
+    process: [
+      { step: "01", title: "Align", body: "Objectives, audience profile, timeline and success metrics." },
+      { step: "02", title: "Design", body: "Theme, agenda, venue layout, stage and technical planning." },
+      { step: "03", title: "Deliver", body: "On-site production, coordination, live support and media capture." },
+      { step: "04", title: "Extend", body: "Recaps, highlight assets, stakeholder reporting and follow-ups." },
+    ],
+    packages: [
+      {
+        tier: "Core",
+        name: "Corporate Essentials",
+        cadence: "project",
+        summary:
+          "Production essentials for internal and external corporate gatherings with clean on-site execution.",
+        includes: [
+          "Run-of-show planning",
+          "Stage + AV production",
+          "Host and speaker coordination",
+          "On-site event manager",
+        ],
+      },
+      {
+        tier: "Premium",
+        name: "Corporate Plus",
+        cadence: "project",
+        highlight: true,
+        summary:
+          "Everything in Essentials plus livestream, capture and polished post-event content.",
+        includes: [
+          "Everything in Corporate Essentials",
+          "Live streaming / hybrid delivery",
+          "Photo + video event coverage",
+          "Highlight film and recap deck",
+        ],
+      },
+      {
+        tier: "Bespoke",
+        name: "Enterprise Programme",
+        cadence: "project",
+        summary:
+          "Multi-day and multi-city corporate programmes with dedicated planning and reporting layers.",
+        includes: [
+          "Multi-day agenda and logistics",
+          "Stakeholder and sponsor management",
+          "Content production pipeline",
+          "Measurement and outcomes report",
+        ],
+      },
+    ],
+    faqs: [
+      { q: "Do you handle venue and vendor coordination?", a: "Yes — we manage venue fit checks, vendor sourcing and technical coordination end-to-end." },
+      { q: "Can you support hybrid events with remote audiences?", a: "Yes — we provide live switching, streaming and recording workflows for hybrid attendance." },
+      { q: "Do you provide post-event content packages?", a: "Yes — we deliver recap films, social clips, photo sets and stakeholder-ready reports." },
     ],
   },
   {
     slug: "content-ads",
-    number: "03",
+    number: "05",
     title: "Photo, Video & Live Streaming",
     tagline: "Photo, video, reels and live broadcast — built to perform.",
     summary:
@@ -258,260 +472,6 @@ export const services: Service[] = [
       { q: "Can we add extra videographers or shoot days?", a: "Yes — every package can scale up with extra crew, locations or shoot days." },
       { q: "Can you livestream our event as part of production?", a: "Yes — livestream production can be included with multi-camera switching, RTMP delivery and recording handoff." },
       { q: "Do livestream prices include travel outside Dubai?", a: "Listed livestream rates are for Dubai. Travel, accommodation and per diem are quoted separately for other locations." },
-    ],
-  },
-  {
-    slug: "web-mobile",
-    number: "04",
-    title: "Websites, E-commerce & Platforms",
-    tagline: "Fast digital products engineered for growth.",
-    summary:
-      "From ready-made websites to custom e-commerce and operations platforms — engineered for speed, SEO and long-term maintainability.",
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=70",
-    deliverables: [
-      { name: "Marketing & e-commerce websites", description: "Fast, conversion-focused sites for brand and sales." },
-      { name: "Custom UI/UX design", description: "Interfaces designed around your users and goals." },
-      { name: "Payments & shipping integrations", description: "Checkout, payments and delivery wired end-to-end." },
-      { name: "Headless CMS implementations", description: "Flexible content systems your team can own." },
-      { name: "Inventory & warehouse workflows", description: "Stock and fulfilment flows that match how you operate." },
-      { name: "POS / ERP integrations", description: "Connect the platform to the systems you already run." },
-      { name: "Role-based admin dashboards", description: "Controlled access and tools for every team member." },
-      { name: "SEO + analytics setup", description: "Search and tracking configured from day one." },
-      { name: "Hosting, maintenance & support", description: "We keep the site fast, secure and up to date." },
-    ],
-    process: [
-      { step: "01", title: "Define", body: "Goals, audiences, technical constraints." },
-      { step: "02", title: "Design", body: "Flows, IA, UI design and prototypes." },
-      { step: "03", title: "Build", body: "Frontend, backend, integrations, QA." },
-      { step: "04", title: "Launch", body: "Deployment, monitoring, iteration." },
-    ],
-    packages: [
-      {
-        tier: "Templates",
-        name: "Template Website",
-        priceFrom: "1–2k",
-        cadence: "one-time",
-        summary:
-          "A polished, mobile-ready site built on a proven template — live in days, not months.",
-        includes: [
-          "Ready-made template setup",
-          "Up to 6 pages",
-          "Mobile responsive",
-          "Contact form + WhatsApp",
-          "Basic SEO setup",
-          "Hosting handover",
-        ],
-      },
-      {
-        tier: "Custom Ecom",
-        name: "Custom E-commerce",
-        priceFrom: "5–10k",
-        cadence: "one-time",
-        note: "+ AED 700 / month maintenance",
-        summary:
-          "A heavily-developed custom e-commerce site with payments, shipping and an admin you'll actually enjoy using.",
-        includes: [
-          "Custom UI/UX design",
-          "Custom e-commerce build",
-          "Payments + shipping integrations",
-          "Admin dashboard",
-          "SEO + analytics + pixels",
-          "Bilingual (EN/AR) ready",
-          "Monthly maintenance retainer",
-        ],
-        highlight: true,
-      },
-      {
-        tier: "Bespoke",
-        name: "Custom Operations Platform",
-        cadence: "project",
-        summary:
-          "Custom CMS, inventory and back-office platforms scoped to your catalogue, channels and workflows.",
-        includes: [
-          "Custom CMS + content workflows",
-          "Inventory + warehouse operations",
-          "POS / e-commerce / ERP integrations",
-          "Backend platform & APIs",
-          "Real-time + offline support",
-          "Data migration + team training",
-          "Ongoing engineering retainer",
-        ],
-      },
-    ],
-    faqs: [
-      { q: "What's the difference between templates and custom?", a: "Templates ship fast on a proven layout — perfect for small businesses. Custom e-commerce is designed and built for your brand, with deeper integrations and admin tooling." },
-      { q: "What does maintenance cover?", a: "Hosting, security patches, plugin updates, content tweaks (up to 2 hours/month) and uptime monitoring." },
-      { q: "Can you integrate with our ERP and migrate legacy data?", a: "Yes — we regularly integrate SAP, Oracle, Odoo and custom systems, including reconciliation and validation before go-live." },
-    ],
-  },
-  {
-    slug: "events-expo",
-    number: "05",
-    title: "Event & Expo Branding",
-    tagline: "Stands, talent and activations that pull a crowd — and convert it.",
-    summary:
-      "End-to-end exhibition programs — stand design and build, trained booth staff, live entertainment and interactive games, content capture, paid amplification, and lead follow-up that ties the show back to revenue.",
-    image:
-      "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=70",
-    deliverables: [
-      { name: "Concept, narrative & stand design with 3D visuals", description: "A clear idea and 3D design before anything is built." },
-      { name: "Stand fabrication, signage, AV & interactive installs", description: "Full build, signage and tech delivered to the floor." },
-      { name: "Printed collateral — brochures, catalogues, leaflets, business cards", description: "Print materials that look the part on the stand." },
-      { name: "Branded giveaways & promotional merchandise", description: "Memorable takeaways that keep your brand in hand." },
-      { name: "Models & Talent Services", description: "Trained models and brand ambassadors who represent you on the floor." },
-      { name: "Bilingual MCs, hosts & event anchors", description: "Hosts who work the crowd in Arabic and English." },
-      { name: "Live artists — DJs, musicians, magicians, caricaturists, mascots", description: "Live acts that draw a crowd and hold it." },
-      { name: "Custom branded games, leaderboards, photo booths & AR experiences", description: "Interactive moments that turn playing into leads." },
-      { name: "Live event photography & videography — reels, BTS, testimonials", description: "Daily content captured straight from the floor." },
-      { name: "Pre-event social campaign with countdown content", description: "Build anticipation before the doors open." },
-      { name: "Paid media across Meta, LinkedIn, TikTok and Google Search & Display", description: "Targeted ads around the show to pull traffic." },
-      { name: "Google Business Profile optimisation & show-week SEO", description: "Get found during the week that matters most." },
-      { name: "QR-driven lead capture wired into your CRM", description: "Visitors scan, and leads land straight in your CRM." },
-      { name: "Post-event recap content & retargeting funnels", description: "Keep the momentum going after the show ends." },
-      { name: "Performance report — footfall, leads, social lift, web traffic", description: "A clear read on what the show actually delivered." },
-    ],
-    process: [
-      { step: "01", title: "Strategy", body: "Goals, audience, KPIs and a read on the show floor." },
-      { step: "02", title: "Build", body: "Stand, collateral, giveaways and sourcing talent + gaming." },
-      { step: "03", title: "Tease", body: "Countdown content, paid pre-show campaigns, GBP and SEO." },
-      { step: "04", title: "Activate", body: "On-site team, hosts and artists, games running, daily content and lead capture." },
-      { step: "05", title: "Follow-up", body: "Recap content, retargeting, lead nurture and the performance report." },
-    ],
-    packages: [
-      {
-        tier: "Standard",
-        name: "Booth Essentials",
-        cadence: "project",
-        summary:
-          "A clean, well-built stand with the collateral and on-site setup to look the part — no marketing layer.",
-        includes: [
-          "Stand design + fabrication",
-          "Core signage & AV",
-          "Brochures, business cards, basic giveaways",
-          "On-site setup & dismantle",
-        ],
-      },
-      {
-        tier: "Premium",
-        name: "Activation",
-        cadence: "project",
-        highlight: true,
-        summary:
-          "Everything in Essentials plus the hosts, live entertainment, branded games and content that turn the booth into a destination — and capture every lead.",
-        includes: [
-          "Everything in Booth Essentials",
-          "Brand promoters, booth hosts & bilingual MC",
-          "Live artists — DJ, musician, magician or mascot",
-          "Custom branded game + photo booth / AR",
-          "Live photo/video team + daily reels",
-          "Pre and post social content calendar",
-          "QR lead capture into your CRM",
-        ],
-      },
-      {
-        tier: "Bespoke",
-        name: "Full Campaign",
-        cadence: "project",
-        note: "+ ad spend billed at cost",
-        summary:
-          "The full program — stand, talent, games, content and a paid media push wrapped around the show with retargeting after.",
-        includes: [
-          "Everything in Activation",
-          "Paid media — Meta, LinkedIn, TikTok, Google",
-          "Retargeting + lead-gen funnels",
-          "GBP optimisation & SEO push",
-          "Post-event analytics report",
-        ],
-      },
-    ],
-    faqs: [
-      { q: "Do you handle production end-to-end?", a: "Yes — design, fabrication, logistics, install, on-site management and dismantle." },
-      { q: "Which expos do you build for?", a: "We brief and quote per event — GITEX, ADIPEC, Arab Health, Gulfood and brand-owned activations are all in scope. Tell us the show and we'll come back with a fit assessment." },
-      { q: "Do you supply the booth staff and promoters?", a: "Yes — trained brand promoters, booth hosts and a team lead, briefed on your product and key messages before day one." },
-      { q: "Can you run the paid ads and social during the show?", a: "Yes — we run Meta, LinkedIn, TikTok and Google campaigns in the weeks before, during and after the event, with daily live posts from the floor." },
-      { q: "How do you capture and hand over leads?", a: "QR codes on the stand and collateral push visitors into a lead form that writes directly into your CRM or a shared sheet, with daily exports during the show." },
-      { q: "What does the post-event report include?", a: "Footfall, qualified leads, social reach and engagement lift, website traffic from the show, paid media performance and a read on what to repeat next time." },
-      { q: "Can you book artists, hosts and entertainers?", a: "Yes — bilingual MCs, DJs, musicians, magicians, caricaturists, mascots and brand ambassadors. We brief and rehearse them on your product so the act ties back to the message." },
-      { q: "What kind of games and interactive experiences do you build?", a: "Custom branded games with live leaderboards, prize wheels, AR try-ons, photo booths and touch-screen demos — all wired to your lead-capture flow so playing earns you a contact." },
-    ],
-  },
-  {
-    slug: "corporate-events",
-    number: "06",
-    title: "Corporate Events",
-    tagline: "Conferences, launches and internal moments executed end-to-end.",
-    summary:
-      "Corporate event programmes for summits, product launches, townhalls and gala nights — strategy, production, media capture and post-event communications under one team.",
-    image:
-      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1600&q=70",
-    deliverables: [
-      { name: "Stage design & setup", description: "A stage built around your theme and run-of-show." },
-      { name: "Event branding", description: "Cohesive branding across every touchpoint on the day." },
-      { name: "LED screens & displays", description: "High-impact screens sized for the room." },
-      { name: "Sound & lighting", description: "Audio and lighting that set the right atmosphere." },
-      { name: "Banquet management", description: "Seamless catering and banquet coordination." },
-      { name: "Guest experience", description: "A thoughtful flow from arrival to farewell." },
-      { name: "Models & Talent Services", description: "Professional models and hosts who elevate the occasion." },
-      { name: "Corporate gifts", description: "Curated gifts that leave a lasting impression." },
-      { name: "Banners & signage", description: "Wayfinding and branding that guide every guest." },
-      { name: "Photography & videography", description: "Full coverage of the moments that matter." },
-      { name: "Live streaming", description: "Broadcast your event to remote audiences." },
-      { name: "DJ & entertainment", description: "Live entertainment that sets the tone." },
-      { name: "Influencer marketing", description: "Amplify the event through the right voices." },
-    ],
-    process: [
-      { step: "01", title: "Align", body: "Objectives, audience profile, timeline and success metrics." },
-      { step: "02", title: "Design", body: "Theme, agenda, venue layout, stage and technical planning." },
-      { step: "03", title: "Deliver", body: "On-site production, coordination, live support and media capture." },
-      { step: "04", title: "Extend", body: "Recaps, highlight assets, stakeholder reporting and follow-ups." },
-    ],
-    packages: [
-      {
-        tier: "Core",
-        name: "Corporate Essentials",
-        cadence: "project",
-        summary:
-          "Production essentials for internal and external corporate gatherings with clean on-site execution.",
-        includes: [
-          "Run-of-show planning",
-          "Stage + AV production",
-          "Host and speaker coordination",
-          "On-site event manager",
-        ],
-      },
-      {
-        tier: "Premium",
-        name: "Corporate Plus",
-        cadence: "project",
-        highlight: true,
-        summary:
-          "Everything in Essentials plus livestream, capture and polished post-event content.",
-        includes: [
-          "Everything in Corporate Essentials",
-          "Live streaming / hybrid delivery",
-          "Photo + video event coverage",
-          "Highlight film and recap deck",
-        ],
-      },
-      {
-        tier: "Bespoke",
-        name: "Enterprise Programme",
-        cadence: "project",
-        summary:
-          "Multi-day and multi-city corporate programmes with dedicated planning and reporting layers.",
-        includes: [
-          "Multi-day agenda and logistics",
-          "Stakeholder and sponsor management",
-          "Content production pipeline",
-          "Measurement and outcomes report",
-        ],
-      },
-    ],
-    faqs: [
-      { q: "Do you handle venue and vendor coordination?", a: "Yes — we manage venue fit checks, vendor sourcing and technical coordination end-to-end." },
-      { q: "Can you support hybrid events with remote audiences?", a: "Yes — we provide live switching, streaming and recording workflows for hybrid attendance." },
-      { q: "Do you provide post-event content packages?", a: "Yes — we deliver recap films, social clips, photo sets and stakeholder-ready reports." },
     ],
   },
 ];

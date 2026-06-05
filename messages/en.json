@@ -26,7 +26,6 @@
       "branding": "Branding",
       "marketing": "Marketing",
       "content-ads": "Photo & Video",
-      "web-mobile": "Web & Apps",
       "events-expo": "Events & Expo",
       "corporate-events": "Corporate Events"
     }
@@ -227,11 +226,11 @@
     "relatedWorkEmpty": "Case studies for this service are landing soon."
   },
   "models": {
-    "eyebrow": "Special service",
-    "title": "Models & Talent Services",
+    "eyebrow": "Dedicated capabilities",
+    "title": "Models & Talent Capabilities",
     "metaDescription": "Carefully selected models, actors, hosts and content creators for advertising, fashion, corporate events and social content across the UAE.",
-    "body": "We provide carefully selected talent for advertising campaigns, fashion shoots, corporate events, product launches, e-commerce photography, social media content, and brand promotions.",
-    "viewDetails": "View service details",
+    "body": "A dedicated models and talent capability for campaigns, fashion shoots, corporate events, product launches, e-commerce photography, social media content and brand promotions across the UAE.",
+    "viewDetails": "View dedicated capabilities",
     "items": [
       { "name": "Professional Models (Male, Female, Kids & Seniors)", "description": "Versatile faces for every age group and brief." },
       { "name": "Fashion & Editorial Models", "description": "Runway and editorial talent for fashion shoots and shows." },

@@ -19,8 +19,10 @@ export default async function ServicesIndexPage({
   setRequestLocale(locale);
   const tNav = await getTranslations("nav");
   const tIndex = await getTranslations("servicesIndex");
+  const tModels = await getTranslations("models");
   const services = getServices(locale);
   const industries = tIndex.raw("industries") as string[];
+  const modelsNumber = String(services.length + 1).padStart(2, "0");
 
   return (
     <>
@@ -63,6 +65,25 @@ export default async function ServicesIndexPage({
               </Link>
             </li>
           ))}
+          <li>
+            <Link
+              href="/models"
+              className="group flex flex-col gap-3 border-b hairline py-8 transition-colors hover:text-[var(--color-accent)] md:grid md:grid-cols-12 md:items-baseline md:gap-6 md:py-14"
+            >
+              <div className="flex items-center justify-between gap-4 md:contents">
+                <span className="font-mono text-xs text-[var(--color-muted)] md:col-span-1">
+                  {modelsNumber}
+                </span>
+                <ArrowUpRight className="h-5 w-5 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 md:order-last md:col-span-1 md:justify-self-end" />
+              </div>
+              <span className="font-serif text-[clamp(1.6rem,5vw,1.8rem)] tracking-tight md:col-span-5 md:text-5xl md:leading-[0.95]">
+                {tModels("title")}
+              </span>
+              <span className="text-sm text-[var(--color-muted)] md:col-span-5 md:text-base">
+                {tModels("body")}
+              </span>
+            </Link>
+          </li>
         </ul>
       </section>
 

@@ -27,7 +27,7 @@ export const work: CaseStudy[] = [
     client: "Regalia Vows",
     title: "An editorial site for a Dubai luxury wedding studio.",
     year: 2026,
-    services: ["branding", "web-mobile", "content-ads"],
+    services: ["branding", "marketing", "content-ads"],
     industry: "Luxury weddings",
     summary:
       "Brand-led, bilingual editorial site for a Dubai-based luxury wedding and private-events studio.",
@@ -59,7 +59,7 @@ export const work: CaseStudy[] = [
     client: "Core Champs",
     title: "Brand site and product authentication for a premium nutrition label.",
     year: 2025,
-    services: ["branding", "web-mobile"],
+    services: ["branding", "marketing"],
     industry: "Premium nutrition",
     summary:
       "Marketing site plus a per-unit QR product authentication system for a US-facing premium supplement brand.",
@@ -91,7 +91,7 @@ export const work: CaseStudy[] = [
     client: "Avion Realty",
     title: "A brand site and lead funnel for a Dubai real estate firm.",
     year: 2025,
-    services: ["branding", "web-mobile", "marketing"],
+    services: ["branding", "marketing"],
     industry: "Real estate",
     summary:
       "Brand-led site, listings presentation and enquiry funnel for a Dubai real estate firm.",
