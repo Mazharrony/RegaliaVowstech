@@ -8,7 +8,7 @@ import { AedSymbol } from "@/components/icons/AedSymbol";
 import { services, getService, getServices, type ServicePackage } from "@/content/services";
 import { work, type CaseStudy } from "@/content/work";
 import { routing } from "@/i18n/routing";
-import { photos } from "@/content/gallery";
+import { getPhotosByCategory } from "@/content/gallery";
 import { CorporateGallery } from "@/components/sections/CorporateGallery";
 
 export function generateStaticParams() {
@@ -318,7 +318,7 @@ export default async function ServiceDetailPage({
               </div>
             </Reveal>
             <div className="mt-10 md:mt-14">
-              <CorporateGallery photos={photos} limit={9} />
+              <CorporateGallery photos={getPhotosByCategory("corporate")} limit={9} />
             </div>
             <Reveal delay={0.1} className="mt-8 text-center">
               <Link href="/gallery" className="btn-ios btn-ios-ink">
