@@ -8,10 +8,14 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "cdn.regaliavowstech.com" },
+      { protocol: "https", hostname: "i.ibb.co" },
     ],
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
+  turbopack: {
+    root: __dirname,
   },
 };
 

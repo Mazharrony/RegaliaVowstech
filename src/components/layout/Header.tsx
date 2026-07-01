@@ -16,6 +16,7 @@ type NavKey =
   | "insights"
   | "process"
   | "contact"
+  | "gallery"
   | "more";
 
 type NavItem = { href: string; key: NavKey };
@@ -25,6 +26,7 @@ const PRIMARY: NavItem[] = [
   { href: "/work", key: "work" },
   { href: "/process", key: "process" },
   { href: "/insights", key: "insights" },
+  { href: "/gallery", key: "gallery" },
 ];
 
 const MORE: NavItem[] = [

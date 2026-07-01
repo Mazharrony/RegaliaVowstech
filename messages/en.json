@@ -40,6 +40,7 @@
     "contact": "Contact",
     "more": "More",
     "moreEyebrow": "More from the studio",
+    "gallery": "Gallery",
     "servicesDesc": "Integrated capabilities, engineered to work as one.",
     "aboutDesc": "Who we are and how we think.",
     "processDesc": "How we move from brief to launch.",
@@ -434,5 +435,19 @@
     "relatedTitle": "More from the journal.",
     "backToJournal": "Back to journal",
     "readingTimeSuffix": "min read"
+  },
+  "gallery": {
+    "metaTitle": "Photo Gallery — Regalia Vows Tech",
+    "metaDescription": "A look behind the scenes at our corporate events, brand activations and talent productions across the UAE.",
+    "eyebrow": "Corporate Gallery",
+    "headline": "Moments captured.",
+    "subhead": "A visual record of the events, productions and brand experiences we've delivered across the UAE.",
+    "teaserEyebrow": "Photo Gallery",
+    "teaserTitle": "Moments from the floor.",
+    "teaserCta": "View all photos",
+    "lightboxClose": "Close",
+    "lightboxPrev": "Previous photo",
+    "lightboxNext": "Next photo",
+    "lightboxCounter": "{current} of {total}"
   }
 }

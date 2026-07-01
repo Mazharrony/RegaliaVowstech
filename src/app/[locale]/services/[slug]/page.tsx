@@ -8,6 +8,8 @@ import { AedSymbol } from "@/components/icons/AedSymbol";
 import { services, getService, getServices, type ServicePackage } from "@/content/services";
 import { work, type CaseStudy } from "@/content/work";
 import { routing } from "@/i18n/routing";
+import { photos } from "@/content/gallery";
+import { CorporateGallery } from "@/components/sections/CorporateGallery";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -52,6 +54,7 @@ export default async function ServiceDetailPage({
   const audiences = tPage.raw("audiences") as { title: string; body: string }[];
   const modelsBadge = tModels("eyebrow");
   const modelsCta = tModels("viewDetails");
+  const tGallery = await getTranslations("gallery");
 
   return (
     <>
@@ -296,6 +299,36 @@ export default async function ServiceDetailPage({
           </Reveal>
         </div>
       </section>
+
+      {/* Photo gallery teaser — corporate-events only */}
+      {slug === "corporate-events" && (
+        <section className="border-t hairline">
+          <div className="container-x py-20 md:py-28">
+            <Reveal>
+              <p className="eyebrow mb-4">{tGallery("teaserEyebrow")}</p>
+              <div className="flex flex-wrap items-end justify-between gap-6">
+                <h2 className="display-3 text-balance">{tGallery("teaserTitle")}</h2>
+                <Link
+                  href="/gallery"
+                  className="btn-ios btn-ios-ink shrink-0"
+                >
+                  <span>{tGallery("teaserCta")}</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </Reveal>
+            <div className="mt-10 md:mt-14">
+              <CorporateGallery photos={photos} limit={9} />
+            </div>
+            <Reveal delay={0.1} className="mt-8 text-center">
+              <Link href="/gallery" className="btn-ios btn-ios-ink">
+                <span>{tGallery("teaserCta")}</span>
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* Related work */}
       {relatedWork.length > 0 && (
