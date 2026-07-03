@@ -9,7 +9,7 @@ import { ReadingProgress } from "@/components/insight/ReadingProgress";
 import { ShareButtons } from "@/components/insight/ShareButtons";
 import { TocSidebar } from "@/components/insight/TocSidebar";
 import { CTASection } from "@/components/sections/home/CTASection";
-import { JsonLd, articleLd } from "@/components/seo/JsonLd";
+import { JsonLd, articleLd, breadcrumbLd } from "@/components/seo/JsonLd";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -20,12 +20,32 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const p = getInsight(slug);
   if (!p) return {};
-  return { title: p.title, description: p.excerpt };
+  return {
+    title: p.title,
+    description: p.excerpt,
+    alternates: {
+      canonical: `/${locale}/insights/${slug}`,
+      languages: {
+        en: `/en/insights/${slug}`,
+        ar: `/ar/insights/${slug}`,
+        "x-default": `/en/insights/${slug}`,
+      },
+    },
+    openGraph: {
+      title: p.title,
+      description: p.excerpt,
+      url: `/${locale}/insights/${slug}`,
+      locale: locale === "ar" ? "ar_AE" : "en_AE",
+      type: "article",
+      publishedTime: p.date,
+    },
+    twitter: { title: p.title, description: p.excerpt },
+  };
 }
 
 export default async function InsightPage({
@@ -52,6 +72,7 @@ export default async function InsightPage({
           },
         ];
   const tocItems = sections.map((s) => ({ id: s.id, heading: s.heading }));
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://regaliavowstech.com";
   const formattedDate = new Date(post.date).toLocaleDateString(
     locale === "ar" ? "ar-AE" : "en-GB",
     { year: "numeric", month: "long", day: "numeric" },
@@ -68,6 +89,13 @@ export default async function InsightPage({
           slug: post.slug,
           locale,
         })}
+      />
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", url: `${siteUrl}/${locale}` },
+          { name: "Insights", url: `${siteUrl}/${locale}/insights` },
+          { name: post.title, url: `${siteUrl}/${locale}/insights/${slug}` },
+        ])}
       />
       <ReadingProgress />
 

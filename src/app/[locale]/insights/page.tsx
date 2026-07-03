@@ -6,9 +6,26 @@ import { MaskReveal } from "@/components/motion/MaskReveal";
 import { insights } from "@/content/insights";
 import { InsightsFilter } from "@/components/insight/InsightsFilter";
 
-export async function generateMetadata() {
-  const t = await getTranslations("nav");
-  return { title: t("insights") };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "nav" });
+  const title = t("insights");
+  const description =
+    "Production and brand insights from Regalia Vows Tech — articles on video production, event branding, corporate photography and creative strategy in Dubai."
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/insights`,
+      languages: { en: "/en/insights", ar: "/ar/insights", "x-default": "/en/insights" },
+    },
+    openGraph: { title, description, url: `/${locale}/insights`, locale: locale === "ar" ? "ar_AE" : "en_AE" },
+    twitter: { title, description },
+  };
 }
 
 function formatDate(iso: string, locale: string) {

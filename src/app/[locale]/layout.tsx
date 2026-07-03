@@ -16,6 +16,9 @@ import { Footer } from "@/components/layout/Footer";
 import { JsonLd, organizationLd, localBusinessLd } from "@/components/seo/JsonLd";
 import "../globals.css";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://regaliavowstech.com";
+
 const interTight = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-display",
@@ -48,23 +51,69 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://regaliavowstech.com"
-  ),
-  title: {
-    default: "Regalia Vows Tech — Brand, Technology & Experiences",
-    template: "%s — Regalia Vows Tech",
-  },
-  description:
-    "A Dubai-based studio partnering with UAE founders and operators on branding, websites, applied AI and content — a small, senior team that takes the whole arc.",
-  openGraph: {
-    type: "website",
-    siteName: "Regalia Vows Tech",
-    images: [{ url: "/og", width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", images: ["/og"] },
-};
+const defaultTitle = "Regalia Vows Tech — Production House Dubai, UAE";
+const defaultDescription =
+  "Dubai-based production house specialising in video production, corporate events, event branding, photography and brand films across the UAE and MENA.";
+const defaultKeywords = [
+  "production house Dubai",
+  "video production Dubai",
+  "corporate video production UAE",
+  "event production company Dubai",
+  "brand film Dubai",
+  "photography studio Dubai",
+  "content creation agency UAE",
+  "corporate photography Dubai",
+  "advertising production UAE",
+  "event branding Dubai",
+  "media production UAE",
+  "corporate events Dubai",
+  "expo branding UAE",
+  "brand identity Dubai",
+  "digital marketing Dubai",
+];
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const ogLocale = locale === "ar" ? "ar_AE" : "en_AE";
+
+  return {
+    metadataBase: new URL(siteUrl),
+    title: {
+      default: defaultTitle,
+      template: "%s — Regalia Vows Tech",
+    },
+    description: defaultDescription,
+    keywords: defaultKeywords,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        en: "/en",
+        ar: "/ar",
+        "x-default": "/en",
+      },
+    },
+    openGraph: {
+      type: "website",
+      siteName: "Regalia Vows Tech",
+      title: defaultTitle,
+      description: defaultDescription,
+      locale: ogLocale,
+      url: `${siteUrl}/${locale}`,
+      images: [{ url: "/og", width: 1200, height: 630, alt: "Regalia Vows Tech — Production House Dubai" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@regaliavowstech",
+      title: defaultTitle,
+      description: defaultDescription,
+      images: ["/media/Corporate/coreporate81.JPEG"],
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

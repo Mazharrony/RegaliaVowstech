@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { work, getCase, getRelatedCases } from "@/content/work";
 import { routing } from "@/i18n/routing";
-import { JsonLd, caseStudyLd } from "@/components/seo/JsonLd";
+import { JsonLd, caseStudyLd, breadcrumbLd, videoObjectLd } from "@/components/seo/JsonLd";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -16,12 +16,31 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const c = getCase(slug);
   if (!c) return {};
-  return { title: `${c.client} — ${c.title}`, description: c.summary };
+  const title = `${c.client} — ${c.title}`;
+  return {
+    title,
+    description: c.summary,
+    alternates: {
+      canonical: `/${locale}/work/${slug}`,
+      languages: {
+        en: `/en/work/${slug}`,
+        ar: `/ar/work/${slug}`,
+        "x-default": `/en/work/${slug}`,
+      },
+    },
+    openGraph: {
+      title,
+      description: c.summary,
+      url: `/${locale}/work/${slug}`,
+      locale: locale === "ar" ? "ar_AE" : "en_AE",
+    },
+    twitter: { title, description: c.summary },
+  };
 }
 
 export default async function CaseStudyPage({
@@ -38,6 +57,7 @@ export default async function CaseStudyPage({
   const idx = work.findIndex((w) => w.slug === slug);
   const next = work[(idx + 1) % work.length];
   const related = getRelatedCases(slug, 2);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://regaliavowstech.com";
 
   return (
     <>
@@ -49,6 +69,22 @@ export default async function CaseStudyPage({
           year: c.year,
           slug: c.slug,
           locale,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", url: `${siteUrl}/${locale}` },
+          { name: "Work", url: `${siteUrl}/${locale}/work` },
+          { name: c.client, url: `${siteUrl}/${locale}/work/${slug}` },
+        ])}
+      />
+      <JsonLd
+        data={videoObjectLd({
+          name: `${c.client} — ${c.title}`,
+          description: c.summary,
+          thumbnailUrl: `${siteUrl}/media/Corporate/coreporate81.JPEG`,
+          uploadDate: `${c.year}-01-01`,
+          url: `${siteUrl}/${locale}/work/${slug}`,
         })}
       />
       <section

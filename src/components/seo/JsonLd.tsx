@@ -40,10 +40,29 @@ export function localBusinessLd() {
     "@type": "ProfessionalService",
     name: company.name,
     url: siteUrl,
-    image: `${siteUrl}/og`,
+    image: `${siteUrl}/media/Corporate/coreporate81.JPEG`,
     telephone: company.phone,
     email: company.email,
     priceRange: "$$$",
+    currenciesAccepted: "AED",
+    paymentAccepted: "Bank Transfer, Credit Card",
+    knowsLanguage: ["en", "ar"],
+    areaServed: [
+      { "@type": "City", name: "Dubai" },
+      { "@type": "Country", name: "United Arab Emirates" },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Production & Brand Services",
+      itemListElement: [
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Video Production" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Corporate Events" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Event & Expo Branding" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Photography & Content" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Branding & Identity" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Digital Marketing & Web" } },
+      ],
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: company.address.line1,
@@ -141,5 +160,74 @@ export function breadcrumbLd(
       name: t.name,
       item: t.url,
     })),
+  };
+}
+
+export function faqPageLd(faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+export function serviceLd({
+  name,
+  description,
+  url,
+}: {
+  name: string;
+  description: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name,
+    description,
+    url,
+    provider: {
+      "@type": "Organization",
+      name: company.name,
+      url: siteUrl,
+    },
+    areaServed: [
+      { "@type": "City", name: "Dubai" },
+      { "@type": "Country", name: "United Arab Emirates" },
+    ],
+    serviceType: "Production & Creative Services",
+  };
+}
+
+export function videoObjectLd({
+  name,
+  description,
+  thumbnailUrl,
+  uploadDate,
+  url,
+}: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name,
+    description,
+    thumbnailUrl,
+    uploadDate,
+    url,
+    publisher: {
+      "@type": "Organization",
+      name: company.name,
+      logo: { "@type": "ImageObject", url: `${siteUrl}/icon.svg` },
+    },
   };
 }

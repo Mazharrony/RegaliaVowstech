@@ -2,9 +2,26 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/Reveal";
 import { company } from "@/content/company";
 
-export async function generateMetadata() {
-  const t = await getTranslations("nav");
-  return { title: t("about") };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "nav" });
+  const title = t("about");
+  const description =
+    "Meet the senior team behind Regalia Vows Tech — a Dubai production house building brands, events and visual content across the UAE."
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/about`,
+      languages: { en: "/en/about", ar: "/ar/about", "x-default": "/en/about" },
+    },
+    openGraph: { title, description, url: `/${locale}/about`, locale: locale === "ar" ? "ar_AE" : "en_AE" },
+    twitter: { title, description },
+  };
 }
 
 type TimelineEntry = { year: string; text: string };

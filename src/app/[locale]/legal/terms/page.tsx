@@ -3,7 +3,7 @@ import { LegalDocument } from "@/components/sections/LegalDocument";
 
 export async function generateMetadata() {
   const t = await getTranslations("legal");
-  return { title: t("terms") };
+  return { title: t("terms"), robots: { index: false, follow: true } };
 }
 
 export default async function TermsPage({

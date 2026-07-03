@@ -2,9 +2,26 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/Reveal";
 import { CTASection } from "@/components/sections/home/CTASection";
 
-export async function generateMetadata() {
-  const t = await getTranslations("nav");
-  return { title: t("process") };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "nav" });
+  const title = t("process");
+  const description =
+    "Our production process — discovery, strategy, production and delivery. How Regalia Vows Tech delivers brand films, events and creative projects in Dubai."
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/process`,
+      languages: { en: "/en/process", ar: "/ar/process", "x-default": "/en/process" },
+    },
+    openGraph: { title, description, url: `/${locale}/process`, locale: locale === "ar" ? "ar_AE" : "en_AE" },
+    twitter: { title, description },
+  };
 }
 
 export default async function ProcessPage({

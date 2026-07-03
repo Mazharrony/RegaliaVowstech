@@ -4,9 +4,26 @@ import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { company } from "@/content/company";
 
-export async function generateMetadata() {
-  const t = await getTranslations("nav");
-  return { title: t("contact") };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "nav" });
+  const title = t("contact");
+  const description =
+    "Start a project with Regalia Vows Tech — production house in Dubai. Reach us for video production, events, branding and photography across the UAE."
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/contact`,
+      languages: { en: "/en/contact", ar: "/ar/contact", "x-default": "/en/contact" },
+    },
+    openGraph: { title, description, url: `/${locale}/contact`, locale: locale === "ar" ? "ar_AE" : "en_AE" },
+    twitter: { title, description },
+  };
 }
 
 export default async function ContactPage({

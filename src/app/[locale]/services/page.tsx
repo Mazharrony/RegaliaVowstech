@@ -5,9 +5,26 @@ import { Reveal } from "@/components/motion/Reveal";
 import { getServices } from "@/content/services";
 import { CTASection } from "@/components/sections/home/CTASection";
 
-export async function generateMetadata() {
-  const t = await getTranslations("nav");
-  return { title: t("services") };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "nav" });
+  const title = t("services");
+  const description =
+    "Production and creative services in Dubai — video production, corporate events, event branding, photography, brand identity and digital marketing across the UAE."
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/services`,
+      languages: { en: "/en/services", ar: "/ar/services", "x-default": "/en/services" },
+    },
+    openGraph: { title, description, url: `/${locale}/services`, locale: locale === "ar" ? "ar_AE" : "en_AE" },
+    twitter: { title, description },
+  };
 }
 
 export default async function ServicesIndexPage({

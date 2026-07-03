@@ -4,9 +4,26 @@ import { work } from "@/content/work";
 import { CTASection } from "@/components/sections/home/CTASection";
 import { WorkFilter } from "@/components/work/WorkFilter";
 
-export async function generateMetadata() {
-  const t = await getTranslations("nav");
-  return { title: t("work") };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "nav" });
+  const title = t("work");
+  const description =
+    "Selected work by Regalia Vows Tech — brand films, corporate event production, photography and web projects for clients across Dubai and the UAE."
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/work`,
+      languages: { en: "/en/work", ar: "/ar/work", "x-default": "/en/work" },
+    },
+    openGraph: { title, description, url: `/${locale}/work`, locale: locale === "ar" ? "ar_AE" : "en_AE" },
+    twitter: { title, description },
+  };
 }
 
 export default async function WorkIndexPage({

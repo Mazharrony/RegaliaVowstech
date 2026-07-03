@@ -15,9 +15,27 @@ export async function generateMetadata({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "gallery" });
+  const title = t("metaTitle");
+  const description = t("metaDescription");
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/gallery`,
+      languages: { en: "/en/gallery", ar: "/ar/gallery", "x-default": "/en/gallery" },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/${locale}/gallery`,
+      locale: locale === "ar" ? "ar_AE" : "en_AE",
+      images: [{ url: "/media/Corporate/coreporate81.JPEG", width: 1200, height: 800, alt: "Corporate photography gallery — Regalia Vows Tech Dubai" }],
+    },
+    twitter: {
+      title,
+      description,
+      images: ["/media/Corporate/coreporate81.JPEG"],
+    },
   };
 }
 

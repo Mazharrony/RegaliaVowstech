@@ -10,6 +10,7 @@ import { work, type CaseStudy } from "@/content/work";
 import { routing } from "@/i18n/routing";
 import { getPhotosByCategory } from "@/content/gallery";
 import { CorporateGallery } from "@/components/sections/CorporateGallery";
+import { JsonLd, faqPageLd, serviceLd, breadcrumbLd } from "@/components/seo/JsonLd";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -28,6 +29,21 @@ export async function generateMetadata({
   return {
     title: service.title,
     description: service.summary,
+    alternates: {
+      canonical: `/${locale}/services/${slug}`,
+      languages: {
+        en: `/en/services/${slug}`,
+        ar: `/ar/services/${slug}`,
+        "x-default": `/en/services/${slug}`,
+      },
+    },
+    openGraph: {
+      title: service.title,
+      description: service.summary,
+      url: `/${locale}/services/${slug}`,
+      locale: locale === "ar" ? "ar_AE" : "en_AE",
+    },
+    twitter: { title: service.title, description: service.summary },
   };
 }
 
@@ -56,8 +72,25 @@ export default async function ServiceDetailPage({
   const modelsCta = tModels("viewDetails");
   const tGallery = await getTranslations("gallery");
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://regaliavowstech.com";
+
   return (
     <>
+      <JsonLd
+        data={serviceLd({
+          name: service.title,
+          description: service.summary,
+          url: `${siteUrl}/${locale}/services/${slug}`,
+        })}
+      />
+      <JsonLd data={faqPageLd(service.faqs)} />
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", url: `${siteUrl}/${locale}` },
+          { name: "Services", url: `${siteUrl}/${locale}/services` },
+          { name: service.title, url: `${siteUrl}/${locale}/services/${slug}` },
+        ])}
+      />
       {/* Hero */}
       <section className="container-x pb-12 pt-20 md:pb-20 md:pt-32">
         <Reveal>
