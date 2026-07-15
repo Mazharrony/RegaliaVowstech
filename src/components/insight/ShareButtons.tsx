@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as LinkIcon, Check } from "lucide-react";
 
 type Props = {
@@ -19,19 +19,22 @@ export function ShareButtons({
   labelLinkedin,
 }: Props) {
   const [copied, setCopied] = useState(false);
+  const [shareUrl, setShareUrl] = useState("");
+
+  useEffect(() => {
+    setShareUrl(window.location.href);
+  }, []);
 
   const handleCopy = async () => {
-    if (typeof window === "undefined") return;
+    if (!shareUrl) return;
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
       // no-op
     }
   };
-
-  const shareUrl = typeof window === "undefined" ? "" : window.location.href;
   const twitterHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`;
   const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
 
