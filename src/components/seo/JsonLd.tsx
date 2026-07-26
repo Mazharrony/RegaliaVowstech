@@ -14,16 +14,24 @@ export function JsonLd({ data }: { data: Json }) {
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://regaliavowstech.com";
 
+const founderPersonId = `${siteUrl}/en/founder#sheikh-mohammad-ali`;
+
 export function organizationLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
     name: company.name,
     url: siteUrl,
     logo: `${siteUrl}/icon.svg`,
     email: company.email,
     telephone: company.phone,
     foundingDate: String(company.founded),
+    founder: {
+      "@type": "Person",
+      "@id": founderPersonId,
+      name: "Sheikh Mohammad Ali",
+    },
     sameAs: company.socials.map((s) => s.href),
     address: {
       "@type": "PostalAddress",
@@ -31,6 +39,78 @@ export function organizationLd() {
       addressLocality: "Dubai",
       addressCountry: "AE",
     },
+  };
+}
+
+export function founderPersonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": founderPersonId,
+    name: "Sheikh Mohammad Ali",
+    jobTitle: "Founder & Managing Director",
+    description:
+      "Sheikh Mohammad Ali is the founder and managing director of Regalia Vows Tech, a Dubai-based production and brand studio specialising in brand identity, video production, events and applied technology for UAE founders and operators.",
+    url: `${siteUrl}/en/founder`,
+    worksFor: {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: company.name,
+      url: siteUrl,
+    },
+    foundedOrganization: {
+      "@type": "Organization",
+      name: company.name,
+      url: siteUrl,
+      foundingDate: String(company.founded),
+    },
+    knowsAbout: [
+      "Brand Identity",
+      "Video Production",
+      "Corporate Events",
+      "Technology & Software",
+      "Applied AI",
+      "Digital Marketing",
+    ],
+    sameAs: company.socials.map((s) => s.href),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Dubai",
+      addressCountry: "AE",
+    },
+  };
+}
+
+export function founderFaqLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Who is the founder of Regalia Vows Tech?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Sheikh Mohammad Ali is the founder and managing director of Regalia Vows Tech, a Dubai-based production and brand studio established in 2022.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Who founded Regalia Vows Tech?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Regalia Vows Tech was founded by Sheikh Mohammad Ali in Dubai in 2022. He built the studio around the belief that brand, technology and event production should be handled under one roof.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Who is the CEO of Regalia Vows Tech?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Sheikh Mohammad Ali is the founder and managing director of Regalia Vows Tech, based in Dubai, UAE.",
+        },
+      },
+    ],
   };
 }
 

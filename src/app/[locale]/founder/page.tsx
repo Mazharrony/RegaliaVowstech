@@ -1,6 +1,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/Reveal";
 import { company } from "@/content/company";
+import { JsonLd, founderPersonLd, founderFaqLd } from "@/components/seo/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -11,7 +12,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "founderPage" });
   const title = `${t("name")} — ${t("role")}`;
   const description =
-    "Meet Jack Mohammed Ali, the founder and managing director of Regalia Vows Tech — the conviction, the story and the beliefs behind Dubai's integrated studio for brand, technology and experience.";
+    "Sheikh Mohammad Ali is the founder and managing director of Regalia Vows Tech — a Dubai production and brand studio established in 2022, delivering brand identity, video production, events and technology for UAE founders.";
   return {
     title,
     description,
@@ -45,6 +46,9 @@ export default async function FounderPage({
 
   return (
     <>
+      <JsonLd data={founderPersonLd()} />
+      <JsonLd data={founderFaqLd()} />
+
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="container-x pb-16 pt-20 md:pb-28 md:pt-36">
         <Reveal>
