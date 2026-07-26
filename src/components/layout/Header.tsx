@@ -17,6 +17,7 @@ type NavKey =
   | "process"
   | "contact"
   | "gallery"
+  | "founder"
   | "more";
 
 type NavItem = { href: string; key: NavKey };
@@ -30,6 +31,7 @@ const PRIMARY: NavItem[] = [
 ];
 
 const MORE: NavItem[] = [
+  { href: "/founder", key: "founder" },
   { href: "/about", key: "about" },
   { href: "/contact", key: "contact" },
 ];
@@ -332,7 +334,7 @@ export function Header() {
                 items={MORE.map((m) => ({
                   href: m.href,
                   label: t(m.key),
-                  desc: t(`${m.key}Desc` as "aboutDesc" | "contactDesc"),
+                  desc: t(`${m.key}Desc` as "founderDesc" | "aboutDesc" | "contactDesc"),
                 }))}
               />
             </nav>
@@ -444,6 +446,7 @@ export function Header() {
                           <span className="mt-1 block text-sm text-[var(--color-muted)]">
                             {t(
                               `${item.key}Desc` as
+                                | "founderDesc"
                                 | "aboutDesc"
                                 | "contactDesc"
                             )}

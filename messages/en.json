@@ -44,7 +44,9 @@
     "servicesDesc": "Integrated capabilities, engineered to work as one.",
     "aboutDesc": "Who we are and how we think.",
     "processDesc": "How we move from brief to launch.",
-    "contactDesc": "Start a conversation — we reply within a day."
+    "contactDesc": "Start a conversation — we reply within a day.",
+    "founder": "Founder",
+    "founderDesc": "The person and beliefs behind Regalia Vows Tech."
   },
   "home": {
     "metaTitle": "Regalia Vows Tech — Brand, Technology & Experiences",
@@ -459,5 +461,32 @@
     "lightboxPrev": "Previous photo",
     "lightboxNext": "Next photo",
     "lightboxCounter": "{current} of {total}"
+  },
+  "founderPage": {
+    "eyebrow": "Founder",
+    "name": "Sheikh Mohammad Ali",
+    "role": "Founder & Managing Director",
+    "lead": "The person behind Regalia Vows Tech — and the conviction that great brands, strong technology and memorable experiences should come from one room.",
+    "manifesto": "The brief is never simple. It is only simple when nobody is being honest about it.",
+    "storyEyebrow": "Background",
+    "storyTitle": "Built from the brief up.",
+    "storyP1": "Sheikh Mohammad Ali founded Regalia Vows Tech in Dubai in 2022, after watching too many briefs get carved up between agencies that never met each other. The brand agency couldn't talk to the engineers. The engineers couldn't talk to the event producers. Nobody took responsibility for the whole arc.",
+    "storyP2": "The studio started with a single conviction: that the best results come when the people making the brand, building the platform and producing the event sit in the same room and share one backlog. That model hasn't changed.",
+    "storyP3": "Today Regalia Vows Tech works with UAE founders and operators on the launches that define their next chapter — from positioning and identity through to product, automation and live experience.",
+    "beliefsEyebrow": "What Sheikh holds to",
+    "beliefsTitle": "Four things that don't change.",
+    "beliefsBody": "After three years running the studio, these are the beliefs that have held up under pressure.",
+    "beliefs": [
+      { "title": "Integrated or nothing.", "body": "The work degrades every time it passes a handover. One studio, one room, one backlog — that's the only model that produces work the whole team is proud to sign." },
+      { "title": "Craft is the strategy.", "body": "The detail the client doesn't consciously notice is what makes them trust you. A well-kerned headline, a hover state that feels alive, a production that ends on time — these are the things that compound." },
+      { "title": "Honesty before comfort.", "body": "If the brief is wrong, the right answer is to say so in week one. A brave conversation at the start costs a day. A polite silence at the start costs the whole project." },
+      { "title": "Build for the next decade.", "body": "Every brief carries a longer arc than the deadline suggests. We build systems that outlast the first campaign and platforms that the next hire can extend without calling us." }
+    ],
+    "noteEyebrow": "On the work",
+    "noteTitle": "A personal note.",
+    "noteQuote": "I started this studio because I wanted to build things that last — brands and platforms that a founder is still proud of in five years, not just five weeks after launch. Every project we take is a bet on that belief.",
+    "connectEyebrow": "Start a conversation",
+    "connectTitle": "Talk to Sheikh.",
+    "connectBody": "Whether it's a brief, an idea or just a question — write to the studio and Sheikh or one of the senior team will reply within one business day."
   }
 }
