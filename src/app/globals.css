@@ -118,7 +118,7 @@
 
   .mega {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 7.4vw, var(--step-8));
+    font-size: clamp(2.7rem, 7.4vw, var(--step-8));
     line-height: 1.04;
     letter-spacing: -0.04em;
     font-weight: 700;
@@ -359,6 +359,205 @@
   50% { opacity: 1; }
 }
 .animate-ticker-pulse { animation: ticker-pulse 2.4s ease-in-out infinite; }
+
+/* Capability cards — animated gradient background */
+@keyframes cap-glow-drift {
+  0% { transform: translate(-14%, -10%) scale(1); }
+  50% { transform: translate(12%, 8%) scale(1.2); }
+  100% { transform: translate(-8%, 14%) scale(0.95); }
+}
+.cap-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(160deg, #ff7a1f 0%, #f5540c 42%, #e13d05 100%);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
+}
+.cap-card:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 28px 70px -24px rgba(240, 78, 10, 0.55);
+  transform: translateY(-4px);
+}
+.cap-card-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 78% 12%, rgba(255, 170, 60, 0.5), transparent 58%),
+    radial-gradient(140% 110% at 15% 92%, rgba(214, 48, 5, 0.55), transparent 62%);
+}
+.cap-card-gradient::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 196, 90, 0.38),
+    rgba(255, 145, 30, 0.16) 48%,
+    transparent 72%
+  );
+  animation: cap-glow-drift 12s ease-in-out infinite alternate;
+  will-change: transform;
+  transition: opacity 0.6s ease;
+  opacity: 0.8;
+}
+.cap-card:hover .cap-card-gradient::before {
+  opacity: 1;
+  animation-duration: 5s;
+}
+.cap-card > .relative {
+  z-index: 1;
+}
+.cap-card h3 {
+  text-shadow: 0 1px 12px rgba(180, 45, 0, 0.35);
+}
+
+/* Hero — CSS 3D decor */
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes cube-spin {
+  from { transform: rotateX(-20deg) rotateY(0deg); }
+  to { transform: rotateX(-20deg) rotateY(360deg); }
+}
+@keyframes ring-spin {
+  from { transform: rotateX(66deg) rotateZ(0deg); }
+  to { transform: rotateX(66deg) rotateZ(360deg); }
+}
+.hero-sphere {
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 32% 26%,
+    #ffe3bd 0%,
+    #ffb054 22%,
+    #ff9500 46%,
+    #e84a06 76%,
+    #8f2400 100%
+  );
+  box-shadow:
+    inset -20px -28px 48px rgba(120, 30, 0, 0.45),
+    inset 10px 14px 30px rgba(255, 235, 200, 0.5),
+    0 36px 70px -24px rgba(240, 78, 10, 0.55);
+}
+.hero-cube {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cube-spin 18s linear infinite;
+}
+.hero-cube span {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+}
+.hero-ring {
+  border-radius: 9999px;
+  border: 2px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  border-top-color: transparent;
+  animation: ring-spin 14s linear infinite;
+}
+.animate-float-bob { animation: float-bob 7s ease-in-out infinite; }
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(52px, -34px) scale(1.12); }
+  66% { transform: translate(-44px, 38px) scale(0.94); }
+}
+.hero-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(48px);
+  animation: blob-drift 20s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.hero-orbit {
+  position: absolute;
+  inset: -28px;
+  animation: orbit-spin 12s linear infinite;
+  will-change: transform;
+}
+@keyframes ring-spin-rev {
+  from { transform: rotateX(66deg) rotateZ(360deg); }
+  to { transform: rotateX(66deg) rotateZ(0deg); }
+}
+.hero-ring-dashed {
+  border-radius: 9999px;
+  border: 2px dashed color-mix(in srgb, var(--color-accent) 65%, transparent);
+  animation: ring-spin-rev 9s linear infinite;
+}
+@keyframes square-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.hero-square {
+  border: 2px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  animation: square-spin 16s linear infinite;
+}
+/* Hero takeover — full-viewport brand orange stage */
+.hero-takeover {
+  background:
+    radial-gradient(140% 100% at 85% 0%, rgba(255, 130, 35, 0.55), transparent 60%),
+    radial-gradient(120% 90% at 10% 100%, rgba(180, 40, 5, 0.5), transparent 60%),
+    linear-gradient(165deg, #ff8a2a 0%, #f5540c 45%, #d63a05 100%);
+}
+@keyframes hero-bloom {
+  0%, 100% { transform: translate(-8%, -4%) scale(1); opacity: 0.75; }
+  50% { transform: translate(6%, 5%) scale(1.18); opacity: 1; }
+}
+.hero-takeover-bloom {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 215, 130, 0.5),
+    rgba(255, 150, 40, 0.18) 45%,
+    transparent 70%
+  );
+  animation: hero-bloom 11s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.hero-takeover .hero-cube span {
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.05);
+}
+.hero-takeover .hero-ring {
+  border-color: rgba(255, 255, 255, 0.5);
+  border-top-color: transparent;
+}
+.hero-takeover .hero-ring-dashed {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Gallery teaser — playful bubbles */
+@keyframes bubble-float {
+  from { transform: translateY(0) rotate(var(--bubble-rot, 0deg)); }
+  to { transform: translateY(-16px) rotate(var(--bubble-rot, 0deg)); }
+}
+.bubble-card {
+  position: absolute;
+  overflow: hidden;
+  animation: bubble-float var(--bubble-dur, 6s) ease-in-out var(--bubble-delay, 0s) infinite alternate;
+  box-shadow:
+    0 2px 6px rgba(20, 10, 5, 0.12),
+    0 28px 56px -18px rgba(20, 10, 5, 0.45);
+  border: 4px solid var(--color-surface);
+  outline: 1px solid var(--color-line);
+  outline-offset: -1px;
+  transition: box-shadow 0.4s ease, outline-color 0.4s ease;
+}
+.bubble-card:hover {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  box-shadow:
+    0 4px 10px rgba(20, 10, 5, 0.16),
+    0 36px 70px -18px rgba(240, 78, 10, 0.4);
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

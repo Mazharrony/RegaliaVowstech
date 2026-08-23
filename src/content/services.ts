@@ -35,7 +35,7 @@ export type Service = {
   summary: string;
   /** Hero stock image (Unsplash). Shared across locales. */
   image: string;
-  deliverables: { name: string; description: string }[];
+  deliverables: { name: string; description: string; image?: string }[];
   process: { step: string; title: string; body: string }[];
   packages: ServicePackage[];
   faqs: { q: string; a: string }[];
@@ -241,12 +241,12 @@ export const services: Service[] = [
     summary:
       "End-to-end exhibition programs across four pillars — exhibition booth design and branding, exhibition marketing and promotion, content production and media coverage, and brand activation and visitor engagement that turns floor traffic into qualified leads.",
     image:
-      "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=70",
+      "/media/Events/DSC06348.jpg",
     deliverables: [
-      { name: "Exhibition booth design & branding", description: "Custom booth design, exhibition graphics and signage, full booth construction and setup, and promotional materials and giveaways." },
-      { name: "Exhibition marketing & promotion", description: "Social media campaigns, Google advertising, brand awareness activities and digital marketing support around the show." },
-      { name: "Content production & media coverage", description: "Event photography, promotional videos and reels, brand storytelling content, and website and advertising creatives." },
-      { name: "Brand activation & visitor engagement", description: "Professional brand promoters, live product demonstrations, visitor interaction and lead generation, and information and sampling distribution." },
+      { name: "Exhibition booth design & branding", image: "/media/Events/DSC03026.jpg", description: "Custom booth design, exhibition graphics and signage, full booth construction and setup, and promotional materials and giveaways." },
+      { name: "Exhibition marketing & promotion", image: "/media/Events/DSC08388.jpg", description: "Social media campaigns, Google advertising, brand awareness activities and digital marketing support around the show." },
+      { name: "Content production & media coverage", image: "/media/Events/DSC04362.jpg", description: "Event photography, promotional videos and reels, brand storytelling content, and website and advertising creatives." },
+      { name: "Brand activation & visitor engagement", image: "/media/Events/DSC08205.jpg", description: "Professional brand promoters, live product demonstrations, visitor interaction and lead generation, and information and sampling distribution." },
     ],
     process: [
       { step: "01", title: "Booth design & branding", body: "Concept, 3D design, signage, fabrication and on-stand collateral." },
@@ -319,21 +319,21 @@ export const services: Service[] = [
     summary:
       "Corporate event programmes for summits, product launches, townhalls and gala nights — strategy, production, media capture and post-event communications under one team.",
     image:
-      "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1600&q=70",
+      "/media/Events/C95B5961.jpg",
     deliverables: [
-      { name: "Stage design & setup", description: "A stage built around your theme and run-of-show." },
-      { name: "Event branding", description: "Cohesive branding across every touchpoint on the day." },
-      { name: "LED screens & displays", description: "High-impact screens sized for the room." },
-      { name: "Sound & lighting", description: "Audio and lighting that set the right atmosphere." },
-      { name: "Banquet management", description: "Seamless catering and banquet coordination." },
-      { name: "Guest experience", description: "A thoughtful flow from arrival to farewell." },
-      { name: "Models & Talent Services", description: "Professional models and hosts who elevate the occasion." },
-      { name: "Corporate gifts", description: "Curated gifts that leave a lasting impression." },
-      { name: "Banners & signage", description: "Wayfinding and branding that guide every guest." },
-      { name: "Photography & videography", description: "Full coverage of the moments that matter." },
-      { name: "Live streaming", description: "Broadcast your event to remote audiences." },
-      { name: "DJ & entertainment", description: "Live entertainment that sets the tone." },
-      { name: "Influencer marketing", description: "Amplify the event through the right voices." },
+      { name: "Stage design & setup", image: "/media/Events/DSC03961.jpg", description: "A stage built around your theme and run-of-show." },
+      { name: "Event branding", image: "/media/Events/DSC06328.jpg", description: "Cohesive branding across every touchpoint on the day." },
+      { name: "LED screens & displays", image: "/media/Corporate/coreporate66.JPEG", description: "High-impact screens sized for the room." },
+      { name: "Sound & lighting", image: "/media/Corporate/coreporate67.JPEG", description: "Audio and lighting that set the right atmosphere." },
+      { name: "Banquet management", image: "/media/Events/C95B9242.jpg", description: "Seamless catering and banquet coordination." },
+      { name: "Guest experience", image: "/media/Events/C95B5907.jpg", description: "A thoughtful flow from arrival to farewell." },
+      { name: "Models & Talent Services", image: "/media/Events/DSC04004.jpg", description: "Professional models and hosts who elevate the occasion." },
+      { name: "Corporate gifts", image: "/media/Events/DSC03948.jpg", description: "Curated gifts that leave a lasting impression." },
+      { name: "Banners & signage", image: "/media/Events/DSC03457.jpg", description: "Wayfinding and branding that guide every guest." },
+      { name: "Photography & videography", image: "/media/Events/KKK_3583.jpg", description: "Full coverage of the moments that matter." },
+      { name: "Live streaming", image: "/media/Events/DSC08317.jpg", description: "Broadcast your event to remote audiences." },
+      { name: "DJ & entertainment", image: "/media/Events/C95B6812.jpg", description: "Live entertainment that sets the tone." },
+      { name: "Influencer marketing", image: "/media/Events/REH09814.jpg", description: "Amplify the event through the right voices." },
     ],
     process: [
       { step: "01", title: "Align", body: "Objectives, audience profile, timeline and success metrics." },
@@ -489,7 +489,11 @@ function localize(service: Service, locale?: Locale): Service {
     title: ar.title,
     tagline: ar.tagline,
     summary: ar.summary,
-    deliverables: ar.deliverables,
+    deliverables: service.deliverables.map((d, i) => ({
+      ...d,
+      name: ar.deliverables[i]?.name ?? d.name,
+      description: ar.deliverables[i]?.description ?? d.description,
+    })),
     process: service.process.map((p, i) => ({
       step: p.step,
       title: ar.process[i]?.title ?? p.title,

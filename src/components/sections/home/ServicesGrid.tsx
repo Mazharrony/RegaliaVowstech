@@ -1,25 +1,92 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { getServices } from "@/content/services";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { easings } from "@/lib/utils";
+
+/**
+ * Key service words highlighted inside each card description (EN + AR).
+ * Longest-first sorting happens in emphasize() so multi-word phrases win.
+ */
+const CARD_KEYWORDS: Record<string, string[]> = {
+  branding: [
+    "Strategy", "naming", "visual systems", "brand guidelines",
+    "استراتيجية", "تسمية", "نظام بصري", "دليل علامة",
+  ],
+  marketing: [
+    "SEO", "paid media", "social media management", "websites", "e-commerce", "platforms",
+    "الإعلانات المدفوعة", "إدارة السوشيال", "المواقع", "التجارة الإلكترونية", "المنصات",
+  ],
+  "events-expo": [
+    "exhibition booth design and branding", "marketing and promotion",
+    "content production", "media coverage", "brand activation", "visitor engagement",
+    "تصميم وهوية الجناح", "التسويق والترويج", "إنتاج المحتوى", "التغطية الإعلامية", "تفعيل العلامة",
+  ],
+  "corporate-events": [
+    "summits", "product launches", "townhalls", "gala nights",
+    "strategy", "production", "media capture", "post-event communications",
+    "المؤتمرات", "الإطلاقات", "اجتماعات الشركات", "حفلات التكريم", "التخطيط", "الإنتاج", "التغطية", "التقارير",
+  ],
+  models: [
+    "campaigns", "fashion shoots", "corporate events", "product launches",
+    "e-commerce photography", "social media content", "brand promotions",
+    "حملات الإعلانات", "جلسات الأزياء", "الفعاليات المؤسسية", "إطلاق المنتجات",
+    "تصوير التجارة الإلكترونية", "محتوى السوشيال ميديا", "حملات الترويج",
+  ],
+  "content-ads": [
+    "photography", "videography", "livestreaming", "graphics",
+    "reels", "behind-the-scenes", "testimonials",
+    "تصوير", "فيديو", "بث مباشر", "جرافيكس", "ريلز", "كواليس", "شهادات",
+  ],
+};
+
+function emphasize(text: string, words?: string[]) {
+  if (!words?.length) return text;
+  const pattern = [...words]
+    .sort((a, b) => b.length - a.length)
+    .map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|");
+  return text.split(new RegExp(`(${pattern})`, "gi")).map((part, i) =>
+    i % 2 === 1 ? (
+      <em key={i} className="font-bold italic text-white">
+        {part}
+      </em>
+    ) : (
+      part
+    ),
+  );
+}
 
 export function ServicesGrid() {
   const locale = useLocale();
   const t = useTranslations("home");
   const tCommon = useTranslations("common");
   const tModels = useTranslations("models");
-  const reduce = useReducedMotion();
-  const [hovered, setHovered] = useState<string | null>(null);
   const services = useMemo(() => getServices(locale), [locale]);
-  const primaryServices = useMemo(() => services.filter((s) => s.slug !== "content-ads"), [services]);
-  const contentAds = useMemo(() => services.find((s) => s.slug === "content-ads"), [services]);
   const serviceCount = String(services.length + 1).padStart(2, "0"); // +1 for models
+
+  const cards = useMemo(() => {
+    const list = services.map((s) => ({
+      key: s.slug as string,
+      href: `/services/${s.slug}`,
+      number: s.number,
+      title: s.title,
+      tagline: s.tagline,
+      description: s.summary,
+    }));
+    list.push({
+      key: "models",
+      href: "/models",
+      number: "05",
+      title: tModels("title"),
+      tagline: tModels("eyebrow"),
+      description: tModels("body"),
+    });
+    return list.sort((a, b) => a.number.localeCompare(b.number));
+  }, [services, tModels]);
 
   return (
     <section className="section-pad relative">
@@ -51,139 +118,39 @@ export function ServicesGrid() {
           </Reveal>
         </div>
 
-        {/* Index list */}
-        <ul
-          className="relative border-t hairline"
-          onMouseLeave={() => setHovered(null)}
-        >
-          {primaryServices.map((s) => (
-            <li key={s.slug} className="relative">
+        {/* Capability cards */}
+        <div className="grid gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          {cards.map((card, i) => (
+            <Reveal key={card.key} delay={0.05 * i} className="h-full">
               <Link
-                href={`/services/${s.slug}`}
-                onMouseEnter={() => setHovered(s.slug)}
-                onFocus={() => setHovered(s.slug)}
-                className="group relative flex items-center justify-between gap-6 border-b hairline py-6 transition-colors md:py-8"
+                href={card.href}
+                className="cap-card group flex h-full flex-col p-7 md:p-8"
               >
-                <div className="flex items-baseline gap-6 md:gap-12">
-                  <span className="font-mono text-[0.7rem] tabular-nums text-[var(--color-muted)] md:text-sm">
-                    {s.number}
-                  </span>
-                  <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-8">
-                    <h3
-                      className="font-serif tracking-tight text-[var(--color-ink)] transition-transform duration-700 group-hover:translate-x-3 rtl:group-hover:-translate-x-3"
-                      style={{ fontSize: "var(--step-3)" }}
-                    >
-                      {s.title}
-                    </h3>
-                    <p className="hidden text-sm text-[var(--color-muted)] md:block md:max-w-[36ch]">
-                      {s.tagline}
-                    </p>
-                  </div>
-                </div>
-                <ArrowUpRight className="h-5 w-5 shrink-0 text-[var(--color-muted)] transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[var(--color-accent)] md:h-6 md:w-6" />
+                <span aria-hidden className="cap-card-gradient" />
 
-                {/* Hover accent bar */}
-                <AnimatePresence>
-                  {!reduce && hovered === s.slug && (
-                    <motion.span
-                      aria-hidden
-                      layoutId="cap-accent"
-                      className="absolute inset-y-0 -start-3 w-[3px] bg-[var(--color-accent)]"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.4, ease: easings.out }}
-                    />
-                  )}
-                </AnimatePresence>
+                <div className="relative flex items-start justify-between gap-4">
+                  <span className="font-mono text-[0.7rem] tabular-nums text-white/70 md:text-sm">
+                    {card.number}
+                  </span>
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-white/70 transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" />
+                </div>
+
+                <h3
+                  className="relative mt-10 font-serif tracking-tight text-balance text-white md:mt-14"
+                  style={{ fontSize: "var(--step-3)", lineHeight: 1.1 }}
+                >
+                  {card.title}
+                </h3>
+                <p className="relative mt-3 font-mono text-[0.66rem] uppercase tracking-[0.22em] text-[#ffe3b8]">
+                  {card.tagline}
+                </p>
+                <p className="relative mt-4 text-sm leading-relaxed text-white/90">
+                  {emphasize(card.description, CARD_KEYWORDS[card.key])}
+                </p>
               </Link>
-            </li>
+            </Reveal>
           ))}
-
-          {/* Models & Talent — section 05 */}
-          <li className="relative">
-            <Link
-              href="/models"
-              onMouseEnter={() => setHovered("models")}
-              onFocus={() => setHovered("models")}
-              className="group relative flex items-center justify-between gap-6 border-b hairline py-6 transition-colors md:py-8"
-            >
-              <div className="flex items-baseline gap-6 md:gap-12">
-                <span className="font-mono text-[0.7rem] tabular-nums text-[var(--color-muted)] md:text-sm">
-                  05
-                </span>
-                <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-8">
-                  <h3
-                    className="font-serif tracking-tight text-[var(--color-ink)] transition-transform duration-700 group-hover:translate-x-3 rtl:group-hover:-translate-x-3"
-                    style={{ fontSize: "var(--step-3)" }}
-                  >
-                    {tModels("title")}
-                  </h3>
-                  <p className="hidden text-sm text-[var(--color-muted)] md:block md:max-w-[36ch]">
-                    {tModels("eyebrow")}
-                  </p>
-                </div>
-              </div>
-              <ArrowUpRight className="h-5 w-5 shrink-0 text-[var(--color-muted)] transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[var(--color-accent)] md:h-6 md:w-6" />
-              <AnimatePresence>
-                {!reduce && hovered === "models" && (
-                  <motion.span
-                    aria-hidden
-                    layoutId="cap-accent"
-                    className="absolute inset-y-0 -start-3 w-[3px] bg-[var(--color-accent)]"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4, ease: easings.out }}
-                  />
-                )}
-              </AnimatePresence>
-            </Link>
-          </li>
-
-          {/* Photo, Video & Live Streaming — section 06 */}
-          {contentAds && (
-            <li key={contentAds.slug} className="relative">
-              <Link
-                href={`/services/${contentAds.slug}`}
-                onMouseEnter={() => setHovered(contentAds.slug)}
-                onFocus={() => setHovered(contentAds.slug)}
-                className="group relative flex items-center justify-between gap-6 border-b hairline py-6 transition-colors md:py-8"
-              >
-                <div className="flex items-baseline gap-6 md:gap-12">
-                  <span className="font-mono text-[0.7rem] tabular-nums text-[var(--color-muted)] md:text-sm">
-                    {contentAds.number}
-                  </span>
-                  <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-8">
-                    <h3
-                      className="font-serif tracking-tight text-[var(--color-ink)] transition-transform duration-700 group-hover:translate-x-3 rtl:group-hover:-translate-x-3"
-                      style={{ fontSize: "var(--step-3)" }}
-                    >
-                      {contentAds.title}
-                    </h3>
-                    <p className="hidden text-sm text-[var(--color-muted)] md:block md:max-w-[36ch]">
-                      {contentAds.tagline}
-                    </p>
-                  </div>
-                </div>
-                <ArrowUpRight className="h-5 w-5 shrink-0 text-[var(--color-muted)] transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[var(--color-accent)] md:h-6 md:w-6" />
-                <AnimatePresence>
-                  {!reduce && hovered === contentAds.slug && (
-                    <motion.span
-                      aria-hidden
-                      layoutId="cap-accent"
-                      className="absolute inset-y-0 -start-3 w-[3px] bg-[var(--color-accent)]"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.4, ease: easings.out }}
-                    />
-                  )}
-                </AnimatePresence>
-              </Link>
-            </li>
-          )}
-        </ul>
+        </div>
       </div>
     </section>
   );

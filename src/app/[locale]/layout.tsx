@@ -4,6 +4,7 @@ import {
   Inter,
   JetBrains_Mono,
   IBM_Plex_Sans_Arabic,
+  Playfair_Display,
 } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
@@ -24,6 +25,13 @@ const interTight = Inter_Tight({
   variable: "--font-display",
   display: "swap",
   weight: ["500", "600", "700"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-monogram",
+  display: "swap",
+  weight: ["500"],
 });
 
 const inter = Inter({
@@ -137,7 +145,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${interTight.variable} ${inter.variable} ${jetbrainsMono.variable} ${plexArabic.variable}`}
+      className={`${interTight.variable} ${inter.variable} ${jetbrainsMono.variable} ${plexArabic.variable} ${playfair.variable}`}
     >
       <body className="relative min-h-screen bg-[var(--color-bg)] text-[var(--color-ink)] antialiased">
         <JsonLd data={organizationLd()} />

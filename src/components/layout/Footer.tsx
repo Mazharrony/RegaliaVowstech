@@ -64,9 +64,7 @@ export async function Footer() {
               <p className="eyebrow mb-5">{t("company")}</p>
               <ul className="space-y-2.5 text-sm">
                 <li><Link href="/about" className="link-wipe text-[var(--color-bg)]">{tNav("about")}</Link></li>
-                <li><Link href="/work" className="link-wipe text-[var(--color-bg)]">{tNav("work")}</Link></li>
                 <li><Link href="/process" className="link-wipe text-[var(--color-bg)]">{tNav("process")}</Link></li>
-                <li><Link href="/insights" className="link-wipe text-[var(--color-bg)]">{tNav("insights")}</Link></li>
                 <li><Link href="/contact" className="link-wipe text-[var(--color-bg)]">{tNav("contact")}</Link></li>
               </ul>
 

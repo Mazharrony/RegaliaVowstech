@@ -1,11 +1,8 @@
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/home/Hero";
 import { ServicesGrid } from "@/components/sections/home/ServicesGrid";
-import { AboutTeaser } from "@/components/sections/home/AboutTeaser";
-import { SelectedWork } from "@/components/sections/home/SelectedWork";
+import { GalleryTeaser } from "@/components/sections/home/GalleryTeaser";
 import { ProcessStrip } from "@/components/sections/home/ProcessStrip";
-import { LatestInsights } from "@/components/sections/home/LatestInsights";
-import { Testimonials } from "@/components/sections/home/Testimonials";
 import { CTASection } from "@/components/sections/home/CTASection";
 import { getTranslations } from "next-intl/server";
 
@@ -47,11 +44,8 @@ export default async function HomePage({
     <>
       <Hero />
       <ServicesGrid />
-      <AboutTeaser />
-      <SelectedWork />
+      <GalleryTeaser />
       <ProcessStrip />
-      <LatestInsights />
-      <Testimonials />
       <CTASection />
     </>
   );

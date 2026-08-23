@@ -14,7 +14,7 @@ export function JsonLd({ data }: { data: Json }) {
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://regaliavowstech.com";
 
-const founderPersonId = `${siteUrl}/en/founder#sheikh-mohammad-ali`;
+const founderPersonId = `${siteUrl}/en/team#sheikh-mohammad-ali`;
 
 export function organizationLd() {
   return {
@@ -51,7 +51,7 @@ export function founderPersonLd() {
     jobTitle: "Founder & Managing Director",
     description:
       "Sheikh Mohammad Ali is the founder and managing director of Regalia Vows Tech, a Dubai-based production and brand studio specialising in brand identity, video production, events and applied technology for UAE founders and operators.",
-    url: `${siteUrl}/en/founder`,
+    url: `${siteUrl}/en/team`,
     worksFor: {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,

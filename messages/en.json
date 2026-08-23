@@ -45,8 +45,8 @@
     "aboutDesc": "Who we are and how we think.",
     "processDesc": "How we move from brief to launch.",
     "contactDesc": "Start a conversation — we reply within a day.",
-    "founder": "Founder",
-    "founderDesc": "The person and beliefs behind Regalia Vows Tech."
+    "team": "Team",
+    "teamDesc": "The talents behind Regalia Vows Tech."
   },
   "home": {
     "metaTitle": "Regalia Vows Tech — Brand, Technology & Experiences",
@@ -86,7 +86,11 @@
     "ctaEyebrow": "Let's build something inevitable",
     "ctaTitle": "Have a brief, an idea, or a deadline?",
     "ctaBody": "Tell us about it. We reply within one business day.",
-    "ctaEmailLabel": "Or write to us directly"
+    "ctaEmailLabel": "Or write to us directly",
+    "galleryTeaserEyebrow": "Corporate gallery",
+    "galleryTeaserTitle": "Moments in motion.",
+    "galleryTeaserBody": "Launches, summits and celebration nights — straight from the event floor.",
+    "galleryTeaserCta": "Explore the gallery"
   },
   "stats": {
     "years": "Studio established",
@@ -157,11 +161,26 @@
     "faqEyebrow": "Before you write",
     "faqTitle": "Questions we get most weeks.",
     "faqs": [
-      { "q": "How fast can you start?", "a": "For sprints, usually within two weeks of the signed brief. For project and retainer engagements, four to six weeks from sign-off — we keep capacity intentionally short so the team can stay deep on each engagement." },
-      { "q": "Do you work outside the UAE?", "a": "The studio is based in Dubai and our focus is the UAE market. We occasionally take on international projects when the brief is a strong fit — for those we run on UAE hours and align one regular meeting in your timezone." },
-      { "q": "What does a typical engagement cost?", "a": "Sprints start at AED 24,000. Project engagements typically range AED 60,000–180,000 depending on scope. Retainers begin at AED 18,000 / month with a six-month minimum. We'll send indicative pricing with the first proposal." },
-      { "q": "Can you work in Arabic and English in parallel?", "a": "Always. Every deliverable is built bilingual from the first line of copy — type, layout, motion and tone tested in both languages before launch. We don't treat Arabic as a translation pass." },
-      { "q": "Do you sign NDAs?", "a": "Yes, and we sign them before the first proper conversation if your work needs it. We're comfortable with standard mutual NDAs and can usually turn one around in a day." }
+      {
+        "q": "How fast can you start?",
+        "a": "For sprints, usually within two weeks of the signed brief. For project and retainer engagements, four to six weeks from sign-off — we keep capacity intentionally short so the team can stay deep on each engagement."
+      },
+      {
+        "q": "Do you work outside the UAE?",
+        "a": "The studio is based in Dubai and our focus is the UAE market. We occasionally take on international projects when the brief is a strong fit — for those we run on UAE hours and align one regular meeting in your timezone."
+      },
+      {
+        "q": "What does a typical engagement cost?",
+        "a": "Sprints start at AED 24,000. Project engagements typically range AED 60,000–180,000 depending on scope. Retainers begin at AED 18,000 / month with a six-month minimum. We'll send indicative pricing with the first proposal."
+      },
+      {
+        "q": "Can you work in Arabic and English in parallel?",
+        "a": "Always. Every deliverable is built bilingual from the first line of copy — type, layout, motion and tone tested in both languages before launch. We don't treat Arabic as a translation pass."
+      },
+      {
+        "q": "Do you sign NDAs?",
+        "a": "Yes, and we sign them before the first proper conversation if your work needs it. We're comfortable with standard mutual NDAs and can usually turn one around in a day."
+      }
     ]
   },
   "legal": {
@@ -174,10 +193,26 @@
     "back": "Back to home",
     "destinationsEyebrow": "Try one of these",
     "destinations": [
-      { "label": "Services", "href": "/services", "description": "Brand, web, AI and motion under one roof." },
-      { "label": "Work", "href": "/work", "description": "Recent launches with the receipts." },
-      { "label": "Journal", "href": "/insights", "description": "Short field notes from the studio." },
-      { "label": "Contact", "href": "/contact", "description": "Tell us what you’re shipping." }
+      {
+        "label": "Services",
+        "href": "/services",
+        "description": "Brand, web, AI and motion under one roof."
+      },
+      {
+        "label": "Work",
+        "href": "/work",
+        "description": "Recent launches with the receipts."
+      },
+      {
+        "label": "Journal",
+        "href": "/insights",
+        "description": "Short field notes from the studio."
+      },
+      {
+        "label": "Contact",
+        "href": "/contact",
+        "description": "Tell us what you’re shipping."
+      }
     ]
   },
   "servicesIndex": {
@@ -186,7 +221,16 @@
     "industriesEyebrow": "Industries we serve",
     "industriesTitle": "Built for teams shipping into demanding sectors.",
     "industriesBody": "We work most often with operators and founders shipping into these sectors. The toolkit changes; the rigour doesn’t.",
-    "industries": ["Hospitality", "Real Estate", "Retail & FMCG", "Finance", "Government", "Healthcare", "Technology", "Events & Culture"],
+    "industries": [
+      "Hospitality",
+      "Real Estate",
+      "Retail & FMCG",
+      "Finance",
+      "Government",
+      "Healthcare",
+      "Technology",
+      "Events & Culture"
+    ],
     "ctaEyebrow": "Ready to start?",
     "ctaTitle": "Tell us what you’re building.",
     "ctaBody": "Share a brief or an idea. We come back within a business day with a starting point."
@@ -215,10 +259,22 @@
     "audienceTitle": "Engagements that take this shape, usually.",
     "audienceBody": "We do our best work for teams that have stopped pretending the brief is simple and are ready to spend the time it deserves.",
     "audiences": [
-      { "title": "Founders rebuilding from positioning out.", "body": "You’ve outgrown the launch identity and the next round needs a system the next CMO won’t want to replace on day one." },
-      { "title": "Heads of marketing inheriting fragmented systems.", "body": "Five vendors, six tones of voice and a logo nobody quite trusts — you need one studio to take responsibility for the whole arc." },
-      { "title": "CTOs scoping greenfield platforms.", "body": "You want a partner who can ship production code and still care about the kerning on the loading state." },
-      { "title": "Brand leads preparing a regional rollout.", "body": "You need a system that survives twelve markets and three local agencies — and you’d rather not be the one explaining it twice a week." }
+      {
+        "title": "Founders rebuilding from positioning out.",
+        "body": "You’ve outgrown the launch identity and the next round needs a system the next CMO won’t want to replace on day one."
+      },
+      {
+        "title": "Heads of marketing inheriting fragmented systems.",
+        "body": "Five vendors, six tones of voice and a logo nobody quite trusts — you need one studio to take responsibility for the whole arc."
+      },
+      {
+        "title": "CTOs scoping greenfield platforms.",
+        "body": "You want a partner who can ship production code and still care about the kerning on the loading state."
+      },
+      {
+        "title": "Brand leads preparing a regional rollout.",
+        "body": "You need a system that survives twelve markets and three local agencies — and you’d rather not be the one explaining it twice a week."
+      }
     ],
     "closingQuoteEyebrow": "From a recent engagement",
     "closingQuote": "They came in for a website and walked out with a brand operating system we’re still finding new uses for.",
@@ -235,17 +291,50 @@
     "body": "A dedicated models and talent capability for campaigns, fashion shoots, corporate events, product launches, e-commerce photography, social media content and brand promotions across the UAE.",
     "viewDetails": "View dedicated capabilities",
     "items": [
-      { "name": "Professional Models (Male, Female, Kids & Seniors)", "description": "Versatile faces for every age group and brief." },
-      { "name": "Fashion & Editorial Models", "description": "Runway and editorial talent for fashion shoots and shows." },
-      { "name": "Commercial & Advertising Models", "description": "Relatable, on-brand faces for campaigns and ads." },
-      { "name": "Plus-Size Models", "description": "Inclusive representation for body-positive brands." },
-      { "name": "Fitness Models", "description": "Athletic talent for sportswear, gyms and wellness." },
-      { "name": "E-commerce & Catalog Models", "description": "Consistent looks built for product and catalog shoots." },
-      { "name": "Actors & Performers", "description": "Trained talent for films, skits and live performance." },
-      { "name": "Brand Ambassadors", "description": "Polished representatives who embody your brand on-site." },
-      { "name": "Hosts & Promoters", "description": "Energetic hosts and promoters who work the crowd." },
-      { "name": "Social Media Influencers", "description": "Creators with the reach to amplify your message." },
-      { "name": "Content Creators & YouTubers", "description": "Storytellers who produce content audiences follow." }
+      {
+        "name": "Professional Models (Male, Female, Kids & Seniors)",
+        "description": "Versatile faces for every age group and brief."
+      },
+      {
+        "name": "Fashion & Editorial Models",
+        "description": "Runway and editorial talent for fashion shoots and shows."
+      },
+      {
+        "name": "Commercial & Advertising Models",
+        "description": "Relatable, on-brand faces for campaigns and ads."
+      },
+      {
+        "name": "Plus-Size Models",
+        "description": "Inclusive representation for body-positive brands."
+      },
+      {
+        "name": "Fitness Models",
+        "description": "Athletic talent for sportswear, gyms and wellness."
+      },
+      {
+        "name": "E-commerce & Catalog Models",
+        "description": "Consistent looks built for product and catalog shoots."
+      },
+      {
+        "name": "Actors & Performers",
+        "description": "Trained talent for films, skits and live performance."
+      },
+      {
+        "name": "Brand Ambassadors",
+        "description": "Polished representatives who embody your brand on-site."
+      },
+      {
+        "name": "Hosts & Promoters",
+        "description": "Energetic hosts and promoters who work the crowd."
+      },
+      {
+        "name": "Social Media Influencers",
+        "description": "Creators with the reach to amplify your message."
+      },
+      {
+        "name": "Content Creators & YouTubers",
+        "description": "Storytellers who produce content audiences follow."
+      }
     ]
   },
   "workIndex": {
@@ -321,11 +410,36 @@
     "compareTitle": "How the three compare.",
     "compareDimension": "Dimension",
     "compareRows": [
-      { "label": "Best for", "project": "A defined launch with a clear scope", "retainer": "Teams shipping continuously", "sprint": "Unblocking one sharp question" },
-      { "label": "Typical duration", "project": "8–16 weeks", "retainer": "6 months+, rolling", "sprint": "2–6 weeks" },
-      { "label": "Commitment", "project": "Statement of work", "retainer": "Quarterly retainer", "sprint": "Fixed-fee engagement" },
-      { "label": "Pricing", "project": "From AED 60k", "retainer": "From AED 18k / month", "sprint": "From AED 24k" },
-      { "label": "Ideal starting point", "project": "Briefing call + audit", "retainer": "Diagnostic + 90-day plan", "sprint": "Focus brief + kickoff workshop" }
+      {
+        "label": "Best for",
+        "project": "A defined launch with a clear scope",
+        "retainer": "Teams shipping continuously",
+        "sprint": "Unblocking one sharp question"
+      },
+      {
+        "label": "Typical duration",
+        "project": "8–16 weeks",
+        "retainer": "6 months+, rolling",
+        "sprint": "2–6 weeks"
+      },
+      {
+        "label": "Commitment",
+        "project": "Statement of work",
+        "retainer": "Quarterly retainer",
+        "sprint": "Fixed-fee engagement"
+      },
+      {
+        "label": "Pricing",
+        "project": "From AED 60k",
+        "retainer": "From AED 18k / month",
+        "sprint": "From AED 24k"
+      },
+      {
+        "label": "Ideal starting point",
+        "project": "Briefing call + audit",
+        "retainer": "Diagnostic + 90-day plan",
+        "sprint": "Focus brief + kickoff workshop"
+      }
     ]
   },
   "privacyPage": {
@@ -335,18 +449,54 @@
     "lastUpdated": "Last reviewed: May 2026. We refresh this notice annually and whenever practice changes — please review with counsel before launch.",
     "tocTitle": "Sections",
     "sections": [
-      { "title": "1. Who we are", "body": "Regalia Vows Tech is an independent design and technology studio based in Dubai, United Arab Emirates. References to ‘we’, ‘us’ or ‘the studio’ in this notice mean Regalia Vows Tech. You can reach our data point of contact at hello@regaliavowstech.com." },
-      { "title": "2. What we collect", "body": "When you fill the contact form we collect the name, email, company name, project category, indicative budget and the message you write to us. When you visit the site we collect standard server logs (IP, user agent, referrer, timestamp) and anonymous aggregated analytics. We do not collect special-category personal data and we ask you not to send it to us." },
-      { "title": "3. Why we collect it", "body": "To reply to your enquiry, to scope and deliver projects you have engaged us for, to keep the site secure and to understand which pages are useful so we can improve them. We never sell your data and we do not share it with third parties for advertising." },
-      { "title": "4. Lawful basis", "body": "We process contact-form data on the basis of your consent (you chose to write to us) and our legitimate interest in responding to business enquiries. For active client engagements we process data on the basis of the contract we signed with you." },
-      { "title": "5. How long we keep it", "body": "Contact-form messages: 24 months from your last interaction, then deleted. Active project files: for the duration of the engagement plus seven years to satisfy UAE record-keeping obligations. Server logs: 90 days, rotating." },
-      { "title": "6. Who we share it with", "body": "Trusted infrastructure providers we cannot operate the business without — our email host, hosting platform, analytics provider and accounting software. All are bound by data-processing agreements. We do not transfer data outside the GCC except where the service provider is based in a region with equivalent protections." },
-      { "title": "7. Cookies and analytics", "body": "We use one first-party cookie to remember your language preference. We use privacy-friendly analytics that aggregates page views without tracking individuals across sites. There are no advertising cookies, no third-party trackers and no fingerprinting." },
-      { "title": "8. Your rights", "body": "You can ask us at any time to confirm what data we hold about you, to correct it, to delete it, to export it in a portable format or to restrict how we use it. Write to hello@regaliavowstech.com and we will respond within 30 days. If you are unhappy with our response you can lodge a complaint with the relevant UAE supervisory authority." },
-      { "title": "9. Security", "body": "Data in transit is encrypted with TLS. Production systems are access-controlled, audited and patched on a regular cadence. We follow the principle of least privilege internally and we run an annual security review." },
-      { "title": "10. Children", "body": "Our site and services are aimed at businesses and adult professionals. We do not knowingly collect data from anyone under 18. If you believe a child has provided personal data, write to us and we will delete it." },
-      { "title": "11. Changes to this notice", "body": "We may update this notice when the law, our practice or the services we offer change. We will date every revision at the top. Material changes will be flagged at the top of the page for 30 days." },
-      { "title": "12. Contact", "body": "Questions, requests or complaints about privacy go to hello@regaliavowstech.com with the subject line ‘Privacy request’. We monitor that inbox during business hours and respond within one working day." }
+      {
+        "title": "1. Who we are",
+        "body": "Regalia Vows Tech is an independent design and technology studio based in Dubai, United Arab Emirates. References to ‘we’, ‘us’ or ‘the studio’ in this notice mean Regalia Vows Tech. You can reach our data point of contact at hello@regaliavowstech.com."
+      },
+      {
+        "title": "2. What we collect",
+        "body": "When you fill the contact form we collect the name, email, company name, project category, indicative budget and the message you write to us. When you visit the site we collect standard server logs (IP, user agent, referrer, timestamp) and anonymous aggregated analytics. We do not collect special-category personal data and we ask you not to send it to us."
+      },
+      {
+        "title": "3. Why we collect it",
+        "body": "To reply to your enquiry, to scope and deliver projects you have engaged us for, to keep the site secure and to understand which pages are useful so we can improve them. We never sell your data and we do not share it with third parties for advertising."
+      },
+      {
+        "title": "4. Lawful basis",
+        "body": "We process contact-form data on the basis of your consent (you chose to write to us) and our legitimate interest in responding to business enquiries. For active client engagements we process data on the basis of the contract we signed with you."
+      },
+      {
+        "title": "5. How long we keep it",
+        "body": "Contact-form messages: 24 months from your last interaction, then deleted. Active project files: for the duration of the engagement plus seven years to satisfy UAE record-keeping obligations. Server logs: 90 days, rotating."
+      },
+      {
+        "title": "6. Who we share it with",
+        "body": "Trusted infrastructure providers we cannot operate the business without — our email host, hosting platform, analytics provider and accounting software. All are bound by data-processing agreements. We do not transfer data outside the GCC except where the service provider is based in a region with equivalent protections."
+      },
+      {
+        "title": "7. Cookies and analytics",
+        "body": "We use one first-party cookie to remember your language preference. We use privacy-friendly analytics that aggregates page views without tracking individuals across sites. There are no advertising cookies, no third-party trackers and no fingerprinting."
+      },
+      {
+        "title": "8. Your rights",
+        "body": "You can ask us at any time to confirm what data we hold about you, to correct it, to delete it, to export it in a portable format or to restrict how we use it. Write to hello@regaliavowstech.com and we will respond within 30 days. If you are unhappy with our response you can lodge a complaint with the relevant UAE supervisory authority."
+      },
+      {
+        "title": "9. Security",
+        "body": "Data in transit is encrypted with TLS. Production systems are access-controlled, audited and patched on a regular cadence. We follow the principle of least privilege internally and we run an annual security review."
+      },
+      {
+        "title": "10. Children",
+        "body": "Our site and services are aimed at businesses and adult professionals. We do not knowingly collect data from anyone under 18. If you believe a child has provided personal data, write to us and we will delete it."
+      },
+      {
+        "title": "11. Changes to this notice",
+        "body": "We may update this notice when the law, our practice or the services we offer change. We will date every revision at the top. Material changes will be flagged at the top of the page for 30 days."
+      },
+      {
+        "title": "12. Contact",
+        "body": "Questions, requests or complaints about privacy go to hello@regaliavowstech.com with the subject line ‘Privacy request’. We monitor that inbox during business hours and respond within one working day."
+      }
     ]
   },
   "termsPage": {
@@ -356,18 +506,54 @@
     "lastUpdated": "Last reviewed: May 2026. Please review with counsel before launch.",
     "tocTitle": "Sections",
     "sections": [
-      { "title": "1. About these terms", "body": "By using this site you accept the terms set out below. If you do not accept them, please don’t use the site. The site is provided by Regalia Vows Tech, an independent studio incorporated in the United Arab Emirates." },
-      { "title": "2. Engagements and scope", "body": "Information on this site about our capabilities, packages and indicative pricing is for guidance only. A binding engagement starts only when both parties sign a project contract setting out scope, deliverables, timeline and price. We work to that contract, and any change in scope is recorded as a written change order." },
-      { "title": "3. Intellectual property", "body": "On full payment and unless otherwise stated in the project contract, all deliverables produced specifically for you become your property. We retain ownership of underlying tools, frameworks and methodologies we developed independently, and we keep the right to feature finished work in our portfolio after launch unless you ask us not to." },
-      { "title": "4. Payment", "body": "Project work is invoiced according to the milestone schedule in the contract. Retainers are invoiced monthly in advance. Invoices are due within 14 days unless otherwise agreed. Late payment may pause active work and incur a fair recovery fee in line with UAE commercial practice." },
-      { "title": "5. Confidentiality", "body": "Both parties keep each other’s non-public business information confidential during and after the engagement. Confidential information may be disclosed only to people who need to know it to perform the work and who are bound by equivalent obligations. This clause survives the end of the engagement for three years." },
-      { "title": "6. Warranty and quality", "body": "We perform the work with reasonable skill and care, using qualified people and current best practice. Where deliverables include software, we warrant that they are free from material defects at the point of acceptance and we will fix any defects reported within 30 days of acceptance at no additional cost." },
-      { "title": "7. Limitation of liability", "body": "To the extent permitted by UAE law, our total liability for any engagement is capped at the fees paid to us for that engagement in the 12 months immediately preceding the claim. We are not liable for indirect, consequential, special or punitive damages, or for loss of profit, revenue, data or goodwill, unless caused by our gross negligence or wilful misconduct." },
-      { "title": "8. Termination", "body": "Either party may terminate an engagement on 30 days’ written notice. We will be paid for work done up to the termination date and for any non-cancellable commitments we made on your behalf. We will hand over work-in-progress in a usable state and assist a reasonable handover for up to 30 days at our standard rate." },
-      { "title": "9. Use of this website", "body": "You may browse the site for any lawful purpose. You may not scrape it, attempt to access systems you are not authorised to use, upload malicious content via any forms, or use the site in any way that breaches applicable law. We may suspend access to anyone who breaches these rules." },
-      { "title": "10. Third-party content", "body": "Where the site links to or embeds content from third parties (case studies, client trademarks, articles, social media), the third parties retain ownership of their material and govern its use under their own terms. We make every effort to credit accurately." },
-      { "title": "11. Changes to these terms", "body": "We may update these terms when our practice or the law changes. The current version is the one published on this page; the date at the top reflects the last revision. Substantive changes that affect existing engagements will always be agreed in writing on the project contract." },
-      { "title": "12. Governing law", "body": "These terms are governed by the laws of the United Arab Emirates as applied in the Emirate of Dubai. Any dispute is to be resolved by the courts of Dubai, unless the parties have agreed an alternative forum in the relevant project contract." }
+      {
+        "title": "1. About these terms",
+        "body": "By using this site you accept the terms set out below. If you do not accept them, please don’t use the site. The site is provided by Regalia Vows Tech, an independent studio incorporated in the United Arab Emirates."
+      },
+      {
+        "title": "2. Engagements and scope",
+        "body": "Information on this site about our capabilities, packages and indicative pricing is for guidance only. A binding engagement starts only when both parties sign a project contract setting out scope, deliverables, timeline and price. We work to that contract, and any change in scope is recorded as a written change order."
+      },
+      {
+        "title": "3. Intellectual property",
+        "body": "On full payment and unless otherwise stated in the project contract, all deliverables produced specifically for you become your property. We retain ownership of underlying tools, frameworks and methodologies we developed independently, and we keep the right to feature finished work in our portfolio after launch unless you ask us not to."
+      },
+      {
+        "title": "4. Payment",
+        "body": "Project work is invoiced according to the milestone schedule in the contract. Retainers are invoiced monthly in advance. Invoices are due within 14 days unless otherwise agreed. Late payment may pause active work and incur a fair recovery fee in line with UAE commercial practice."
+      },
+      {
+        "title": "5. Confidentiality",
+        "body": "Both parties keep each other’s non-public business information confidential during and after the engagement. Confidential information may be disclosed only to people who need to know it to perform the work and who are bound by equivalent obligations. This clause survives the end of the engagement for three years."
+      },
+      {
+        "title": "6. Warranty and quality",
+        "body": "We perform the work with reasonable skill and care, using qualified people and current best practice. Where deliverables include software, we warrant that they are free from material defects at the point of acceptance and we will fix any defects reported within 30 days of acceptance at no additional cost."
+      },
+      {
+        "title": "7. Limitation of liability",
+        "body": "To the extent permitted by UAE law, our total liability for any engagement is capped at the fees paid to us for that engagement in the 12 months immediately preceding the claim. We are not liable for indirect, consequential, special or punitive damages, or for loss of profit, revenue, data or goodwill, unless caused by our gross negligence or wilful misconduct."
+      },
+      {
+        "title": "8. Termination",
+        "body": "Either party may terminate an engagement on 30 days’ written notice. We will be paid for work done up to the termination date and for any non-cancellable commitments we made on your behalf. We will hand over work-in-progress in a usable state and assist a reasonable handover for up to 30 days at our standard rate."
+      },
+      {
+        "title": "9. Use of this website",
+        "body": "You may browse the site for any lawful purpose. You may not scrape it, attempt to access systems you are not authorised to use, upload malicious content via any forms, or use the site in any way that breaches applicable law. We may suspend access to anyone who breaches these rules."
+      },
+      {
+        "title": "10. Third-party content",
+        "body": "Where the site links to or embeds content from third parties (case studies, client trademarks, articles, social media), the third parties retain ownership of their material and govern its use under their own terms. We make every effort to credit accurately."
+      },
+      {
+        "title": "11. Changes to these terms",
+        "body": "We may update these terms when our practice or the law changes. The current version is the one published on this page; the date at the top reflects the last revision. Substantive changes that affect existing engagements will always be agreed in writing on the project contract."
+      },
+      {
+        "title": "12. Governing law",
+        "body": "These terms are governed by the laws of the United Arab Emirates as applied in the Emirate of Dubai. Any dispute is to be resolved by the courts of Dubai, unless the parties have agreed an alternative forum in the relevant project contract."
+      }
     ]
   },
   "aboutPage": {
@@ -382,31 +568,79 @@
     "storyEyebrow": "Story",
     "storyTitle": "A short history.",
     "timeline": [
-      { "year": "2022", "text": "Studio founded in Dubai as a small, senior team — brand, web and motion under one roof." },
-      { "year": "2023", "text": "First UAE founder engagements shipped; bilingual EN/AR delivery model formalised." },
-      { "year": "2024", "text": "Real estate and lifestyle brand sites delivered for Dubai-based operators." },
-      { "year": "2025", "text": "Editorial bilingual site shipped for a Dubai luxury brand; first international engagement (US-facing brand site with product authentication system)." },
-      { "year": "2026", "text": "Studio focus refined around brand, web and applied AI for UAE founders — with selected international work when the brief fits." }
+      {
+        "year": "2022",
+        "text": "Studio founded in Dubai as a small, senior team — brand, web and motion under one roof."
+      },
+      {
+        "year": "2023",
+        "text": "First UAE founder engagements shipped; bilingual EN/AR delivery model formalised."
+      },
+      {
+        "year": "2024",
+        "text": "Real estate and lifestyle brand sites delivered for Dubai-based operators."
+      },
+      {
+        "year": "2025",
+        "text": "Editorial bilingual site shipped for a Dubai luxury brand; first international engagement (US-facing brand site with product authentication system)."
+      },
+      {
+        "year": "2026",
+        "text": "Studio focus refined around brand, web and applied AI for UAE founders — with selected international work when the brief fits."
+      }
     ],
     "valuesEyebrow": "Values",
     "valuesTitle": "What we hold to.",
     "values": [
-      { "title": "Craft", "body": "Detail is the difference between work that ships and work that lasts. We sweat the kerning, the hover state and the dB level — because the audience always feels the things we hoped they’d miss." },
-      { "title": "Clarity", "body": "Plain writing, clear scopes and decisions made in the room. If we can’t explain it to your CFO in a sentence, we haven’t finished thinking about it. The work is only ever as honest as the brief that drives it." },
-      { "title": "Curiosity", "body": "We hire for it. We protect time for it. We hand it to clients. The teams who let us bring questions to the table get the strongest work; the teams who answer ‘because we’ve always done it that way’ get exactly that." },
-      { "title": "Care", "body": "For people, for data, for the work and for the launches that follow. We pick up the phone post-launch, we own the bugs we ship and we never treat handover as someone else’s problem." },
-      { "title": "Courage", "body": "Strong work needs a brave room. We tell you when an idea isn’t worth pursuing, when a deadline is wishful thinking and when the safer route is the wrong one. You can disagree — and often should." },
-      { "title": "Continuity", "body": "We work with a small number of clients each year and we stay close after launch — long arcs let us think in seasons rather than sprints, and that’s where compounding really shows up." }
+      {
+        "title": "Craft",
+        "body": "Detail is the difference between work that ships and work that lasts. We sweat the kerning, the hover state and the dB level — because the audience always feels the things we hoped they’d miss."
+      },
+      {
+        "title": "Clarity",
+        "body": "Plain writing, clear scopes and decisions made in the room. If we can’t explain it to your CFO in a sentence, we haven’t finished thinking about it. The work is only ever as honest as the brief that drives it."
+      },
+      {
+        "title": "Curiosity",
+        "body": "We hire for it. We protect time for it. We hand it to clients. The teams who let us bring questions to the table get the strongest work; the teams who answer ‘because we’ve always done it that way’ get exactly that."
+      },
+      {
+        "title": "Care",
+        "body": "For people, for data, for the work and for the launches that follow. We pick up the phone post-launch, we own the bugs we ship and we never treat handover as someone else’s problem."
+      },
+      {
+        "title": "Courage",
+        "body": "Strong work needs a brave room. We tell you when an idea isn’t worth pursuing, when a deadline is wishful thinking and when the safer route is the wrong one. You can disagree — and often should."
+      },
+      {
+        "title": "Continuity",
+        "body": "We work with a small number of clients each year and we stay close after launch — long arcs let us think in seasons rather than sprints, and that’s where compounding really shows up."
+      }
     ],
     "principlesEyebrow": "Operating principles",
     "principlesTitle": "Five rules we run on.",
     "principlesBody": "They sound obvious. They aren’t, in practice. We test new hires and new clients against these — and we walk away from work that needs us to break them.",
     "principles": [
-      { "title": "One studio, one room.", "body": "No sub-sub-contractors. Designers, engineers and producers sit in the same standup and share one backlog." },
-      { "title": "Show, don’t deck.", "body": "Weekly demos of the real thing. The slide that summarises the work is always shorter than the work itself." },
-      { "title": "Decide on dates.", "body": "Every decision has a person and a date. Open loops are tracked in writing and closed in days, not quarters." },
-      { "title": "Measure what matters.", "body": "Every brief carries two or three metrics worth defending to a CFO. Vanity numbers stay out of the deck." },
-      { "title": "Stay after launch.", "body": "We instrument what we ship, watch it land and tune it. The next quarter is part of this engagement, not the next pitch." }
+      {
+        "title": "One studio, one room.",
+        "body": "No sub-sub-contractors. Designers, engineers and producers sit in the same standup and share one backlog."
+      },
+      {
+        "title": "Show, don’t deck.",
+        "body": "Weekly demos of the real thing. The slide that summarises the work is always shorter than the work itself."
+      },
+      {
+        "title": "Decide on dates.",
+        "body": "Every decision has a person and a date. Open loops are tracked in writing and closed in days, not quarters."
+      },
+      {
+        "title": "Measure what matters.",
+        "body": "Every brief carries two or three metrics worth defending to a CFO. Vanity numbers stay out of the deck."
+      },
+      {
+        "title": "Stay after launch.",
+        "body": "We instrument what we ship, watch it land and tune it. The next quarter is part of this engagement, not the next pitch."
+      }
     ]
   },
   "casePage": {
@@ -477,10 +711,22 @@
     "beliefsTitle": "Four things that don't change.",
     "beliefsBody": "After three years running the studio, these are the beliefs that have held up under pressure.",
     "beliefs": [
-      { "title": "Integrated or nothing.", "body": "The work degrades every time it passes a handover. One studio, one room, one backlog — that's the only model that produces work the whole team is proud to sign." },
-      { "title": "Craft is the strategy.", "body": "The detail the client doesn't consciously notice is what makes them trust you. A well-kerned headline, a hover state that feels alive, a production that ends on time — these are the things that compound." },
-      { "title": "Honesty before comfort.", "body": "If the brief is wrong, the right answer is to say so in week one. A brave conversation at the start costs a day. A polite silence at the start costs the whole project." },
-      { "title": "Build for the next decade.", "body": "Every brief carries a longer arc than the deadline suggests. We build systems that outlast the first campaign and platforms that the next hire can extend without calling us." }
+      {
+        "title": "Integrated or nothing.",
+        "body": "The work degrades every time it passes a handover. One studio, one room, one backlog — that's the only model that produces work the whole team is proud to sign."
+      },
+      {
+        "title": "Craft is the strategy.",
+        "body": "The detail the client doesn't consciously notice is what makes them trust you. A well-kerned headline, a hover state that feels alive, a production that ends on time — these are the things that compound."
+      },
+      {
+        "title": "Honesty before comfort.",
+        "body": "If the brief is wrong, the right answer is to say so in week one. A brave conversation at the start costs a day. A polite silence at the start costs the whole project."
+      },
+      {
+        "title": "Build for the next decade.",
+        "body": "Every brief carries a longer arc than the deadline suggests. We build systems that outlast the first campaign and platforms that the next hire can extend without calling us."
+      }
     ],
     "noteEyebrow": "On the work",
     "noteTitle": "A personal note.",
@@ -488,5 +734,27 @@
     "connectEyebrow": "Start a conversation",
     "connectTitle": "Talk to Sheikh.",
     "connectBody": "Whether it's a brief, an idea or just a question — write to the studio and Sheikh or one of the senior team will reply within one business day."
+  },
+  "teamPage": {
+    "eyebrow": "The team",
+    "title": "The people behind the work.",
+    "lead": "A senior, hands-on crew across brand, technology and production — led from Dubai, built around obsessive care.",
+    "leadershipEyebrow": "Leadership",
+    "gridEyebrow": "The talents",
+    "gridTitle": "The talents around the table.",
+    "gridBody": "We keep the room small and senior. These are the disciplines around the table — profiles landing here soon.",
+    "placeholderName": "To be announced",
+    "roles": [
+      "Creative Director",
+      "Brand Designer",
+      "Full-stack Engineer",
+      "Producer",
+      "Motion Designer",
+      "Growth & Marketing Strategist",
+      "Photographer & Videographer"
+    ],
+    "connectEyebrow": "Join us",
+    "connectTitle": "Want a seat at this table?",
+    "connectBody": "We're always meeting sharp designers, engineers, producers and marketers. Introduce yourself."
   }
 }

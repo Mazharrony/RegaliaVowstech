@@ -6,7 +6,6 @@ import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
 import { AedSymbol } from "@/components/icons/AedSymbol";
 import { services, getService, getServices, type ServicePackage } from "@/content/services";
-import { work, type CaseStudy } from "@/content/work";
 import { routing } from "@/i18n/routing";
 import { getPhotosByCategory } from "@/content/gallery";
 import { CorporateGallery } from "@/components/sections/CorporateGallery";
@@ -64,10 +63,6 @@ export default async function ServiceDetailPage({
   const idx = localized.findIndex((s) => s.slug === slug);
   const next = localized[(idx + 1) % localized.length];
 
-  const relatedWork: CaseStudy[] = work
-    .filter((w) => w.services.includes(slug as CaseStudy["services"][number]))
-    .slice(0, 3);
-  const audiences = tPage.raw("audiences") as { title: string; body: string }[];
   const modelsBadge = tModels("eyebrow");
   const modelsCta = tModels("viewDetails");
   const tGallery = await getTranslations("gallery");
@@ -91,42 +86,75 @@ export default async function ServiceDetailPage({
           { name: service.title, url: `${siteUrl}/${locale}/services/${slug}` },
         ])}
       />
-      {/* Hero */}
-      <section className="container-x pb-12 pt-20 md:pb-20 md:pt-32">
-        <Reveal>
-          <Link
-            href="/services"
-            className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-muted)] hover:text-[var(--color-ink)]"
-          >
-            ← {tCommon("allServices")}
-          </Link>
-        </Reveal>
-        <div className="mt-10 grid gap-10 lg:grid-cols-12">
-          <Reveal delay={0.1} className="lg:col-span-1">
-            <p className="font-mono text-xs text-[var(--color-muted)]">
-              {service.number}
+      {/* Hero — full-bleed image behind the text */}
+      <section className="relative isolate flex min-h-[72svh] flex-col justify-end overflow-hidden bg-[#0e0e0d] text-white md:min-h-[80svh]">
+        <Image
+          src={service.image}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        {/* Legibility scrim + brand tint */}
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(10,8,6,0.92) 0%, rgba(10,8,6,0.55) 52%, rgba(10,8,6,0.65) 100%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(90% 65% at 12% 100%, rgba(255,149,0,0.2), transparent 60%)",
+          }}
+        />
+
+        <div className="container-x relative pb-14 pt-36 md:pb-20 md:pt-44">
+          <Reveal>
+            <Link
+              href="/services"
+              className="font-mono text-xs uppercase tracking-[0.18em] text-white/60 transition-colors hover:text-white"
+            >
+              ← {tCommon("allServices")}
+            </Link>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <p className="mt-10 inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-accent)]">
+              <span>{service.number}</span>
+              <span aria-hidden className="inline-block h-px w-8 bg-[var(--color-accent)]" />
+              <span>{service.tagline}</span>
             </p>
           </Reveal>
-          <Reveal delay={0.15} className="lg:col-span-8">
-            <h1 className="display-1 text-balance">{service.title}</h1>
-            <p className="mt-8 max-w-2xl text-lg text-[var(--color-muted)] md:text-xl">
+          <Reveal delay={0.14}>
+            <h1 className="display-1 mt-5 max-w-4xl text-balance text-white">
+              {service.title}
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="mt-7 max-w-2xl text-lg text-white/85 md:text-xl">
               {service.summary}
             </p>
           </Reveal>
+          <Reveal delay={0.26}>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Link href="/contact" className="btn-ios btn-ios-primary">
+                {tCommon("startProject")}
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <a
+                href="#packages"
+                className="btn-ios border border-white/30 text-white transition-colors hover:bg-white/10"
+              >
+                {tPage("packages")}
+              </a>
+            </div>
+          </Reveal>
         </div>
-
-        <Reveal delay={0.2}>
-          <div className="relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-[var(--radius-xl)] border hairline md:mt-16 md:aspect-[21/9]">
-            <Image
-              src={service.image}
-              alt={service.title}
-              fill
-              priority
-              sizes="(min-width: 1024px) 1100px, 100vw"
-              className="object-cover"
-            />
-          </div>
-        </Reveal>
       </section>
 
       {/* Services */}
@@ -153,40 +181,66 @@ export default async function ServiceDetailPage({
                 >
                   {isModelsCard ? (
                     <Link href="/models" className="group block h-full">
-                      <div className="flex h-full flex-col rounded-[var(--radius-xl)] border border-[var(--color-ink)] bg-[var(--color-bg-alt)] p-7 transition-colors hover:bg-[var(--color-bg)] md:p-8">
-                        <div className="flex items-center justify-between gap-3">
-                          <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                            {String(i + 1).padStart(2, "0")}
+                      <div className="flex h-full flex-col overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-ink)] bg-[var(--color-bg-alt)] transition-colors hover:bg-[var(--color-bg)]">
+                        {d.image && (
+                          <div className="relative aspect-[16/10] w-full overflow-hidden">
+                            <Image
+                              src={d.image}
+                              alt={d.name}
+                              fill
+                              sizes="(min-width: 1024px) 420px, 100vw"
+                              className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                          </div>
+                        )}
+                        <div className="flex flex-1 flex-col p-7 md:p-8">
+                          <div className="flex items-center justify-between gap-3">
+                            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                              {String(i + 1).padStart(2, "0")}
+                            </p>
+                            <span className="inline-flex h-6 items-center rounded-full bg-[var(--color-accent)] px-2.5 text-[0.66rem] font-semibold tracking-[-0.005em] text-[var(--color-ink)]">
+                              {modelsBadge}
+                            </span>
+                          </div>
+                          <h3 className="mt-4 font-serif text-xl tracking-tight md:text-2xl">
+                            {d.name}
+                          </h3>
+                          <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+                            {d.description}
                           </p>
-                          <span className="inline-flex h-6 items-center rounded-full bg-[var(--color-accent)] px-2.5 text-[0.66rem] font-semibold tracking-[-0.005em] text-[var(--color-ink)]">
-                            {modelsBadge}
-                          </span>
+                          <div className="mt-auto flex items-center justify-between gap-3 pt-8">
+                            <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                              {modelsCta}
+                            </span>
+                            <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" />
+                          </div>
                         </div>
+                      </div>
+                    </Link>
+                  ) : (
+                    <div className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-xl)] border surface-card transition-colors">
+                      {d.image && (
+                        <div className="relative aspect-[16/10] w-full overflow-hidden">
+                          <Image
+                            src={d.image}
+                            alt={d.name}
+                            fill
+                            sizes="(min-width: 1024px) 420px, 100vw"
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                        </div>
+                      )}
+                      <div className="flex flex-1 flex-col p-7 md:p-8">
+                        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                          {String(i + 1).padStart(2, "0")}
+                        </p>
                         <h3 className="mt-4 font-serif text-xl tracking-tight md:text-2xl">
                           {d.name}
                         </h3>
                         <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
                           {d.description}
                         </p>
-                        <div className="mt-auto flex items-center justify-between gap-3 pt-8">
-                          <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                            {modelsCta}
-                          </span>
-                          <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" />
-                        </div>
                       </div>
-                    </Link>
-                  ) : (
-                    <div className="group flex h-full flex-col rounded-[var(--radius-xl)] border surface-card p-7 transition-colors md:p-8">
-                      <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                        {String(i + 1).padStart(2, "0")}
-                      </p>
-                      <h3 className="mt-4 font-serif text-xl tracking-tight md:text-2xl">
-                        {d.name}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
-                        {d.description}
-                      </p>
                     </div>
                   )}
                 </Reveal>
@@ -237,27 +291,29 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Process */}
-      <section className="border-t hairline bg-[var(--color-bg-alt)]">
+      <section className="border-t hairline">
         <div className="container-x grid gap-10 py-20 md:py-28 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="eyebrow mb-4">{tPage("howItRuns")}</p>
             <h2 className="display-3">{tPage("process")}</h2>
           </div>
-          <div className="grid gap-6 lg:col-span-8 md:grid-cols-2">
+          <ol className="border-t hairline lg:col-span-8">
             {service.process.map((p, i) => (
-              <Reveal key={p.step} delay={i * 0.06}>
-                <div className="rounded-md border hairline bg-[var(--color-bg)] p-7">
-                  <p className="font-mono text-xs text-[var(--color-muted)]">
+              <Reveal key={p.step} delay={i * 0.05}>
+                <li className="grid gap-3 border-b hairline py-7 md:grid-cols-12 md:gap-6">
+                  <span className="font-mono text-sm text-[var(--color-accent)] md:col-span-2">
                     {p.step}
-                  </p>
-                  <h3 className="mt-4 font-serif text-2xl">{p.title}</h3>
-                  <p className="mt-3 text-sm text-[var(--color-muted)] md:text-base">
+                  </span>
+                  <h3 className="font-serif text-2xl tracking-tight md:col-span-4">
+                    {p.title}
+                  </h3>
+                  <p className="text-[var(--color-muted)] md:col-span-6 md:text-lg">
                     {p.body}
                   </p>
-                </div>
+                </li>
               </Reveal>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
@@ -280,56 +336,6 @@ export default async function ServiceDetailPage({
               </Reveal>
             ))}
           </dl>
-        </div>
-      </section>
-
-      {/* Who it's for */}
-      <section className="border-t hairline">
-        <div className="container-x grid gap-10 py-20 md:py-28 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <p className="eyebrow mb-4">{tPage("audienceEyebrow")}</p>
-            <h2 className="display-3">{tPage("audienceTitle")}</h2>
-            <p className="mt-6 max-w-md text-[var(--color-muted)] md:text-lg">
-              {tPage("audienceBody")}
-            </p>
-          </div>
-          <ul className="grid gap-px bg-[var(--color-line)] lg:col-span-8 md:grid-cols-2">
-            {audiences.map((a, i) => (
-              <Reveal key={a.title} delay={i * 0.04}>
-                <li className="flex h-full flex-col gap-3 bg-[var(--color-bg)] p-8">
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="font-serif text-xl md:text-2xl">{a.title}</h3>
-                  <p className="text-[var(--color-muted)] md:text-lg">{a.body}</p>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Closing pull-quote */}
-      <section className="border-t hairline bg-[var(--color-bg-alt)]">
-        <div className="container-x grid gap-10 py-20 md:py-28 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
-            <p className="eyebrow">{tPage("closingQuoteEyebrow")}</p>
-          </Reveal>
-          <Reveal delay={0.1} className="lg:col-span-8">
-            <figure>
-              <blockquote className="font-serif text-2xl leading-snug md:text-4xl">
-                <span aria-hidden className="mr-1 text-[var(--color-muted)]">“</span>
-                {tPage("closingQuote")}
-                <span aria-hidden className="ml-1 text-[var(--color-muted)]">”</span>
-              </blockquote>
-              <figcaption className="mt-8 border-t hairline pt-6">
-                <p className="font-medium">{tPage("closingQuoteAuthor")}</p>
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                  {tPage("closingQuoteRole")}
-                </p>
-              </figcaption>
-            </figure>
-          </Reveal>
         </div>
       </section>
 
@@ -363,42 +369,6 @@ export default async function ServiceDetailPage({
         </section>
       )}
 
-      {/* Related work */}
-      {relatedWork.length > 0 && (
-        <section className="border-t hairline">
-          <div className="container-x py-20 md:py-28">
-            <Reveal>
-              <p className="eyebrow mb-4">{tPage("relatedWorkEyebrow")}</p>
-              <h2 className="display-3 mb-12 max-w-2xl">{tPage("relatedWorkTitle")}</h2>
-            </Reveal>
-            <div className="grid gap-px bg-[var(--color-line)] md:grid-cols-3">
-              {relatedWork.map((r, i) => (
-                <Reveal key={r.slug} delay={i * 0.05}>
-                  <Link
-                    href={`/work/${r.slug}`}
-                    className="group flex h-full flex-col gap-6 bg-[var(--color-bg)] p-8 transition-colors hover:bg-[var(--color-bg-alt)]"
-                  >
-                    <div
-                      aria-hidden
-                      className="aspect-[16/10] w-full"
-                      style={{ background: r.cover }}
-                    />
-                    <div className="flex items-baseline justify-between gap-4">
-                      <div className="min-w-0">
-                        <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-muted)]">
-                          {r.client} · {r.industry}
-                        </p>
-                        <h3 className="mt-3 font-serif text-xl md:text-2xl">{r.title}</h3>
-                      </div>
-                      <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" />
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Next service */}
       <section className="border-t hairline">

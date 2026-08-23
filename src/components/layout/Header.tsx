@@ -1,37 +1,34 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { cn, easings } from "@/lib/utils";
 import { company } from "@/content/company";
+import { getServices } from "@/content/services";
 
 type NavKey =
   | "services"
-  | "work"
   | "about"
-  | "insights"
   | "process"
   | "contact"
   | "gallery"
-  | "founder"
+  | "team"
   | "more";
 
 type NavItem = { href: string; key: NavKey };
 
 const PRIMARY: NavItem[] = [
   { href: "/services", key: "services" },
-  { href: "/work", key: "work" },
   { href: "/process", key: "process" },
-  { href: "/insights", key: "insights" },
   { href: "/gallery", key: "gallery" },
 ];
 
 const MORE: NavItem[] = [
-  { href: "/founder", key: "founder" },
+  { href: "/team", key: "team" },
   { href: "/about", key: "about" },
   { href: "/contact", key: "contact" },
 ];
@@ -77,6 +74,165 @@ function NavLink({
     >
       <span>{label}</span>
     </Link>
+  );
+}
+
+function CapabilitiesMenu({
+  pathname,
+  label,
+  allLabel,
+}: {
+  pathname: string;
+  label: string;
+  allLabel: string;
+}) {
+  const locale = useLocale();
+  const tModels = useTranslations("models");
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const items = useMemo(() => {
+    const list = getServices(locale).map((s) => ({
+      key: s.slug,
+      href: `/services/${s.slug}`,
+      number: s.number,
+      title: s.title,
+      tagline: s.tagline,
+    }));
+    list.push({
+      key: "models" as (typeof list)[number]["key"],
+      href: "/models",
+      number: "05",
+      title: tModels("title"),
+      tagline: tModels("eyebrow"),
+    });
+    return list.sort((a, b) => a.number.localeCompare(b.number));
+  }, [locale, tModels]);
+
+  const clearClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+  const scheduleClose = () => {
+    clearClose();
+    closeTimer.current = setTimeout(() => setOpen(false), 140);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => () => clearClose(), []);
+
+  const active =
+    pathname.startsWith("/services") || pathname.startsWith("/models");
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => {
+        clearClose();
+        setOpen(true);
+      }}
+      onMouseLeave={scheduleClose}
+    >
+      <Link
+        href="/services"
+        onFocus={() => {
+          clearClose();
+          setOpen(true);
+        }}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-current={active ? "page" : undefined}
+        className={cn(
+          "inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-[0.88rem] font-medium tracking-[-0.01em] transition-colors",
+          active || open
+            ? "bg-[color-mix(in_srgb,var(--color-ink)_8%,transparent)] text-[var(--color-ink)]"
+            : "text-[var(--color-ink-soft)] hover:bg-[color-mix(in_srgb,var(--color-ink)_5%,transparent)] hover:text-[var(--color-ink)]"
+        )}
+      >
+        <span>{label}</span>
+        <ChevronDown
+          className={cn(
+            "h-3.5 w-3.5 transition-transform duration-300",
+            open && "rotate-180"
+          )}
+        />
+      </Link>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="menu"
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.28, ease: easings.apple }}
+            style={{ transformOrigin: "top left" }}
+            className="glass-strong absolute start-0 mt-3 w-[720px] max-w-[calc(100vw-3rem)] overflow-hidden rounded-[var(--radius-xl)] p-3"
+          >
+            <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
+              {items.map((item) => (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  role="menuitem"
+                  onClick={() => setOpen(false)}
+                  className="group/cap relative flex flex-col overflow-hidden rounded-[var(--radius-md)] p-4 text-white transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
+                  style={{
+                    background:
+                      "linear-gradient(150deg, #ff7a1f 0%, #f5540c 55%, #e13d05 100%)",
+                  }}
+                >
+                  <span className="flex items-center justify-between">
+                    <span className="font-mono text-[0.62rem] tabular-nums text-white/75">
+                      {item.number}
+                    </span>
+                    <ArrowUpRight className="h-3.5 w-3.5 text-white/75 transition-all duration-300 group-hover/cap:-translate-y-0.5 group-hover/cap:translate-x-0.5 group-hover/cap:text-white rtl:group-hover/cap:-translate-x-0.5" />
+                  </span>
+                  <span className="mt-4 block text-[0.92rem] font-semibold leading-tight tracking-[-0.015em]">
+                    {item.title}
+                  </span>
+                  <span className="mt-1 block text-[0.74rem] leading-snug text-white/85">
+                    {item.tagline}
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <Link
+              href="/services"
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className="group/all mt-2 flex items-center justify-between rounded-[var(--radius-md)] px-4 py-3 text-[0.85rem] font-medium text-[var(--color-ink)] transition-colors hover:bg-[color-mix(in_srgb,var(--color-ink)_5%,transparent)]"
+            >
+              <span>{allLabel}</span>
+              <ArrowUpRight className="h-4 w-4 text-[var(--color-muted)] transition-all duration-300 group-hover/all:-translate-y-0.5 group-hover/all:translate-x-0.5 group-hover/all:text-[var(--color-accent)] rtl:group-hover/all:-translate-x-0.5" />
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
@@ -319,7 +475,12 @@ export function Header() {
               aria-label="Primary"
               className="hidden items-center gap-1 md:flex"
             >
-              {PRIMARY.map((item) => (
+              <CapabilitiesMenu
+                pathname={pathname}
+                label={t("services")}
+                allLabel={tCommon("allServices")}
+              />
+              {PRIMARY.filter((item) => item.key !== "services").map((item) => (
                 <NavLink
                   key={item.href}
                   href={item.href}
@@ -334,7 +495,7 @@ export function Header() {
                 items={MORE.map((m) => ({
                   href: m.href,
                   label: t(m.key),
-                  desc: t(`${m.key}Desc` as "founderDesc" | "aboutDesc" | "contactDesc"),
+                  desc: t(`${m.key}Desc` as "teamDesc" | "aboutDesc" | "contactDesc"),
                 }))}
               />
             </nav>
@@ -446,7 +607,7 @@ export function Header() {
                           <span className="mt-1 block text-sm text-[var(--color-muted)]">
                             {t(
                               `${item.key}Desc` as
-                                | "founderDesc"
+                                | "teamDesc"
                                 | "aboutDesc"
                                 | "contactDesc"
                             )}
