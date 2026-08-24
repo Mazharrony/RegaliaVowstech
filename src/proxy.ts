@@ -7,6 +7,11 @@ export const config = {
   matcher: [
     "/",
     "/(ar|en)/:path*",
-    "/((?!api|_next|_vercel|.*\\..*).*)",
+    // og / icon / apple-icon are excluded: they are route handlers and
+    // metadata files, not pages. Without this the locale proxy rewrites
+    // /og -> /en/og and /apple-icon -> /en/apple-icon, which 404 — that
+    // silently broke every social share card, structured-data image and
+    // touch icon on the site.
+    "/((?!api|og|icon|apple-icon|_next|_vercel|.*\\..*).*)",
   ],
 };
