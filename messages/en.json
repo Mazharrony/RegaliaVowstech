@@ -337,37 +337,6 @@
       }
     ]
   },
-  "workIndex": {
-    "eyebrow": "Selected work",
-    "headline": "Recent launches, in their own words.",
-    "body": "Each piece below shipped to market — brands, platforms, automations and stands built in tight loops with operators who knew exactly what they wanted, and a few who needed help finding it.",
-    "industriesEyebrow": "Browse by industry",
-    "industriesAll": "All work",
-    "yearsEyebrow": "Year",
-    "yearsAll": "All years",
-    "sortEyebrow": "Sort",
-    "sortNewest": "Newest",
-    "sortOldest": "Oldest",
-    "emptyTitle": "Nothing matches yet.",
-    "emptyBody": "Clear a filter or two and the list will come back.",
-    "emptyReset": "Reset filters",
-    "resultsCount": "{count, plural, one {# project} other {# projects}}",
-    "ctaTitle": "Your launch could be next.",
-    "ctaBody": "Tell us what you’re shipping. We’ll come back with a sharp first take and an honest scope."
-  },
-  "insightsIndex": {
-    "eyebrow": "Journal",
-    "headline": "Field notes from the studio.",
-    "body": "Short pieces on the craft and the business of running it — how we hire, what we ship, the trade-offs that show up only after launch. Written by the people doing the work.",
-    "featuredEyebrow": "Featured",
-    "allArticles": "All articles",
-    "readArticle": "Read article",
-    "filterEyebrow": "Filter by topic",
-    "filterAll": "All topics",
-    "emptyTitle": "Nothing under this topic yet.",
-    "emptyBody": "Switch back to all topics and the list will reappear.",
-    "emptyReset": "Show all"
-  },
   "processPage": {
     "eyebrow": "Method",
     "headline": "A clear path from brief to launch — and beyond.",
@@ -642,35 +611,6 @@
         "body": "We instrument what we ship, watch it land and tune it. The next quarter is part of this engagement, not the next pitch."
       }
     ]
-  },
-  "casePage": {
-    "challengeEyebrow": "Challenge",
-    "approachEyebrow": "Approach",
-    "outcomeEyebrow": "Outcome",
-    "projectMetaEyebrow": "Project",
-    "metaYear": "Year",
-    "metaDuration": "Duration",
-    "metaTeam": "Team",
-    "metaLocation": "Location",
-    "metaIndustry": "Industry",
-    "stackEyebrow": "Stack",
-    "quoteEyebrow": "From the client",
-    "relatedEyebrow": "Related work",
-    "relatedTitle": "Other launches in this neighbourhood."
-  },
-  "insightPage": {
-    "tocTitle": "In this piece",
-    "shareEyebrow": "Share",
-    "shareCopy": "Copy link",
-    "shareCopied": "Link copied",
-    "shareTwitter": "Share on X",
-    "shareLinkedin": "Share on LinkedIn",
-    "tagsEyebrow": "Tags",
-    "authorEyebrow": "Written by",
-    "relatedEyebrow": "Keep reading",
-    "relatedTitle": "More from the journal.",
-    "backToJournal": "Back to journal",
-    "readingTimeSuffix": "min read"
   },
   "gallery": {
     "metaTitle": "Photo Gallery — Regalia Vows Tech",

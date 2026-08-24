@@ -337,37 +337,6 @@
       }
     ]
   },
-  "workIndex": {
-    "eyebrow": "مختارات من أعمالنا",
-    "headline": "إطلاقات حديثة، بأصواتٍ من عاشوها.",
-    "body": "كل عملٍ في الأسفل وصل إلى السوق — علاماتٌ ومنصّاتٌ وأتمتةٌ وأجنحةٌ بُنيت في دوراتٍ محكمة مع مشغّلين عرفوا تماماً ما يريدون، وبعضهم احتاج إلى من يساعده على إيجاده.",
-    "industriesEyebrow": "تصفّح بحسب القطاع",
-    "industriesAll": "كل الأعمال",
-    "yearsEyebrow": "السنة",
-    "yearsAll": "كل السنوات",
-    "sortEyebrow": "الترتيب",
-    "sortNewest": "الأحدث",
-    "sortOldest": "الأقدم",
-    "emptyTitle": "ما يطابق المرشّحات الحالية شيء.",
-    "emptyBody": "خفّف فلتراً أو اثنين وترجع القائمة.",
-    "emptyReset": "إعادة ضبط المرشّحات",
-    "resultsCount": "{count, plural, zero {لا مشاريع} one {مشروع واحد} two {مشروعان} few {# مشاريع} many {# مشروعاً} other {# مشروع}}",
-    "ctaTitle": "إطلاقتك قد تكون التالية.",
-    "ctaBody": "أخبرنا بما تطلقه. نعود إليك برأي واضح ونطاق صادق."
-  },
-  "insightsIndex": {
-    "eyebrow": "اليوميات",
-    "headline": "ملاحظات من قلب الاستوديو.",
-    "body": "نصوصٌ قصيرة عن الحرفة وعن إدارة شركتها — كيف نوظّف، ماذا نُسلّم، والمقايضات التي تتكشّف بعد الإطلاق فقط. يكتبها الناس الذين ينفّذون العمل.",
-    "featuredEyebrow": "مميّز",
-    "allArticles": "كل المقالات",
-    "readArticle": "اقرأ المقال",
-    "filterEyebrow": "تصفية بحسب الموضوع",
-    "filterAll": "كل المواضيع",
-    "emptyTitle": "ما في شيء تحت هذا الموضوع بعد.",
-    "emptyBody": "ارجع لكل المواضيع وتظهر القائمة من جديد.",
-    "emptyReset": "عرض الكل"
-  },
   "processPage": {
     "eyebrow": "المنهجية",
     "headline": "مسارٌ واضح من البريف إلى الإطلاق — وما بعده.",
@@ -642,35 +611,6 @@
         "body": "نُجهِّز ما نشحنه بأدوات قياس، ونراقبه يهبط، ونضبطه. الربع القادم جزء من هذا الارتباط، لا من البِتش القادم."
       }
     ]
-  },
-  "casePage": {
-    "challengeEyebrow": "التحدّي",
-    "approachEyebrow": "المنهج",
-    "outcomeEyebrow": "الأثر",
-    "projectMetaEyebrow": "تفاصيل المشروع",
-    "metaYear": "السنة",
-    "metaDuration": "المدة",
-    "metaTeam": "الفريق",
-    "metaLocation": "الموقع",
-    "metaIndustry": "القطاع",
-    "stackEyebrow": "المنصّة التقنية",
-    "quoteEyebrow": "بلسان العميل",
-    "relatedEyebrow": "أعمال ذات صلة",
-    "relatedTitle": "إطلاقات أخرى في الجوار."
-  },
-  "insightPage": {
-    "tocTitle": "في هذا المقال",
-    "shareEyebrow": "مشاركة",
-    "shareCopy": "نسخ الرابط",
-    "shareCopied": "تمّ النسخ",
-    "shareTwitter": "مشاركة على X",
-    "shareLinkedin": "مشاركة على لِنكدإن",
-    "tagsEyebrow": "وسوم",
-    "authorEyebrow": "الكاتب",
-    "relatedEyebrow": "تابع القراءة",
-    "relatedTitle": "مزيد من المجلة.",
-    "backToJournal": "عودة للمجلة",
-    "readingTimeSuffix": "د قراءة"
   },
   "gallery": {
     "metaTitle": "معرض الصور — ريجاليا فاوز تيك",
