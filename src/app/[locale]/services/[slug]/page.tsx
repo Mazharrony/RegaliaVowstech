@@ -181,7 +181,7 @@ export default async function ServiceDetailPage({
                 >
                   {isModelsCard ? (
                     <Link href="/models" className="group block h-full">
-                      <div className="flex h-full flex-col overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-ink)] bg-[var(--color-bg-alt)] transition-colors hover:bg-[var(--color-bg)]">
+                      <div className="grad-card flex h-full flex-col overflow-hidden rounded-[var(--radius-xl)]">
                         {d.image && (
                           <div className="relative aspect-[16/10] w-full overflow-hidden">
                             <Image
@@ -195,7 +195,7 @@ export default async function ServiceDetailPage({
                         )}
                         <div className="flex flex-1 flex-col p-7 md:p-8">
                           <div className="flex items-center justify-between gap-3">
-                            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                            <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-white/75">
                               {String(i + 1).padStart(2, "0")}
                             </p>
                             <span className="inline-flex h-6 items-center rounded-full bg-[var(--color-accent)] px-2.5 text-[0.66rem] font-semibold tracking-[-0.005em] text-[var(--color-ink)]">
@@ -205,11 +205,11 @@ export default async function ServiceDetailPage({
                           <h3 className="mt-4 font-serif text-xl tracking-tight md:text-2xl">
                             {d.name}
                           </h3>
-                          <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+                          <p className="mt-3 text-sm leading-relaxed text-white/75">
                             {d.description}
                           </p>
                           <div className="mt-auto flex items-center justify-between gap-3 pt-8">
-                            <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-muted)]">
+                            <span className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-white/75">
                               {modelsCta}
                             </span>
                             <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" />
@@ -218,7 +218,7 @@ export default async function ServiceDetailPage({
                       </div>
                     </Link>
                   ) : (
-                    <div className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-xl)] border surface-card transition-colors">
+                    <div className="grad-card group flex h-full flex-col overflow-hidden rounded-[var(--radius-xl)]">
                       {d.image && (
                         <div className="relative aspect-[16/10] w-full overflow-hidden">
                           <Image
@@ -231,13 +231,13 @@ export default async function ServiceDetailPage({
                         </div>
                       )}
                       <div className="flex flex-1 flex-col p-7 md:p-8">
-                        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
+                        <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-white/75">
                           {String(i + 1).padStart(2, "0")}
                         </p>
                         <h3 className="mt-4 font-serif text-xl tracking-tight md:text-2xl">
                           {d.name}
                         </h3>
-                        <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+                        <p className="mt-3 text-sm leading-relaxed text-white/75">
                           {d.description}
                         </p>
                       </div>
@@ -414,7 +414,7 @@ function PackageCard({
       className={[
         "group flex h-full flex-col rounded-[var(--radius-xl)] border p-7 transition-colors md:p-8",
         isHighlight
-          ? "border-[var(--color-ink)] bg-[var(--color-ink)] text-[var(--color-bg)]"
+          ? "grad-card grad-card-flip"
           : "surface-card text-[var(--color-ink)]",
       ].join(" ")}
     >
@@ -422,7 +422,7 @@ function PackageCard({
         <p
           className={[
             "font-mono text-[0.7rem] uppercase tracking-[0.22em]",
-            isHighlight ? "text-white/70" : "text-[var(--color-muted)]",
+            isHighlight ? "text-white" : "text-[var(--color-muted)]",
           ].join(" ")}
         >
           {pkg.tier}
@@ -441,7 +441,7 @@ function PackageCard({
       <p
         className={[
           "mt-3 text-sm md:text-base",
-          isHighlight ? "text-white/80" : "text-[var(--color-muted)]",
+          isHighlight ? "text-white" : "text-[var(--color-muted)]",
         ].join(" ")}
       >
         {pkg.summary}
@@ -459,7 +459,7 @@ function PackageCard({
               <span
                 className={[
                   "font-mono text-[0.65rem] uppercase tracking-[0.22em]",
-                  isHighlight ? "text-white/70" : "text-[var(--color-muted)]",
+                  isHighlight ? "text-white" : "text-[var(--color-muted)]",
                 ].join(" ")}
               >
                 {t("from")}
@@ -478,7 +478,7 @@ function PackageCard({
                 <span
                   className={[
                     "mb-1.5 font-mono text-[0.7rem] uppercase tracking-[0.18em]",
-                    isHighlight ? "text-white/70" : "text-[var(--color-muted)]",
+                    isHighlight ? "text-white" : "text-[var(--color-muted)]",
                   ].join(" ")}
                 >
                   {cadenceLabel}
@@ -489,7 +489,7 @@ function PackageCard({
               <p
                 className={[
                   "mt-2 text-xs",
-                  isHighlight ? "text-white/70" : "text-[var(--color-muted)]",
+                  isHighlight ? "text-white" : "text-[var(--color-muted)]",
                 ].join(" ")}
               >
                 {pkg.note}
@@ -504,7 +504,7 @@ function PackageCard({
             <span
               className={[
                 "font-mono text-[0.7rem] uppercase tracking-[0.18em]",
-                isHighlight ? "text-white/70" : "text-[var(--color-muted)]",
+                isHighlight ? "text-white" : "text-[var(--color-muted)]",
               ].join(" ")}
             >
               {t("scopedToBrief")}

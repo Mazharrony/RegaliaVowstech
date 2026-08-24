@@ -54,24 +54,24 @@
       color-mix(in srgb, var(--ramp-1) 62%, transparent) 52%,
       transparent 78%),
     radial-gradient(115% 92% at 64% 24%,
-      transparent 38%,
-      color-mix(in srgb, var(--ramp-6) 45%, transparent) 80%,
-      color-mix(in srgb, var(--ramp-7) 85%, transparent) 100%),
+      transparent 46%,
+      color-mix(in srgb, var(--ramp-5) 38%, transparent) 84%,
+      color-mix(in srgb, var(--ramp-6) 55%, transparent) 100%),
     linear-gradient(168deg,
-      var(--ramp-3) 0%,
-      var(--ramp-3) 16%,
-      var(--ramp-4) 42%,
-      var(--ramp-5) 66%,
-      var(--ramp-7) 100%);
+      var(--ramp-2) 0%,
+      var(--ramp-3) 22%,
+      var(--ramp-4) 52%,
+      var(--ramp-5) 82%,
+      color-mix(in srgb, var(--ramp-5) 78%, var(--ramp-6)) 100%);
   --grad-slab:
-    radial-gradient(72% 58% at 80% 6%,
-      color-mix(in srgb, var(--ramp-2) 50%, transparent) 0%,
-      color-mix(in srgb, var(--ramp-4) 32%, transparent) 46%,
-      transparent 76%),
+    radial-gradient(78% 62% at 80% 4%,
+      color-mix(in srgb, var(--ramp-1) 52%, transparent) 0%,
+      color-mix(in srgb, var(--ramp-3) 38%, transparent) 46%,
+      transparent 78%),
     linear-gradient(166deg,
-      var(--ramp-5) 0%,
-      var(--ramp-6) 44%,
-      var(--ramp-7) 100%);
+      var(--ramp-4) 0%,
+      var(--ramp-5) 52%,
+      color-mix(in srgb, var(--ramp-5) 70%, var(--ramp-6)) 100%);
   --grad-edge:
     linear-gradient(90deg, transparent, var(--ramp-2), transparent);
   --scrim-photo:
@@ -417,6 +417,48 @@
     transition: clip-path 1.1s var(--ease-brand-entrance);
   }
 
+  /* Gradient card surface. Same heat-ramp fill as .cap-card, but without
+     the animated bloom overlay — these cards carry photography, and a
+     drifting glow on top of an image reads as a rendering artefact. Body
+     copy sits at --ramp-4 or darker, the 4.5:1 floor for white text. */
+  .grad-card {
+    background-image: linear-gradient(160deg, var(--ramp-2) 0%, var(--ramp-4) 45%, var(--ramp-5) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
+    transition:
+      box-shadow 0.5s var(--ease-brand),
+      border-color 0.5s var(--ease-brand),
+      transform 0.5s var(--ease-brand);
+  }
+  /* For gradient cards with NO image: the photo normally covers the bright
+     --ramp-2 end, but on a bare card that end sits under the small tier
+     label (11px, 3.41:1 — below AA). Flipping the gradient puts the bright
+     corner bottom-right, away from the small type, without losing it. */
+  .grad-card-flip {
+    background-image: linear-gradient(325deg, var(--ramp-2) 0%, var(--ramp-4) 52%, var(--ramp-5) 100%);
+  }
+
+  .grad-card:hover {
+    border-color: rgba(255, 255, 255, 0.38);
+    box-shadow: var(--shadow-lg), var(--shadow-accent);
+    transform: translateY(-4px);
+  }
+  .grad-card :focus-visible {
+    outline-color: #ffffff;
+  }
+  /* A gradient button on a gradient card reads as mud — invert it so the
+     primary action still separates from the surface it sits on. */
+  .grad-card .btn-solid {
+    background-image: none;
+    background-color: #ffffff;
+    color: var(--ramp-4);
+  }
+  .grad-card .btn-solid:hover {
+    background-image: none;
+    background-color: color-mix(in srgb, var(--ramp-0) 22%, #ffffff);
+  }
+
   /* Photography — the library spans many shoots with their own grades.
      A shared warm grade plus a scrim makes them read as one system
      without re-exporting ninety source files, and guarantees contrast
@@ -474,7 +516,7 @@
   overflow: hidden;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  background-image: linear-gradient(160deg, var(--ramp-2) 0%, var(--ramp-4) 40%, var(--ramp-6) 100%);
+  background-image: linear-gradient(160deg, var(--ramp-2) 0%, var(--ramp-4) 45%, var(--ramp-5) 100%);
   transition: border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
 }
 .cap-card:hover {
@@ -487,7 +529,7 @@
   inset: 0;
   background:
     radial-gradient(85% 45% at 78% 6%, color-mix(in srgb, var(--ramp-0) 42%, transparent), transparent 62%),
-    radial-gradient(140% 110% at 15% 96%, color-mix(in srgb, var(--ramp-6) 55%, transparent), transparent 68%);
+    radial-gradient(140% 110% at 15% 96%, color-mix(in srgb, var(--ramp-5) 45%, transparent), transparent 68%);
 }
 .cap-card-gradient::before {
   content: "";
