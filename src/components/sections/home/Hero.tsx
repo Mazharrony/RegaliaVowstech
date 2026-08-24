@@ -176,7 +176,7 @@ export function Hero() {
               <MagneticButton as="div" strength={8} className="w-full sm:w-auto">
                 <Link
                   href="/contact"
-                  className="btn btn-lg w-full bg-white text-[var(--ramp-4)] shadow-[var(--shadow-lg)] transition-colors hover:bg-[color-mix(in_srgb,var(--ramp-0)_22%,#ffffff)] sm:w-auto"
+                  className="btn btn-lg w-full bg-white text-[var(--ramp-7)] shadow-[var(--shadow-lg)] transition-colors hover:bg-[color-mix(in_srgb,var(--ramp-0)_22%,#ffffff)] sm:w-auto"
                 >
                   {tCommon("startProject")}
                   <ArrowUpRight className="h-4 w-4" />

@@ -48,20 +48,29 @@
   /* ── Gradients ─────────────────────────────────────────────────────
      Declared once so no gradient is ever hand-written in a component. */
   --grad-hero:
-    radial-gradient(78% 58% at 70% 16%,
-      color-mix(in srgb, var(--ramp-0) 92%, #ffffff) 0%,
-      color-mix(in srgb, var(--ramp-1) 70%, transparent) 34%,
-      transparent 72%),
-    linear-gradient(172deg,
-      var(--ramp-2) 0%,
-      var(--ramp-3) 30%,
-      var(--ramp-4) 52%,
-      var(--ramp-5) 72%,
+    radial-gradient(44% 32% at 69% 15%,
+      color-mix(in srgb, var(--ramp-0) 55%, #ffffff) 0%,
+      var(--ramp-0) 24%,
+      color-mix(in srgb, var(--ramp-1) 62%, transparent) 52%,
+      transparent 78%),
+    radial-gradient(115% 92% at 64% 24%,
+      transparent 38%,
+      color-mix(in srgb, var(--ramp-6) 45%, transparent) 80%,
+      color-mix(in srgb, var(--ramp-7) 85%, transparent) 100%),
+    linear-gradient(168deg,
+      var(--ramp-3) 0%,
+      var(--ramp-3) 16%,
+      var(--ramp-4) 42%,
+      var(--ramp-5) 66%,
       var(--ramp-7) 100%);
   --grad-slab:
-    linear-gradient(155deg,
-      var(--ramp-2) 0%,
-      var(--ramp-4) 45%,
+    radial-gradient(72% 58% at 80% 6%,
+      color-mix(in srgb, var(--ramp-2) 50%, transparent) 0%,
+      color-mix(in srgb, var(--ramp-4) 32%, transparent) 46%,
+      transparent 76%),
+    linear-gradient(166deg,
+      var(--ramp-5) 0%,
+      var(--ramp-6) 44%,
       var(--ramp-7) 100%);
   --grad-edge:
     linear-gradient(90deg, transparent, var(--ramp-2), transparent);
@@ -321,12 +330,12 @@
   .btn:active { transform: scale(0.97); }
   .btn:disabled { opacity: 0.45; cursor: not-allowed; }
   .btn-solid {
-    background-image: linear-gradient(140deg, var(--ramp-4), var(--ramp-6));
-    color: #ffffff;
+    background-image: linear-gradient(140deg, var(--ramp-0), var(--ramp-2));
+    color: var(--ramp-7);
     box-shadow: var(--shadow-accent);
   }
   .btn-solid:hover {
-    background-image: linear-gradient(140deg, var(--ramp-3), var(--ramp-5));
+    background-image: linear-gradient(140deg, var(--ramp-1), var(--ramp-3));
   }
   .btn-soft {
     background: var(--color-accent-tint);
