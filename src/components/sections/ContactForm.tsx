@@ -118,7 +118,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={pending}
-          className="btn-ios btn-ios-primary btn-ios-lg"
+          className="btn btn-solid btn-lg"
         >
           {pending ? t("sending") : t("send")}
         </button>

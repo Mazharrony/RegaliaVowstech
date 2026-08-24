@@ -113,7 +113,7 @@ export function GalleryTeaser() {
             </Reveal>
           </div>
           <Reveal delay={0.25}>
-            <Link href="/gallery" className="btn-ios btn-ios-secondary btn-ios-sm">
+            <Link href="/gallery" className="btn btn-soft btn-sm">
               {t("galleryTeaserCta")}
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>

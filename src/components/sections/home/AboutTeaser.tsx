@@ -11,7 +11,7 @@ export function AboutTeaser() {
   const tCommon = useTranslations("common");
 
   return (
-    <section className="slab-dark relative overflow-hidden">
+    <section className="slab relative overflow-hidden">
       {/* Subtle accent diagonals */}
       <div
         aria-hidden
@@ -32,7 +32,7 @@ export function AboutTeaser() {
               </p>
             </Reveal>
             <MaskReveal>
-              <h2 className="display-1 max-w-[18ch] text-balance text-[var(--color-bg)]">
+              <h2 className="display-2 max-w-[20ch] text-balance text-white">
                 {t("aboutTitle")}
               </h2>
             </MaskReveal>
@@ -44,7 +44,7 @@ export function AboutTeaser() {
             <Reveal delay={0.3}>
               <Link
                 href="/about"
-                className="btn-ios btn-ios-secondary mt-10"
+                className="btn btn-soft mt-10"
               >
                 {tCommon("learnMore")}
                 <ArrowUpRight className="h-3.5 w-3.5" />

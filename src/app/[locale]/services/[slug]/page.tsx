@@ -142,13 +142,13 @@ export default async function ServiceDetailPage({
           </Reveal>
           <Reveal delay={0.26}>
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Link href="/contact" className="btn-ios btn-ios-primary">
+              <Link href="/contact" className="btn btn-solid">
                 {tCommon("startProject")}
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
               <a
                 href="#packages"
-                className="btn-ios border border-white/30 text-white transition-colors hover:bg-white/10"
+                className="btn border border-white/30 text-white transition-colors hover:bg-white/10"
               >
                 {tPage("packages")}
               </a>
@@ -349,7 +349,7 @@ export default async function ServiceDetailPage({
                 <h2 className="display-3 text-balance">{tGallery("teaserTitle")}</h2>
                 <Link
                   href="/gallery"
-                  className="btn-ios btn-ios-ink shrink-0"
+                  className="btn btn-ink shrink-0"
                 >
                   <span>{tGallery("teaserCta")}</span>
                   <ArrowUpRight className="h-4 w-4" />
@@ -360,7 +360,7 @@ export default async function ServiceDetailPage({
               <CorporateGallery photos={getPhotosByCategory("corporate")} limit={9} />
             </div>
             <Reveal delay={0.1} className="mt-8 text-center">
-              <Link href="/gallery" className="btn-ios btn-ios-ink">
+              <Link href="/gallery" className="btn btn-ink">
                 <span>{tGallery("teaserCta")}</span>
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
@@ -518,8 +518,8 @@ function PackageCard({
       <Link
         href="/contact"
         className={[
-          "btn-ios mt-8 w-full justify-between",
-          isHighlight ? "btn-ios-primary" : "btn-ios-ink",
+          "btn mt-8 w-full justify-between",
+          isHighlight ? "btn-solid" : "btn-ink",
         ].join(" ")}
       >
         {hasPrice ? t("startWith", { tier: pkg.tier }) : t("requestQuote")}

@@ -190,7 +190,7 @@ function CapabilitiesMenu({
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.28, ease: easings.apple }}
             style={{ transformOrigin: "top left" }}
-            className="glass-strong absolute start-0 mt-3 w-[720px] max-w-[calc(100vw-3rem)] overflow-hidden rounded-[var(--radius-xl)] p-3"
+            className="veil-strong absolute start-0 mt-3 w-[720px] max-w-[calc(100vw-3rem)] overflow-hidden rounded-[var(--radius-xl)] p-3"
           >
             <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
               {items.map((item) => (
@@ -199,11 +199,7 @@ function CapabilitiesMenu({
                   href={item.href}
                   role="menuitem"
                   onClick={() => setOpen(false)}
-                  className="group/cap relative flex flex-col overflow-hidden rounded-[var(--radius-md)] p-4 text-white transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
-                  style={{
-                    background:
-                      "linear-gradient(150deg, #ff7a1f 0%, #f5540c 55%, #e13d05 100%)",
-                  }}
+                  className="cap-card group/cap relative flex flex-col overflow-hidden rounded-[var(--radius-md)] p-4 text-white transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
                 >
                   <span className="flex items-center justify-between">
                     <span className="font-mono text-[0.62rem] tabular-nums text-white/75">
@@ -327,7 +323,7 @@ function MoreMenu({
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.28, ease: easings.apple }}
             style={{ transformOrigin: "top right" }}
-            className="glass-strong absolute end-0 mt-3 w-[320px] overflow-hidden rounded-[var(--radius-xl)] p-2"
+            className="veil-strong absolute end-0 mt-3 w-[320px] overflow-hidden rounded-[var(--radius-xl)] p-2"
           >
             <p className="px-3 pb-2 pt-1 text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
               {eyebrow}
@@ -463,7 +459,7 @@ export function Header() {
             "container-wide flex items-center justify-between rounded-[var(--radius-pill)] transition-all duration-500",
             "mx-auto h-14 px-4 md:h-[60px] md:px-5",
             headerSolid
-              ? "glass"
+              ? "veil"
               : "border border-transparent bg-transparent"
           )}
           style={{ maxWidth: "min(1200px, calc(100% - 1.5rem))" }}
@@ -508,7 +504,7 @@ export function Header() {
             </div>
             <Link
               href="/contact"
-              className="btn-ios btn-ios-primary btn-ios-sm hidden md:inline-flex"
+              className="btn btn-solid btn-sm hidden md:inline-flex"
             >
               <span>{tCommon("startProject")}</span>
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -554,7 +550,7 @@ export function Header() {
             animate={reduce ? { opacity: 1 } : { clipPath: "inset(0 0 0% 0)" }}
             exit={reduce ? { opacity: 0 } : { clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.55, ease: easings.appleEntrance }}
-            className="glass-strong fixed inset-0 z-40 flex flex-col bg-[var(--color-bg)] pt-16 md:hidden"
+            className="veil-strong fixed inset-0 z-40 flex flex-col bg-[var(--color-bg)] pt-16 md:hidden"
           >
             <div className="container-x flex flex-1 flex-col overflow-y-auto pb-10 pt-6">
               <nav aria-label="Primary mobile" className="flex flex-col">

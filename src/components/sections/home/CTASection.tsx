@@ -24,7 +24,7 @@ export function CTASection() {
   };
 
   return (
-    <section className="slab-dark relative overflow-hidden">
+    <section className="slab relative overflow-hidden">
       <div
         aria-hidden
         className="pointer-events-none absolute -left-32 top-1/2 hidden h-[520px] w-[520px] -translate-y-1/2 rounded-full md:block"
@@ -59,7 +59,7 @@ export function CTASection() {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/contact"
-                className="btn-ios btn-ios-primary btn-ios-lg"
+                className="btn btn-solid btn-lg"
               >
                 {tCommon("startProject")}
                 <ArrowUpRight className="h-4 w-4" />
@@ -67,7 +67,7 @@ export function CTASection() {
               <button
                 type="button"
                 onClick={copyEmail}
-                className="btn-ios btn-ios-ghost btn-ios-lg"
+                className="btn btn-outline btn-lg"
               >
                 <span className="truncate">{company.email}</span>
                 {copied ? (

@@ -15,7 +15,7 @@ export function Metrics() {
   ];
 
   return (
-    <section className="slab-dark relative overflow-hidden">
+    <section className="slab relative overflow-hidden">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
