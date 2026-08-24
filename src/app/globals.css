@@ -112,6 +112,14 @@
   --ease-brand-entrance: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Playfair carries no Arabic coverage. On ar pages put the Arabic face
+   first so glyph selection never depends on whichever local fallback
+   next/font happens to synthesise — some cover Arabic, some do not. */
+[lang="ar"] {
+  --font-display: var(--font-arabic), "Segoe UI", Tahoma, sans-serif;
+  --font-serif: var(--font-arabic), "Segoe UI", Tahoma, sans-serif;
+}
+
 /* Light mode only — dark mode disabled site-wide. */
 
 @layer base {
@@ -146,6 +154,14 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
     border-radius: 6px;
+  }
+
+  /* An orange ring is invisible on the orange gradient surfaces, so the
+     focus indicator inverts on them. */
+  .slab :focus-visible,
+  .hero-takeover :focus-visible,
+  .cap-card:focus-visible {
+    outline-color: #ffffff;
   }
 }
 
@@ -333,7 +349,11 @@
 
   .focus-ring:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 35%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 45%, transparent);
+  }
+  .slab .focus-ring:focus-visible,
+  .hero-takeover .focus-ring:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.85);
   }
 
   .slab {
