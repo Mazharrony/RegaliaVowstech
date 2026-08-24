@@ -87,7 +87,7 @@ export default async function ServiceDetailPage({
         ])}
       />
       {/* Hero — full-bleed image behind the text */}
-      <section className="relative isolate flex min-h-[72svh] flex-col justify-end overflow-hidden bg-[#0e0e0d] text-white md:min-h-[80svh]">
+      <section className="photo photo-plain relative isolate flex min-h-[72svh] flex-col justify-end overflow-hidden bg-[var(--ramp-7)] text-white md:min-h-[80svh]">
         <Image
           src={service.image}
           alt=""
@@ -102,7 +102,7 @@ export default async function ServiceDetailPage({
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to top, rgba(10,8,6,0.92) 0%, rgba(10,8,6,0.55) 52%, rgba(10,8,6,0.65) 100%)",
+              "linear-gradient(to top, color-mix(in srgb, var(--ramp-7) 92%, transparent) 0%, color-mix(in srgb, var(--ramp-7) 55%, transparent) 52%, color-mix(in srgb, var(--ramp-7) 65%, transparent) 100%)",
           }}
         />
         <div
@@ -110,7 +110,7 @@ export default async function ServiceDetailPage({
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(90% 65% at 12% 100%, rgba(255,149,0,0.2), transparent 60%)",
+              "radial-gradient(90% 65% at 12% 100%, color-mix(in srgb, var(--ramp-2) 24%, transparent), transparent 60%)",
           }}
         />
 

@@ -171,7 +171,7 @@ export function GalleryTeaser() {
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                className="bubble-card cursor-pointer rounded-[2rem]"
+                className="bubble-card photo photo-plain cursor-pointer rounded-[2rem]"
                 style={
                   {
                     top: b.top,
