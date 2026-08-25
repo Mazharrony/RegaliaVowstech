@@ -11,19 +11,19 @@ import { getPhotosByCategory, type Photo } from "@/content/gallery";
 
 /** Scatter layout for the floating bubbles (desktop canvas). */
 const BUBBLES = [
-  { top: "2%", start: "0%", size: 190, circle: true, rot: -4, dur: 6.5, delay: 0 },
-  { top: "0%", start: "17%", size: 130, circle: false, rot: 6, dur: 7.5, delay: -2 },
-  { top: "8%", start: "31%", size: 170, circle: true, rot: 0, dur: 8, delay: -1 },
-  { top: "0%", start: "48%", size: 210, circle: false, rot: -5, dur: 7.2, delay: -3.6 },
-  { top: "10%", start: "68%", size: 160, circle: true, rot: 3, dur: 6.8, delay: -1.4 },
-  { top: "2%", start: "85%", size: 145, circle: false, rot: 7, dur: 6, delay: -3 },
-  { top: "44%", start: "5%", size: 150, circle: false, rot: -6, dur: 7, delay: -1.5 },
-  { top: "52%", start: "20%", size: 200, circle: true, rot: 0, dur: 6.8, delay: -4 },
-  { top: "50%", start: "41%", size: 130, circle: true, rot: -2, dur: 5.6, delay: -3.4 },
-  { top: "42%", start: "54%", size: 185, circle: false, rot: 4, dur: 7.6, delay: -2.5 },
-  { top: "54%", start: "73%", size: 170, circle: true, rot: 0, dur: 6.4, delay: -0.8 },
-  { top: "44%", start: "89%", size: 115, circle: true, rot: 5, dur: 5.8, delay: -2.2 },
-  { top: "28%", start: "13%", size: 95, circle: true, rot: -3, dur: 5.2, delay: -1.8 },
+  { top: "2%", start: "0%", size: 190, rot: -4, dur: 6.5, delay: 0 },
+  { top: "0%", start: "17%", size: 130, rot: 6, dur: 7.5, delay: -2 },
+  { top: "8%", start: "31%", size: 170, rot: 0, dur: 8, delay: -1 },
+  { top: "0%", start: "48%", size: 210, rot: -5, dur: 7.2, delay: -3.6 },
+  { top: "10%", start: "68%", size: 160, rot: 3, dur: 6.8, delay: -1.4 },
+  { top: "2%", start: "85%", size: 145, rot: 7, dur: 6, delay: -3 },
+  { top: "44%", start: "5%", size: 150, rot: -6, dur: 7, delay: -1.5 },
+  { top: "52%", start: "20%", size: 200, rot: 0, dur: 6.8, delay: -4 },
+  { top: "50%", start: "41%", size: 130, rot: -2, dur: 5.6, delay: -3.4 },
+  { top: "42%", start: "54%", size: 185, rot: 4, dur: 7.6, delay: -2.5 },
+  { top: "54%", start: "73%", size: 170, rot: 0, dur: 6.4, delay: -0.8 },
+  { top: "44%", start: "89%", size: 115, rot: 5, dur: 5.8, delay: -2.2 },
+  { top: "28%", start: "13%", size: 95, rot: -3, dur: 5.2, delay: -1.8 },
 ];
 
 /** Decorative accent dots drifting in the background. */
@@ -113,7 +113,7 @@ export function GalleryTeaser() {
             </Reveal>
           </div>
           <Reveal delay={0.25}>
-            <Link href="/gallery" className="btn-ios btn-ios-secondary btn-ios-sm">
+            <Link href="/gallery" className="btn btn-soft btn-sm">
               {t("galleryTeaserCta")}
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
@@ -171,7 +171,7 @@ export function GalleryTeaser() {
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                className={`bubble-card cursor-pointer ${b.circle ? "rounded-full" : "rounded-[2rem]"}`}
+                className="bubble-card photo photo-plain cursor-pointer rounded-[2rem]"
                 style={
                   {
                     top: b.top,
@@ -199,14 +199,12 @@ export function GalleryTeaser() {
 
         {/* Mobile: snap-scroll bubble row */}
         <div className="-mx-6 flex gap-4 overflow-x-auto px-6 pb-4 md:hidden">
-          {photos.map((photo, i) => (
+          {photos.map((photo) => (
             <button
               key={photo.id}
               type="button"
               onClick={() => setActive(photo)}
-              className={`relative h-36 w-36 shrink-0 overflow-hidden border-[3px] border-[var(--color-surface)] shadow-lg ${
-                i % 2 === 0 ? "rounded-full" : "rounded-[1.6rem]"
-              }`}
+              className="relative h-36 w-36 shrink-0 overflow-hidden rounded-[1.6rem] border-[3px] border-[var(--color-surface)] shadow-lg"
               aria-label={photo.alt}
             >
               <Image

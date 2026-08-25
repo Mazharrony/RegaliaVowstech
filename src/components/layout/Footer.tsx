@@ -15,7 +15,7 @@ export async function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative slab-dark border-t hairline-dark">
+    <footer className="relative slab border-t hairline-dark">
       {/* Massive contact card */}
       <div className="container-wide pb-16 pt-16 md:pb-24 md:pt-24 lg:pb-28 lg:pt-28">
         <div className="grid gap-12 md:gap-16 lg:grid-cols-12">

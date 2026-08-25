@@ -19,7 +19,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="btn-ios btn-ios-primary btn-ios-lg"
+          className="btn btn-solid btn-lg"
         >
           ← {t("back")}
         </Link>

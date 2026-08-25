@@ -73,7 +73,7 @@ export function Hero() {
   return (
     <section
       className="hero-takeover relative isolate flex min-h-[100svh] flex-col overflow-hidden pt-[88px] text-white md:pt-[120px]"
-      style={{ "--color-accent": "#ffdfae" } as React.CSSProperties}
+      style={{ "--color-accent": "var(--ramp-0)" } as React.CSSProperties}
     >
       {/* Breathing centre bloom (the poster's glow) */}
       <div aria-hidden className="hero-takeover-bloom" />
@@ -176,7 +176,7 @@ export function Hero() {
               <MagneticButton as="div" strength={8} className="w-full sm:w-auto">
                 <Link
                   href="/contact"
-                  className="btn-ios btn-ios-lg w-full bg-white text-[#e1440a] shadow-[0_16px_40px_-12px_rgba(60,15,0,0.5)] transition-colors hover:bg-[#fff1de] sm:w-auto"
+                  className="btn btn-lg w-full bg-white text-[var(--ramp-7)] shadow-[var(--shadow-lg)] transition-colors hover:bg-[color-mix(in_srgb,var(--ramp-0)_22%,#ffffff)] sm:w-auto"
                 >
                   {tCommon("startProject")}
                   <ArrowUpRight className="h-4 w-4" />
@@ -184,7 +184,7 @@ export function Hero() {
               </MagneticButton>
               <Link
                 href="/gallery"
-                className="btn-ios btn-ios-lg w-full border border-white/40 text-white transition-colors hover:bg-white/10 sm:w-auto"
+                className="btn btn-lg w-full border border-white/40 text-white transition-colors hover:bg-white/10 sm:w-auto"
               >
                 {t("galleryTeaserCta")}
                 <ArrowUpRight className="h-3.5 w-3.5" />

@@ -110,7 +110,7 @@ export function ServicesGrid() {
             </p>
             <Link
               href="/services"
-              className="btn-ios btn-ios-secondary btn-ios-sm mt-6"
+              className="btn btn-soft btn-sm mt-6"
             >
               {tCommon("allServices")}
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -141,7 +141,7 @@ export function ServicesGrid() {
                 >
                   {card.title}
                 </h3>
-                <p className="relative mt-3 font-mono text-[0.66rem] uppercase tracking-[0.22em] text-[#ffe3b8]">
+                <p className="relative mt-3 font-mono text-[0.66rem] uppercase tracking-[0.22em] text-[color-mix(in_srgb,var(--ramp-0)_65%,#ffffff)]">
                   {card.tagline}
                 </p>
                 <p className="relative mt-4 text-sm leading-relaxed text-white/90">

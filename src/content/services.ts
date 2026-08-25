@@ -50,7 +50,7 @@ export const services: Service[] = [
     summary:
       "Strategy, naming, visual systems and brand guidelines that hold up across a logo, a packaging line and a 30-second film.",
     image:
-      "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1600&q=70",
+      "/media/Corporate/coreporate64.JPEG",
     deliverables: [
       { name: "Brand strategy & positioning", description: "Where you play and why you win, set before any design begins." },
       { name: "Naming & verbal identity", description: "Names, tone and messaging that sound unmistakably yours." },
@@ -94,7 +94,7 @@ export const services: Service[] = [
     summary:
       "SEO, paid media and social media management plus the websites, e-commerce and platforms behind them — built and run by one team for measurable UAE outcomes.",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=70",
+      "/media/Events/DSC08388.jpg",
     deliverables: [
       { name: "Channel strategy & media planning", description: "The right mix of channels and budget mapped to your goals." },
       { name: "SEO & content programmes", description: "Organic visibility that compounds month after month." },
@@ -397,7 +397,7 @@ export const services: Service[] = [
     summary:
       "In-house photography, videography, livestreaming and graphics for products, teams, events and brand films — with social-first reels, behind-the-scenes, testimonials and broadcast-ready outputs.",
     image:
-      "https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?auto=format&fit=crop&w=1600&q=70",
+      "/media/Events/KKK_3583.jpg",
     deliverables: [
       { name: "Professional product & catalogue photography", description: "Crisp product shots ready for store, web and print." },
       { name: "Exhibition booth & event photography", description: "Live coverage that captures the energy of your stand." },

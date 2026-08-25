@@ -22,7 +22,7 @@ const siteUrl =
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-display-sans",
   display: "swap",
   weight: ["500", "600", "700"],
 });
@@ -31,7 +31,7 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-monogram",
   display: "swap",
-  weight: ["500"],
+  weight: ["500", "600", "700"],
 });
 
 const inter = Inter({
@@ -56,7 +56,7 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 
 export const viewport: Viewport = {
   colorScheme: "light",
-  themeColor: "#ffffff",
+  themeColor: "#160401",
 };
 
 const defaultTitle = "Regalia Vows Tech — Production House Dubai, UAE";

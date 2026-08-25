@@ -52,7 +52,7 @@ export function LocaleSwitcher() {
               <motion.span
                 layoutId="locale-pill"
                 aria-hidden
-                className="absolute inset-0 -z-10 rounded-full bg-[var(--color-surface)] shadow-[0_1px_2px_rgba(0,0,0,0.08),0_4px_12px_-6px_rgba(0,0,0,0.18)]"
+                className="absolute inset-0 -z-10 rounded-full bg-[var(--color-surface)] shadow-[var(--shadow-sm)]"
                 transition={{ type: "spring", stiffness: 360, damping: 32 }}
               />
             )}

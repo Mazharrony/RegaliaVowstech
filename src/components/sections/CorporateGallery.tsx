@@ -167,7 +167,7 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
             className="group mb-3 block w-full cursor-zoom-in overflow-hidden rounded-[var(--radius-lg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
             aria-label={photo.alt}
           >
-            <div className="relative w-full overflow-hidden">
+            <div className="photo photo-plain relative w-full overflow-hidden">
               <Image
                 src={photo.src}
                 alt={photo.alt}
