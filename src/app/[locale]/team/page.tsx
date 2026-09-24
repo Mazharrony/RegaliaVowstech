@@ -2,6 +2,8 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/motion/Reveal";
 import { company } from "@/content/company";
 import { JsonLd, founderPersonLd } from "@/components/seo/JsonLd";
+import { toneClass, toneCycle } from "@/lib/tones";
+import { cn } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -62,18 +64,19 @@ export default async function TeamPage({
       </section>
 
       {/* ── Leadership ───────────────────────────────────────────────── */}
-      <section className="border-y hairline bg-[var(--color-bg-alt)]">
+      {/* Violet is the founder's hue here and on the about page */}
+      <section className="tone-violet border-y hairline bg-[var(--color-bg-alt)]">
         <div className="container-x grid gap-14 py-24 md:py-32 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Reveal>
               <p className="eyebrow mb-5 inline-flex items-center gap-2">
-                <span className="inline-block h-px w-8 bg-[var(--color-accent)]" />
+                <span aria-hidden className="spectrum-rule" />
                 {t("leadershipEyebrow")}
               </p>
             </Reveal>
             <Reveal delay={0.08}>
               <div className="flex items-center gap-5">
-                <div className="grid h-20 w-20 shrink-0 place-items-center rounded-full bg-[var(--color-ink)] font-mono text-xl font-semibold text-[var(--color-bg)]">
+                <div className="grid h-20 w-20 shrink-0 place-items-center rounded-full bg-tone-base font-mono text-xl font-semibold text-tone-ink">
                   {initials}
                 </div>
                 <div>
@@ -88,9 +91,9 @@ export default async function TeamPage({
           <div className="lg:col-span-7 lg:col-start-6">
             <Reveal delay={0.12}>
               <blockquote className="text-balance font-serif text-2xl leading-snug md:text-3xl">
-                <span aria-hidden className="me-1 text-[var(--color-muted)]">&ldquo;</span>
+                <span aria-hidden className="tone-text me-1">&ldquo;</span>
                 {tFounder("manifesto")}
-                <span aria-hidden className="ms-1 text-[var(--color-muted)]">&rdquo;</span>
+                <span aria-hidden className="tone-text ms-1">&rdquo;</span>
               </blockquote>
             </Reveal>
           </div>
@@ -104,7 +107,7 @@ export default async function TeamPage({
             <div className="lg:col-span-6">
               <Reveal>
                 <p className="eyebrow mb-5 inline-flex items-center gap-2">
-                  <span className="inline-block h-px w-8 bg-[var(--color-accent)]" />
+                  <span aria-hidden className="spectrum-rule" />
                   {t("gridEyebrow")}
                 </p>
               </Reveal>
@@ -117,35 +120,43 @@ export default async function TeamPage({
             </Reveal>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Founder 2x1 + seven seats fill three rows of three at lg */}
+          <div className="grid gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
             {/* Founder — the first seat */}
-            <Reveal>
-              <div className="flex h-full flex-col items-start gap-6 rounded-md border hairline bg-[var(--color-bg-alt)] p-7">
-                <div className="grid h-16 w-16 place-items-center rounded-full bg-[var(--color-ink)] font-mono text-lg font-semibold text-[var(--color-bg)]">
+            <Reveal className="sm:col-span-2">
+              <div className="tone-card tone-violet flex h-full min-h-72 flex-col items-start justify-between gap-10 rounded-[var(--radius-xl)] p-7 md:p-10">
+                <div className="grid h-20 w-20 place-items-center rounded-full bg-tone-ink font-mono text-xl font-semibold text-tone-deep">
                   {initials}
                 </div>
-                <div className="mt-auto">
-                  <p className="font-serif text-xl tracking-tight">{tFounder("name")}</p>
-                  <p className="mt-1.5 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-[var(--color-muted)]">
+                <div>
+                  <h3 className="display-3">{tFounder("name")}</h3>
+                  <p className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-tone-ink-soft">
                     {tFounder("role")}
                   </p>
                 </div>
               </div>
             </Reveal>
 
-            {/* Placeholder seats */}
+            {/* Open seats: pastel, dashed edge. Lilac sits out so it can't echo the violet founder. */}
             {roles.map((role, i) => (
-              <Reveal key={role} delay={(i + 1) * 0.06}>
-                <div className="flex h-full flex-col items-start gap-6 rounded-md border border-dashed border-[var(--color-line)] p-7">
-                  <div className="grid h-16 w-16 place-items-center rounded-full border border-dashed border-[var(--color-line)] font-mono text-sm text-[var(--color-muted)]">
+              <Reveal
+                key={role}
+                delay={(i + 1) * 0.06}
+                className={cn(i === roles.length - 1 && roles.length % 2 === 1 && "sm:col-span-2 lg:col-span-1")}
+              >
+                <div
+                  className={cn(
+                    "tone-card flex h-full flex-col items-start gap-10 rounded-[var(--radius-xl)] border-2 border-dashed border-tone-ink/25 p-7 md:p-8",
+                    toneClass(toneCycle(i, { set: "pastel", exclude: ["lilac"] })),
+                  )}
+                >
+                  <div className="grid h-14 w-14 place-items-center rounded-full border border-dashed border-tone-ink/40 font-mono text-sm text-tone-ink-soft">
                     {String(i + 2).padStart(2, "0")}
                   </div>
                   <div className="mt-auto">
-                    <p className="font-serif text-xl tracking-tight text-[var(--color-muted)]">
+                    <h3 className="display-4 break-words">{role}</h3>
+                    <p className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-tone-ink-soft">
                       {t("placeholderName")}
-                    </p>
-                    <p className="mt-1.5 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-[var(--color-accent)]">
-                      {role}
                     </p>
                   </div>
                 </div>
@@ -161,7 +172,10 @@ export default async function TeamPage({
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <Reveal>
-                <p className="eyebrow mb-4">{t("connectEyebrow")}</p>
+                <p className="eyebrow mb-4 inline-flex items-center gap-2">
+                  <span aria-hidden className="spectrum-rule" />
+                  {t("connectEyebrow")}
+                </p>
                 <h2 className="display-3">{t("connectTitle")}</h2>
                 <p className="mt-6 max-w-md text-[var(--color-muted)] md:text-lg">
                   {t("connectBody")}

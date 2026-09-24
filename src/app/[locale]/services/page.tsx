@@ -1,8 +1,13 @@
+import Image from "next/image";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
-import { getServices } from "@/content/services";
+import { ScrubReveal } from "@/components/motion/ScrubReveal";
+import { TiltCard } from "@/components/motion/TiltCard";
+import { cn } from "@/lib/utils";
+import { serviceTone, toneClass, toneCycle } from "@/lib/tones";
+import { getServices, type Service } from "@/content/services";
 import { CTASection } from "@/components/sections/home/CTASection";
 
 export async function generateMetadata({
@@ -40,7 +45,20 @@ export default async function ServicesIndexPage({
   const services = getServices(locale);
   const industries = tIndex.raw("industries") as string[];
   const contentAds = services.find((s) => s.slug === "content-ads");
-  const primaryServices = services.filter((s) => s.slug !== "content-ads");
+  const toCard = (s: Service) => ({
+    key: s.slug as string,
+    href: `/services/${s.slug}`,
+    number: s.number,
+    title: s.title,
+    tagline: s.tagline,
+    image: s.image as string | undefined,
+  });
+  // Models sits at 05, between the primary services and content & ads.
+  const cards = [
+    ...services.filter((s) => s.slug !== "content-ads").map(toCard),
+    { key: "models", href: "/models", number: "05", title: tModels("title"), tagline: tModels("body"), image: undefined },
+    ...(contentAds ? [toCard(contentAds)] : []),
+  ];
 
   return (
     <>
@@ -60,69 +78,62 @@ export default async function ServicesIndexPage({
         </Reveal>
       </section>
 
-      <section className="border-t hairline">
-        <ul className="container-x">
-          {primaryServices.map((s) => (
-            <li key={s.slug}>
-              <Link
-                href={`/services/${s.slug}`}
-                className="group flex flex-col gap-3 border-b hairline py-8 transition-colors hover:text-[var(--color-accent)] md:grid md:grid-cols-12 md:items-baseline md:gap-6 md:py-14"
-              >
-                <div className="flex items-center justify-between gap-4 md:contents">
-                  <span className="font-mono text-xs text-[var(--color-muted)] md:col-span-1">
-                    {s.number}
-                  </span>
-                  <ArrowUpRight className="h-5 w-5 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 md:order-last md:col-span-1 md:justify-self-end" />
-                </div>
-                <span className="font-serif text-[clamp(1.6rem,5vw,1.8rem)] tracking-tight md:col-span-5 md:text-5xl md:leading-[0.95]">
-                  {s.title}
-                </span>
-                <span className="text-sm text-[var(--color-muted)] md:col-span-5 md:text-base">
-                  {s.tagline}
-                </span>
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Link
-              href="/models"
-              className="group flex flex-col gap-3 border-b hairline py-8 transition-colors hover:text-[var(--color-accent)] md:grid md:grid-cols-12 md:items-baseline md:gap-6 md:py-14"
-            >
-              <div className="flex items-center justify-between gap-4 md:contents">
-                <span className="font-mono text-xs text-[var(--color-muted)] md:col-span-1">
-                  05
-                </span>
-                <ArrowUpRight className="h-5 w-5 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 md:order-last md:col-span-1 md:justify-self-end" />
-              </div>
-              <span className="font-serif text-[clamp(1.6rem,5vw,1.8rem)] tracking-tight md:col-span-5 md:text-5xl md:leading-[0.95]">
-                {tModels("title")}
-              </span>
-              <span className="text-sm text-[var(--color-muted)] md:col-span-5 md:text-base">
-                {tModels("body")}
-              </span>
-            </Link>
-          </li>
-          {contentAds ? (
-            <li key={contentAds.slug}>
-              <Link
-                href={`/services/${contentAds.slug}`}
-                className="group flex flex-col gap-3 border-b hairline py-8 transition-colors hover:text-[var(--color-accent)] md:grid md:grid-cols-12 md:items-baseline md:gap-6 md:py-14"
-              >
-                <div className="flex items-center justify-between gap-4 md:contents">
-                  <span className="font-mono text-xs text-[var(--color-muted)] md:col-span-1">
-                    {contentAds.number}
-                  </span>
-                  <ArrowUpRight className="h-5 w-5 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 md:order-last md:col-span-1 md:justify-self-end" />
-                </div>
-                <span className="font-serif text-[clamp(1.6rem,5vw,1.8rem)] tracking-tight md:col-span-5 md:text-5xl md:leading-[0.95]">
-                  {contentAds.title}
-                </span>
-                <span className="text-sm text-[var(--color-muted)] md:col-span-5 md:text-base">
-                  {contentAds.tagline}
-                </span>
-              </Link>
-            </li>
-          ) : null}
+      <section className="container-x pb-20 md:pb-28">
+        <ul className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          {cards.map((c, i) => {
+            const feature = i === 0;
+            return (
+              <li key={c.href} className={feature ? "lg:col-span-2 lg:row-span-2" : undefined}>
+                <ScrubReveal className="h-full" variant={feature ? "scale" : "rise"}>
+                  <TiltCard className="h-full rounded-[var(--radius-xl)]" max={feature ? 3 : 6}>
+                    <Link
+                      href={c.href}
+                      className={cn(
+                        "tone-card group flex h-full flex-col rounded-[var(--radius-xl)]",
+                        feature ? "min-h-[26rem]" : "min-h-[17rem] md:min-h-[19rem]",
+                        toneClass(serviceTone(c.key)),
+                      )}
+                    >
+                      {feature && c.image && (
+                        <div className="relative min-h-56 flex-1 overflow-hidden">
+                          <Image
+                            src={c.image}
+                            alt=""
+                            fill
+                            preload
+                            sizes="(min-width: 1024px) 66vw, (min-width: 640px) 50vw, 100vw"
+                            className="object-cover transition-transform duration-700 ease-brand group-hover:scale-105"
+                          />
+                        </div>
+                      )}
+                      <div className={cn("flex flex-col p-7 md:p-8", !feature && "flex-1")}>
+                        <div className="flex items-start justify-between gap-4">
+                          <span className="font-mono text-xs tracking-[0.18em] text-tone-ink-soft">
+                            {c.number}
+                          </span>
+                          <ArrowUpRight
+                            aria-hidden
+                            className="h-6 w-6 shrink-0 transition-transform duration-300 ease-brand group-hover:-translate-y-1 group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1"
+                          />
+                        </div>
+                        <h2
+                          className={cn(
+                            "mt-auto text-balance pt-10 font-serif leading-[1.02] tracking-tight",
+                            feature ? "text-[length:var(--step-4)]" : "text-[length:var(--step-3)]",
+                          )}
+                        >
+                          {c.title}
+                        </h2>
+                        <p className="mt-3 max-w-xl text-sm text-tone-ink-soft md:text-base">
+                          {c.tagline}
+                        </p>
+                      </div>
+                    </Link>
+                  </TiltCard>
+                </ScrubReveal>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
@@ -132,7 +143,7 @@ export default async function ServicesIndexPage({
             <div className="lg:col-span-6">
               <Reveal>
                 <p className="eyebrow mb-5 inline-flex items-center gap-2">
-                  <span className="inline-block h-px w-8 bg-[var(--color-accent)]" />
+                  <span aria-hidden className="spectrum-rule" />
                   {tIndex("industriesEyebrow")}
                 </p>
               </Reveal>
@@ -149,15 +160,18 @@ export default async function ServicesIndexPage({
             </Reveal>
           </div>
 
-          <ul className="mt-12 flex flex-wrap gap-2 md:mt-16 md:gap-3">
-            {industries.map((label, i) => (
-              <Reveal key={label} delay={i * 0.04}>
-                <li className="rounded-full border hairline px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] transition-colors hover:border-[var(--color-ink)] hover:text-[var(--color-ink)] md:px-5 md:py-2.5">
+          <Reveal delay={0.1}>
+            <ul className="mt-12 flex flex-wrap gap-2 md:mt-16 md:gap-3">
+              {industries.map((label, i) => (
+                <li
+                  key={label}
+                  className={cn("tone-chip md:min-h-10 md:px-5 md:text-[0.9rem]", toneClass(toneCycle(i % 6)))}
+                >
                   {label}
                 </li>
-              </Reveal>
-            ))}
-          </ul>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </section>
 

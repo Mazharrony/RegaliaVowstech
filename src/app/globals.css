@@ -47,37 +47,35 @@
 
   /* ── Gradients ─────────────────────────────────────────────────────
      Declared once so no gradient is ever hand-written in a component. */
+  /* Hero and slabs are bright orange stages carrying ink text: the darkest
+     stop is the ramp-1/ramp-2 midpoint (#fa6f1b), where ink holds 6.5:1 and
+     ink/85 5.3:1. White text can't pass on an orange this bright.
+     Bloom x and angle are vars so [dir="rtl"] can mirror them (base layer). */
   --grad-hero:
-    radial-gradient(44% 32% at 69% 15%,
+    radial-gradient(44% 32% at var(--hero-bloom-x, 69%) 15%,
       color-mix(in srgb, var(--ramp-0) 55%, #ffffff) 0%,
       var(--ramp-0) 24%,
-      color-mix(in srgb, var(--ramp-1) 62%, transparent) 52%,
+      color-mix(in srgb, var(--ramp-0) 40%, transparent) 52%,
       transparent 78%),
-    radial-gradient(115% 92% at 64% 24%,
-      transparent 46%,
-      color-mix(in srgb, var(--ramp-5) 38%, transparent) 84%,
-      color-mix(in srgb, var(--ramp-6) 55%, transparent) 100%),
-    linear-gradient(168deg,
-      var(--ramp-2) 0%,
-      var(--ramp-3) 22%,
-      var(--ramp-4) 52%,
-      var(--ramp-5) 82%,
-      color-mix(in srgb, var(--ramp-5) 78%, var(--ramp-6)) 100%);
+    linear-gradient(var(--hero-angle, 168deg),
+      var(--ramp-1) 0%,
+      color-mix(in srgb, var(--ramp-1) 70%, var(--ramp-2)) 55%,
+      color-mix(in srgb, var(--ramp-1) 50%, var(--ramp-2)) 100%);
   --grad-slab:
-    radial-gradient(78% 62% at 80% 4%,
-      color-mix(in srgb, var(--ramp-1) 52%, transparent) 0%,
-      color-mix(in srgb, var(--ramp-3) 38%, transparent) 46%,
-      transparent 78%),
-    linear-gradient(166deg,
-      var(--ramp-4) 0%,
-      var(--ramp-5) 52%,
-      color-mix(in srgb, var(--ramp-5) 70%, var(--ramp-6)) 100%);
+    radial-gradient(78% 62% at var(--slab-bloom-x, 80%) 4%,
+      color-mix(in srgb, var(--ramp-0) 60%, transparent) 0%,
+      transparent 70%),
+    linear-gradient(var(--slab-angle, 166deg),
+      var(--ramp-1) 0%,
+      color-mix(in srgb, var(--ramp-1) 60%, var(--ramp-2)) 60%,
+      color-mix(in srgb, var(--ramp-1) 50%, var(--ramp-2)) 100%);
   --grad-edge:
     linear-gradient(90deg, transparent, var(--ramp-2), transparent);
   --scrim-photo:
     linear-gradient(0deg,
       color-mix(in srgb, var(--ramp-7) 78%, transparent) 0%,
       transparent 62%);
+
 
   --font-sans: var(--font-inter), var(--font-arabic), -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-monogram), var(--font-arabic), Georgia, "Times New Roman", serif;
@@ -168,9 +166,8 @@
   /* An orange ring is invisible on the orange gradient surfaces, so the
      focus indicator inverts on them. */
   .slab :focus-visible,
-  .hero-takeover :focus-visible,
-  .cap-card:focus-visible {
-    outline-color: #ffffff;
+  .hero-takeover :focus-visible {
+    outline-color: var(--color-ink);
   }
 }
 
@@ -337,11 +334,16 @@
   .btn-solid:hover {
     background-image: linear-gradient(140deg, var(--ramp-1), var(--ramp-3));
   }
+  /* Crimson label: ≥ 4.6:1 on the tint over white and over the 9% tone
+     washes; hover deepens to maroon as the tint darkens. */
   .btn-soft {
     background: var(--color-accent-tint);
-    color: var(--color-accent);
+    color: var(--ramp-4);
   }
-  .btn-soft:hover { background: color-mix(in srgb, var(--color-accent) 22%, transparent); }
+  .btn-soft:hover {
+    background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+    color: var(--ramp-5);
+  }
   .btn-outline {
     background: transparent;
     color: var(--color-ink);
@@ -362,16 +364,30 @@
   }
   .slab .focus-ring:focus-visible,
   .hero-takeover .focus-ring:focus-visible {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 0 3px var(--color-ink);
   }
 
   .slab {
     background-image: var(--grad-slab);
-    background-color: var(--ramp-7);
-    color: #ffffff;
+    background-color: var(--ramp-1);
+    color: var(--color-ink);
   }
   .slab .eyebrow {
-    color: color-mix(in srgb, var(--color-bg) 70%, transparent);
+    color: var(--color-ink);
+  }
+  /* An orange gradient button disappears on an orange stage — go ink */
+  :is(.slab, .hero-takeover) .btn-solid {
+    background-image: none;
+    background-color: var(--color-ink);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
+  }
+  :is(.slab, .hero-takeover) .btn-solid:hover {
+    background-image: none;
+    background-color: color-mix(in srgb, var(--color-ink) 82%, var(--ramp-3));
+  }
+  :is(.slab, .hero-takeover) .btn-outline {
+    border-color: color-mix(in srgb, var(--color-ink) 35%, transparent);
   }
 
   .text-outline {
@@ -417,48 +433,6 @@
     transition: clip-path 1.1s var(--ease-brand-entrance);
   }
 
-  /* Gradient card surface. Same heat-ramp fill as .cap-card, but without
-     the animated bloom overlay — these cards carry photography, and a
-     drifting glow on top of an image reads as a rendering artefact. Body
-     copy sits at --ramp-4 or darker, the 4.5:1 floor for white text. */
-  .grad-card {
-    background-image: linear-gradient(160deg, var(--ramp-2) 0%, var(--ramp-4) 45%, var(--ramp-5) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    color: #ffffff;
-    box-shadow: var(--shadow-md);
-    transition:
-      box-shadow 0.5s var(--ease-brand),
-      border-color 0.5s var(--ease-brand),
-      transform 0.5s var(--ease-brand);
-  }
-  /* For gradient cards with NO image: the photo normally covers the bright
-     --ramp-2 end, but on a bare card that end sits under the small tier
-     label (11px, 3.41:1 — below AA). Flipping the gradient puts the bright
-     corner bottom-right, away from the small type, without losing it. */
-  .grad-card-flip {
-    background-image: linear-gradient(325deg, var(--ramp-2) 0%, var(--ramp-4) 52%, var(--ramp-5) 100%);
-  }
-
-  .grad-card:hover {
-    border-color: rgba(255, 255, 255, 0.38);
-    box-shadow: var(--shadow-lg), var(--shadow-accent);
-    transform: translateY(-4px);
-  }
-  .grad-card :focus-visible {
-    outline-color: #ffffff;
-  }
-  /* A gradient button on a gradient card reads as mud — invert it so the
-     primary action still separates from the surface it sits on. */
-  .grad-card .btn-solid {
-    background-image: none;
-    background-color: #ffffff;
-    color: var(--ramp-4);
-  }
-  .grad-card .btn-solid:hover {
-    background-image: none;
-    background-color: color-mix(in srgb, var(--ramp-0) 22%, #ffffff);
-  }
-
   /* Photography — the library spans many shoots with their own grades.
      A shared warm grade plus a scrim makes them read as one system
      without re-exporting ninety source files, and guarantees contrast
@@ -491,71 +465,268 @@
   }
 }
 
-@keyframes marquee-x {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+/* ── Tone utilities ───────────────────────────────────────────────────
+   `inline` makes these emit var(--tone-*) directly, so each element
+   resolves its own tone: text-tone-ink, text-tone-ink-soft, bg-tone-base … */
+@theme inline {
+  --color-tone-bloom: var(--tone-bloom);
+  --color-tone-base: var(--tone-base);
+  --color-tone-deep: var(--tone-deep);
+  --color-tone-ink: var(--tone-ink);
+  --color-tone-ink-soft: var(--tone-ink-soft);
+  --color-tone-strong: var(--tone-strong);
 }
-@keyframes marquee-x-reverse {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
+
+@layer base {
+  :root {
+    /* Fixed header pill: pt-2 + h-14 (md: pt-3 + 60px). Mirrors <main>'s top padding. */
+    --header-clear: 64px;
+    --spectrum-dir: 90deg;
+    /* Jewel bases only — every stop ≥ 5.6:1 on white, so safe for clipped text. */
+    --grad-spectrum-ink: linear-gradient(var(--spectrum-dir), #c22e0a, #b81a60 28%, #6d34e0 55%, #1c56cc 80%, #0a6e62);
+    /* Decoration only (rules, progress bars): includes pastels. */
+    --grad-spectrum: linear-gradient(var(--spectrum-dir), #ff8a2a, #ff4d9d 22%, #8b5cf6 44%, #3b82f6 64%, #14b8a6 84%, #b8e62e);
+  }
+  @media (min-width: 768px) {
+    :root { --header-clear: 72px; }
+  }
+  /* dir sits on <html>, the same element the theme gradients resolve on */
+  [dir="rtl"] {
+    --spectrum-dir: 270deg;
+    --hero-bloom-x: 31%;
+    --hero-angle: 192deg;
+    --slab-bloom-x: 20%;
+    --slab-angle: 194deg;
+  }
 }
+
+/* ── Spectrum tones ───────────────────────────────────────────────────
+   Cards step outside the heat ramp: each carries one tone. A .tone-*
+   class sets primitives only; every consumer derives its colours on its
+   own element, so a nested tone always wins. :root defaults to sunset so
+   a bare .tone-card renders as the brand orange. Hexes mirror TONES in
+   src/lib/tones.ts — edit both.
+
+   Contrast (WCAG, text on --tone-base): jewels take white text at ≥ 5.95:1
+   and white/90 at ≥ 5.05:1; sunset and the pastels take ink at ≥ 5.46:1. The jewel bloom
+   corner drops to ~3:1 — icons only there, never small text. */
+@layer components {
+  .tone-magenta, .tone-violet, .tone-cobalt, .tone-teal, .tone-ruby {
+    --tone-ink: #ffffff;
+    --tone-ink-soft: rgb(255 255 255 / 0.9);
+    --tone-strong: var(--tone-deep);
+    --tone-edge: rgb(255 255 255 / 0.16);
+    --tone-edge-hover: rgb(255 255 255 / 0.4);
+    --tone-sheen: inset 0 1px 0 rgb(255 255 255 / 0.14);
+    --tone-focus: #ffffff;
+    --tone-on: #ffffff;
+    --tone-on-ink: var(--tone-deep);
+    --tone-bloom-mix: 45%;
+    --tone-chip-mix: 12%;
+    --tone-wash: color-mix(in srgb, var(--tone-base) 9%, #ffffff);
+    --tone-text-from: var(--tone-base);
+    --tone-text-to: var(--tone-deep);
+  }
+  :root, .tone-sunset, .tone-citrus, .tone-lime, .tone-sky, .tone-blush, .tone-lilac, .tone-mint {
+    --tone-ink: var(--color-ink);
+    --tone-ink-soft: var(--color-ink-soft);
+    --tone-strong: color-mix(in srgb, var(--tone-deep) 35%, var(--color-ink));
+    --tone-edge: rgb(28 16 10 / 0.12);
+    --tone-edge-hover: rgb(28 16 10 / 0.28);
+    --tone-sheen: inset 0 1px 0 rgb(255 255 255 / 0.6);
+    --tone-focus: var(--color-ink);
+    --tone-on: var(--color-ink);
+    --tone-on-ink: #ffffff;
+    --tone-bloom-mix: 90%;
+    --tone-chip-mix: 45%;
+    --tone-wash: color-mix(in srgb, var(--tone-base) 30%, #ffffff);
+    --tone-text-from: color-mix(in srgb, var(--tone-deep) 60%, var(--color-ink));
+    --tone-text-to: var(--color-ink);
+  }
+
+  /* Swatches — after the kind blocks */
+  /* Sunset is the brand orange at full brightness: ink text (≥ 5.46:1 down to
+     its deep end), and soft text stays full ink — ink-soft dips to 3.9:1 there.
+     Its wash stays at jewel strength: 30% of a saturated orange is a heavy peach. */
+  :root, .tone-sunset {
+    --tone-bloom: #ffd27a; --tone-base: #ff8a2a; --tone-deep: #f5540c; --tone-ink-soft: var(--color-ink);
+    --tone-wash: color-mix(in srgb, var(--tone-base) 12%, #ffffff);
+  }
+  .tone-magenta { --tone-bloom: #ff7ab8; --tone-base: #b81a60; --tone-deep: #5e0a33; }
+  .tone-violet  { --tone-bloom: #b69cff; --tone-base: #6d34e0; --tone-deep: #2e1065; }
+  .tone-cobalt  { --tone-bloom: #7cc0ff; --tone-base: #1c56cc; --tone-deep: #0f1f5c; }
+  .tone-teal    { --tone-bloom: #5ee6c8; --tone-base: #0a6e62; --tone-deep: #06332e; }
+  .tone-ruby    { --tone-bloom: #ff8f8f; --tone-base: #c21d3a; --tone-deep: #4c0519; }
+  .tone-citrus  { --tone-bloom: #fff3b0; --tone-base: #ffd83d; --tone-deep: #f5b700; }
+  .tone-lime    { --tone-bloom: #efffc2; --tone-base: #c8f25a; --tone-deep: #9fd62a; }
+  .tone-sky     { --tone-bloom: #e3f4ff; --tone-base: #9ad8ff; --tone-deep: #5cb8f5; }
+  .tone-blush   { --tone-bloom: #ffe6f1; --tone-base: #ffc2dc; --tone-deep: #ff94c2; }
+  .tone-lilac   { --tone-bloom: #f0e9ff; --tone-base: #d9c8ff; --tone-deep: #b79cff; }
+  .tone-mint    { --tone-bloom: #e3fff4; --tone-base: #a8f0d4; --tone-deep: #6fdcb4; }
+
+  /* Card surface */
+  .tone-card {
+    --_bx: 88%;
+    --_by: 0%;
+    --_angle: 160deg;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--tone-edge);
+    color: var(--tone-ink);
+    background-color: var(--tone-deep);
+    background-image:
+      radial-gradient(70% 55% at var(--_bx) var(--_by),
+        color-mix(in srgb, var(--tone-bloom) var(--tone-bloom-mix), transparent), transparent 72%),
+      linear-gradient(var(--_angle), var(--tone-base) 0%,
+        color-mix(in srgb, var(--tone-base) 55%, var(--tone-deep)) 55%, var(--tone-deep) 100%);
+    box-shadow:
+      var(--tone-sheen),
+      0 2px 6px color-mix(in srgb, var(--tone-deep) 14%, transparent),
+      0 18px 40px -20px color-mix(in srgb, var(--tone-deep) 50%, transparent);
+    transition:
+      translate 0.5s var(--ease-brand),
+      box-shadow 0.5s var(--ease-brand),
+      border-color 0.5s var(--ease-brand);
+  }
+  [dir="rtl"] .tone-card {
+    --_bx: 12%;
+    --_angle: 200deg;
+  }
+  /* Bloom to the bottom corner, away from a small label at the top */
+  .tone-card-flip { --_by: 100%; }
+
+  /* Lift uses `translate`, not `transform`, so it composes with framer's
+     inline transforms (TiltCard, ScrubReveal). Only interactive cards lift. */
+  @media (hover: hover) {
+    .tone-card:where(a, button, :has(a[href], button)):hover {
+      translate: 0 -4px;
+      border-color: var(--tone-edge-hover);
+      box-shadow:
+        var(--tone-sheen),
+        0 6px 16px color-mix(in srgb, var(--tone-deep) 18%, transparent),
+        0 34px 70px -24px color-mix(in srgb, var(--tone-base) 65%, transparent);
+    }
+  }
+  /* Ring drawn on the card's own surface, so it reads on white pages and
+     on tinted sections alike. */
+  .tone-card:focus-visible {
+    outline: 2px solid var(--tone-focus);
+    outline-offset: -6px;
+    translate: 0 -4px;
+    border-color: var(--tone-edge-hover);
+  }
+
+  /* Chip: tinted pill for light surfaces */
+  .tone-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2rem;
+    padding-inline: 0.85rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid color-mix(in srgb, var(--tone-deep) 22%, transparent);
+    background: color-mix(in srgb, var(--tone-base) var(--tone-chip-mix), #ffffff);
+    color: var(--tone-strong);
+    font: 600 0.82rem/1 var(--font-ui);
+  }
+  .tone-chip::before {
+    content: "";
+    inline-size: 0.45rem;
+    block-size: 0.45rem;
+    border-radius: 50%;
+    background: var(--tone-base);
+  }
+  /* Badge: solid tone pill on light surfaces, inverted on a card */
+  .tone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    block-size: 1.5rem;
+    padding-inline: 0.65rem;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    background: var(--tone-base);
+    color: var(--tone-ink);
+    font: 700 0.72rem/1 var(--font-ui);
+  }
+  .tone-dot {
+    display: inline-block;
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-radius: 50%;
+    background: var(--tone-base);
+  }
+
+  .tone-text, .spectrum-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  /* Tone text is for jewel tones on light surfaces */
+  .tone-text {
+    color: var(--tone-text-to);
+    background-image: linear-gradient(100deg, var(--tone-text-from), var(--tone-text-to));
+  }
+  .spectrum-text {
+    color: #6d34e0;
+    background-image: var(--grad-spectrum-ink);
+  }
+  .spectrum-rule {
+    display: inline-block;
+    block-size: 2px;
+    inline-size: 2rem;
+    border-radius: var(--radius-pill);
+    background-image: var(--grad-spectrum);
+  }
+  /* The bright spectrum's orange head vanishes on the orange stages */
+  :is(.slab, .hero-takeover) .spectrum-rule { background-image: var(--grad-spectrum-ink); }
+  .scroll-tint-layer { background: var(--tone-wash); }
+
+  @media (forced-colors: active) {
+    .tone-text, .spectrum-text {
+      -webkit-text-fill-color: currentColor;
+      background: none;
+    }
+  }
+}
+
+/* Descendant overrides must beat .btn-* / .eyebrow, which live in
+   utilities — same layer, higher specificity. */
+@layer utilities {
+  .tone-card :focus-visible { outline-color: var(--tone-focus); }
+  .tone-card .focus-ring:focus-visible { box-shadow: 0 0 0 3px var(--tone-focus); }
+  .tone-card .btn-solid {
+    background-image: none;
+    background-color: var(--tone-on);
+    color: var(--tone-on-ink);
+    box-shadow: none;
+  }
+  .tone-card .btn-solid:hover {
+    background-image: none;
+    background-color: color-mix(in srgb, var(--tone-on) 84%, var(--tone-bloom));
+  }
+  .tone-card .btn-outline { color: var(--tone-ink); border-color: var(--tone-edge-hover); }
+  .tone-card .btn-soft { color: var(--tone-ink); background: color-mix(in srgb, var(--tone-on) 16%, transparent); }
+  .tone-card .eyebrow { color: var(--tone-ink-soft); }
+  .tone-card :is(.hairline, .hairline-strong) { border-color: var(--tone-edge); }
+  .tone-card .tone-badge { background: var(--tone-on); color: var(--tone-on-ink); }
+  .tone-card .tone-chip {
+    color: var(--tone-ink);
+    border-color: var(--tone-edge);
+    background: color-mix(in srgb, var(--tone-on) 14%, transparent);
+  }
+  .tone-card .tone-chip::before { background: currentColor; }
+}
+
 @keyframes ticker-pulse {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
 .animate-ticker-pulse { animation: ticker-pulse 2.4s ease-in-out infinite; }
-
-/* Capability cards — animated gradient background */
-@keyframes cap-glow-drift {
-  0% { transform: translate(-14%, -10%) scale(1); }
-  50% { transform: translate(12%, 8%) scale(1.2); }
-  100% { transform: translate(-8%, 14%) scale(0.95); }
-}
-.cap-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background-image: linear-gradient(160deg, var(--ramp-2) 0%, var(--ramp-4) 45%, var(--ramp-5) 100%);
-  transition: border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
-}
-.cap-card:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 28px 70px -24px color-mix(in srgb, var(--ramp-3) 60%, transparent);
-  transform: translateY(-4px);
-}
-.cap-card-gradient {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(85% 45% at 78% 6%, color-mix(in srgb, var(--ramp-0) 42%, transparent), transparent 62%),
-    radial-gradient(140% 110% at 15% 96%, color-mix(in srgb, var(--ramp-5) 45%, transparent), transparent 68%);
-}
-.cap-card-gradient::before {
-  content: "";
-  position: absolute;
-  inset: -45% -45% 55% -45%;
-  background: radial-gradient(
-    closest-side,
-    color-mix(in srgb, var(--ramp-0) 30%, transparent),
-    color-mix(in srgb, var(--ramp-1) 10%, transparent) 48%,
-    transparent 72%
-  );
-  animation: cap-glow-drift 12s ease-in-out infinite alternate;
-  will-change: transform;
-  transition: opacity 0.6s ease;
-  opacity: 0.6;
-}
-.cap-card:hover .cap-card-gradient::before {
-  opacity: 0.8;
-  animation-duration: 5s;
-}
-.cap-card > .relative {
-  z-index: 1;
-}
-.cap-card h3 {
-  text-shadow: 0 1px 12px color-mix(in srgb, var(--ramp-5) 45%, transparent);
-}
 
 /* Hero — CSS 3D decor */
 @keyframes float-bob {
@@ -646,7 +817,7 @@
 /* Hero takeover — full-viewport brand orange stage */
 .hero-takeover {
   background-image: var(--grad-hero);
-  background-color: var(--ramp-7);
+  background-color: var(--ramp-1);
 }
 @keyframes hero-bloom {
   0%, 100% { transform: translate(-8%, -4%) scale(1); opacity: 0.75; }
@@ -665,16 +836,17 @@
   animation: hero-bloom 11s ease-in-out infinite;
   will-change: transform, opacity;
 }
+/* Bright orange stage: wireframe decor is ink, not white */
 .hero-takeover .hero-cube span {
-  border-color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: color-mix(in srgb, var(--color-ink) 40%, transparent);
+  background: color-mix(in srgb, var(--color-ink) 4%, transparent);
 }
 .hero-takeover .hero-ring {
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: color-mix(in srgb, var(--color-ink) 35%, transparent);
   border-top-color: transparent;
 }
 .hero-takeover .hero-ring-dashed {
-  border-color: rgba(255, 255, 255, 0.45);
+  border-color: color-mix(in srgb, var(--color-ink) 35%, transparent);
 }
 
 /* Gallery teaser — playful bubbles */
@@ -693,9 +865,13 @@
   transition: box-shadow 0.4s ease, outline-color 0.4s ease;
 }
 .bubble-card:hover {
+  outline: 2px solid var(--tone-base);
+  outline-offset: 2px;
+}
+/* Unlayered, so it must restate the base-layer ring it would otherwise hide */
+.bubble-card:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
-  box-shadow: var(--shadow-lg), var(--shadow-accent);
 }
 
 @media (prefers-reduced-motion: reduce) {

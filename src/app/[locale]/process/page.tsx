@@ -1,6 +1,13 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Compass, PenTool, Rocket, Search } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
+import { ScrubReveal } from "@/components/motion/ScrubReveal";
+import { StackCards } from "@/components/motion/StackCards";
 import { CTASection } from "@/components/sections/home/CTASection";
+import { cn } from "@/lib/utils";
+import { toneClass, toneCycle } from "@/lib/tones";
+
+const PHASE_ICONS = [Search, Compass, PenTool, Rocket];
 
 export async function generateMetadata({
   params,
@@ -36,6 +43,8 @@ export default async function ProcessPage({
 
   const phases = [1, 2, 3, 4].map((n) => ({
     n: String(n).padStart(2, "0"),
+    Icon: PHASE_ICONS[n - 1],
+    tone: toneCycle(n - 1),
     title: t(`phase${n}Title`),
     body: t(`phase${n}Body`),
     deliverables: [
@@ -46,7 +55,9 @@ export default async function ProcessPage({
     ],
   }));
 
+  // Anchored past the phase deck's tones so the two sections don't echo.
   const engagements = [1, 2, 3].map((n) => ({
+    tone: toneCycle(n - 1, { anchor: "magenta" }),
     title: t(`engagement${n}Title`),
     body: t(`engagement${n}Body`),
   }));
@@ -77,27 +88,43 @@ export default async function ProcessPage({
       </section>
 
       <section className="border-t hairline">
-        {phases.map((p, i) => (
-          <div key={p.n} className={i % 2 === 1 ? "bg-[var(--color-bg-alt)]" : ""}>
-            <div className="container-x grid gap-10 border-b hairline py-20 md:py-28 lg:grid-cols-12">
-              <Reveal className="lg:col-span-4">
-                <p className="font-mono text-xs text-[var(--color-muted)]">{p.n} / 04</p>
-                <h2 className="display-2 mt-6">{p.title}</h2>
-              </Reveal>
-              <Reveal delay={0.1} className="lg:col-span-5">
-                <p className="text-lg text-[var(--color-muted)] md:text-xl">{p.body}</p>
-              </Reveal>
-              <Reveal delay={0.15} className="lg:col-span-3">
-                <p className="eyebrow mb-4">{t("deliverables")}</p>
-                <ul className="space-y-2 text-sm">
-                  {p.deliverables.map((d) => (
-                    <li key={d} className="border-b hairline pb-2">{d}</li>
-                  ))}
-                </ul>
-              </Reveal>
-            </div>
-          </div>
-        ))}
+        <div className="container-x py-20 md:py-28">
+          <StackCards>
+            {phases.map(({ n, Icon, tone, title, body, deliverables }) => (
+              <article
+                key={n}
+                className={cn(
+                  "tone-card flex flex-col gap-6 rounded-[var(--radius-xl)] p-6 md:min-h-[24rem] md:gap-8 md:p-10",
+                  toneClass(tone),
+                )}
+              >
+                <div className="flex items-start justify-between gap-6">
+                  <p className="font-mono text-xs uppercase tracking-[0.22em] text-tone-ink-soft">{n} / 04</p>
+                  <span
+                    aria-hidden
+                    className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-current/25 md:h-14 md:w-14"
+                  >
+                    <Icon className="h-5 w-5 md:h-6 md:w-6" />
+                  </span>
+                </div>
+                <div className="mt-auto grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-10">
+                  <div className="lg:col-span-7">
+                    <h2 className="display-3">{title}</h2>
+                    <p className="mt-4 text-tone-ink-soft md:text-lg">{body}</p>
+                  </div>
+                  <div className="lg:col-span-5">
+                    <p className="eyebrow mb-3">{t("deliverables")}</p>
+                    <ul className="flex flex-wrap gap-2">
+                      {deliverables.map((d) => (
+                        <li key={d} className="tone-chip">{d}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </StackCards>
+        </div>
       </section>
 
       <section className="border-t hairline">
@@ -106,7 +133,7 @@ export default async function ProcessPage({
             <div className="lg:col-span-6">
               <Reveal>
                 <p className="eyebrow mb-5 inline-flex items-center gap-2">
-                  <span className="inline-block h-px w-8 bg-[var(--color-accent)]" />
+                  <span aria-hidden className="spectrum-rule" />
                   {t("engagementEyebrow")}
                 </p>
               </Reveal>
@@ -123,19 +150,32 @@ export default async function ProcessPage({
             </Reveal>
           </div>
 
-          <ul className="mt-14 grid gap-6 md:mt-20 md:grid-cols-3">
+          <ul className="mt-14 grid gap-4 md:mt-20 md:grid-cols-2 md:gap-6">
             {engagements.map((e, i) => (
-              <Reveal key={e.title} delay={i * 0.08}>
-                <li className="flex h-full flex-col gap-4 rounded-md border hairline p-7 md:p-8">
-                  <span className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
-                    {String(i + 1).padStart(2, "0")} / 03
-                  </span>
-                  <h3 className="font-serif text-2xl tracking-tight md:text-3xl">
-                    {e.title}
-                  </h3>
-                  <p className="text-[var(--color-muted)]">{e.body}</p>
-                </li>
-              </Reveal>
+              <li key={e.title} className={i === 0 ? "md:col-span-2" : undefined}>
+                <ScrubReveal className="h-full" variant={i === 0 ? "scale" : "rise"}>
+                  <div
+                    className={cn(
+                      "tone-card flex h-full flex-col gap-4 rounded-[var(--radius-xl)] p-7 md:p-10",
+                      i === 0 && "md:min-h-[18rem] md:justify-end",
+                      toneClass(e.tone),
+                    )}
+                  >
+                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-tone-ink-soft">
+                      {String(i + 1).padStart(2, "0")} / 03
+                    </span>
+                    <h3
+                      className={cn(
+                        "font-serif tracking-tight",
+                        i === 0 ? "text-[length:var(--step-4)]" : "text-[length:var(--step-3)]",
+                      )}
+                    >
+                      {e.title}
+                    </h3>
+                    <p className={cn("text-tone-ink-soft", i === 0 && "max-w-2xl md:text-lg")}>{e.body}</p>
+                  </div>
+                </ScrubReveal>
+              </li>
             ))}
           </ul>
 
@@ -162,7 +202,10 @@ export default async function ProcessPage({
                         scope="col"
                         className="py-4 pe-4 text-start font-mono text-[0.7rem] font-normal uppercase tracking-[0.22em]"
                       >
-                        {e.title}
+                        <span className="inline-flex items-center gap-2">
+                          <span aria-hidden className={cn("tone-dot", toneClass(e.tone))} />
+                          {e.title}
+                        </span>
                       </th>
                     ))}
                   </tr>

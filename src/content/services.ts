@@ -49,8 +49,9 @@ export const services: Service[] = [
     tagline: "Identity systems with intent.",
     summary:
       "Strategy, naming, visual systems and brand guidelines that hold up across a logo, a packaging line and a 30-second film.",
+    // Andy Brown on Unsplash (Unsplash License): unsplash.com/photos/8dgFq8Vbelo
     image:
-      "/media/Corporate/coreporate64.JPEG",
+      "https://images.unsplash.com/photo-1716471330463-f475b00f0506?auto=format&fit=crop&w=1800&q=80",
     deliverables: [
       { name: "Brand strategy & positioning", description: "Where you play and why you win, set before any design begins." },
       { name: "Naming & verbal identity", description: "Names, tone and messaging that sound unmistakably yours." },
@@ -93,8 +94,9 @@ export const services: Service[] = [
     tagline: "Performance marketing and the websites that convert it.",
     summary:
       "SEO, paid media and social media management plus the websites, e-commerce and platforms behind them — built and run by one team for measurable UAE outcomes.",
+    // Austin Distel on Unsplash (Unsplash License): unsplash.com/photos/tLZhFRLj6nY
     image:
-      "/media/Events/DSC08388.jpg",
+      "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1800&q=80",
     deliverables: [
       { name: "Channel strategy & media planning", description: "The right mix of channels and budget mapped to your goals." },
       { name: "SEO & content programmes", description: "Organic visibility that compounds month after month." },
@@ -396,8 +398,9 @@ export const services: Service[] = [
     tagline: "Photo, video, reels and live broadcast — built to perform.",
     summary:
       "In-house photography, videography, livestreaming and graphics for products, teams, events and brand films — with social-first reels, behind-the-scenes, testimonials and broadcast-ready outputs.",
+    // Unsplash License: unsplash.com/photos/IcwAKUhNGXs
     image:
-      "/media/Events/KKK_3583.jpg",
+      "https://images.unsplash.com/photo-1612548403247-aa2873e9422d?auto=format&fit=crop&w=1800&q=80",
     deliverables: [
       { name: "Professional product & catalogue photography", description: "Crisp product shots ready for store, web and print." },
       { name: "Exhibition booth & event photography", description: "Live coverage that captures the energy of your stand." },

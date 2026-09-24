@@ -14,6 +14,7 @@ import { Toaster } from "sonner";
 import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { JsonLd, organizationLd, localBusinessLd } from "@/components/seo/JsonLd";
 import "../globals.css";
 
@@ -157,6 +158,7 @@ export default async function LocaleLayout({
           >
             {tCommon("skipToContent")}
           </a>
+          <ScrollProgress />
           <Header />
           <main id="main" className="relative z-10 pt-16 md:pt-[72px]">{children}</main>
           <Footer />

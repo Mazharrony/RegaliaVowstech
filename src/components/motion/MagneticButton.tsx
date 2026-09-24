@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, type ReactNode, type MouseEvent } from "react";
 import { cn } from "@/lib/utils";
+import { useReducedMotionSafe } from "./hooks";
 
 type Props = {
   children: ReactNode;
@@ -22,7 +23,7 @@ export function MagneticButton({
   onClick,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
 
   const handleMove = (e: MouseEvent<HTMLDivElement>) => {
     if (reduce || !ref.current) return;
@@ -43,6 +44,9 @@ export function MagneticButton({
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       whileTap={reduce ? undefined : { scale: 0.97 }}
+      // whileTap would otherwise add tabindex=0: a second, unlabeled tab stop
+      // around the real button/link this wrapper contains or sits inside.
+      tabIndex={-1}
       transition={{ type: "spring", stiffness: 260, damping: 22, mass: 0.8 }}
       className={cn(
         "inline-flex items-center justify-center gap-2 will-change-transform",

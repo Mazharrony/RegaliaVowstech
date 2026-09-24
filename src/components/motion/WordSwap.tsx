@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { easings } from "@/lib/utils";
+import { useReducedMotionSafe } from "./hooks";
 
 type Props = {
   words: string[];
@@ -12,7 +13,8 @@ type Props = {
 };
 
 export function WordSwap({ words, interval = 2600, className, accent = false }: Props) {
-  const reduce = useReducedMotion();
+  // Hydrates as the animated markup, then settles on the first word under reduced motion
+  const reduce = useReducedMotionSafe();
   const [i, setI] = useState(0);
 
   useEffect(() => {
