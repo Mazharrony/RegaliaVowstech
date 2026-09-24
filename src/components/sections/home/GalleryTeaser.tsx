@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "@/components/motion/Reveal";
+import { Parallax } from "@/components/motion/Parallax";
+import { useHydrated } from "@/components/motion/hooks";
 import { getPhotosByCategory, type Photo } from "@/content/gallery";
+import { toneClass, toneCycle } from "@/lib/tones";
+import { cn } from "@/lib/utils";
 
 /** Scatter layout for the floating bubbles (desktop canvas). */
 const BUBBLES = [
@@ -25,6 +30,18 @@ const BUBBLES = [
   { top: "44%", start: "89%", size: 115, rot: 5, dur: 5.8, delay: -2.2 },
   { top: "28%", start: "13%", size: 95, rot: -3, dur: 5.2, delay: -1.8 },
 ];
+
+/**
+ * Parallax speed per depth layer, far to near: small bubbles and the accents
+ * lag behind the page, big bubbles rise ahead of it.
+ */
+const LAYERS = [-0.16, 0.14, 0.32] as const;
+const layerOf = (size: number) => (size >= 185 ? 2 : size >= 145 ? 1 : 0);
+/** Near layers paint over far ones (local to the canvas's isolated stack). */
+const LAYER_Z = ["z-0", "z-[1]", "z-[2]"] as const;
+
+/** First six of the mixed cycle, so the section stays at six tones; even indices are jewels. */
+const accentTone = (i: number) => toneCycle(i % 6);
 
 /** Decorative accent dots drifting in the background. */
 const DOTS = [
@@ -49,6 +66,7 @@ const RINGS = [
 export function GalleryTeaser() {
   const t = useTranslations("home");
   const [active, setActive] = useState<Photo | null>(null);
+  const hydrated = useHydrated();
   const photos = useMemo(() => {
     // Sample evenly across the whole corporate pool so every batch of
     // photography surfaces on the homepage, not just the first uploads.
@@ -71,21 +89,21 @@ export function GalleryTeaser() {
 
   return (
     <section className="section-pad relative overflow-hidden">
-      {/* Playful backdrop blobs */}
+      {/* Backdrop blobs: one jewel, one pastel */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div
-          className="absolute -start-24 top-1/4 h-96 w-96 rounded-full opacity-70"
+          className="tone-violet absolute -start-24 top-1/4 h-96 w-96 rounded-full"
           style={{
             background:
-              "radial-gradient(circle, var(--color-accent-tint) 0%, transparent 65%)",
+              "radial-gradient(circle, color-mix(in srgb, var(--tone-base) 16%, transparent) 0%, transparent 65%)",
             filter: "blur(30px)",
           }}
         />
         <div
-          className="absolute -end-20 bottom-0 h-80 w-80 rounded-full opacity-60"
+          className="tone-mint absolute -end-20 bottom-0 h-80 w-80 rounded-full"
           style={{
             background:
-              "radial-gradient(circle, color-mix(in srgb, var(--color-accent-soft) 22%, transparent) 0%, transparent 65%)",
+              "radial-gradient(circle, color-mix(in srgb, var(--tone-base) 55%, transparent) 0%, transparent 65%)",
             filter: "blur(30px)",
           }}
         />
@@ -97,7 +115,7 @@ export function GalleryTeaser() {
           <div>
             <Reveal>
               <p className="eyebrow mb-5 inline-flex items-center gap-2">
-                <span className="inline-block h-px w-8 bg-[var(--color-accent)]" />
+                <span aria-hidden className="spectrum-rule" />
                 {t("galleryTeaserEyebrow")}
               </p>
             </Reveal>
@@ -113,98 +131,122 @@ export function GalleryTeaser() {
             </Reveal>
           </div>
           <Reveal delay={0.25}>
-            <Link href="/gallery" className="btn btn-soft btn-sm">
+            <Link href="/gallery" className="btn btn-ink btn-sm">
               {t("galleryTeaserCta")}
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              <ArrowUpRight className="h-3.5 w-3.5 rtl:-scale-x-100" />
             </Link>
           </Reveal>
         </div>
 
-        {/* Desktop: floating bubble canvas */}
+        {/* Desktop: floating bubble canvas, three parallax depths. Parallax
+            moves each layer; the bubbles keep their own float animation.
+            Each bubble gets its own full-canvas layer so DOM (and Tab) order
+            follows the layout; z-index restores near-over-far stacking. */}
         <div
-          className="relative hidden h-[540px] md:block"
+          className="relative isolate hidden h-[540px] md:block"
           style={{
             backgroundImage:
-              "radial-gradient(color-mix(in srgb, var(--color-accent) 22%, transparent) 1.5px, transparent 1.5px)",
+              "radial-gradient(color-mix(in srgb, var(--color-ink) 12%, transparent) 1.5px, transparent 1.5px)",
             backgroundSize: "30px 30px",
           }}
         >
-          {DOTS.map((d, i) => (
-            <span
-              key={i}
-              aria-hidden
-              className="animate-float-bob absolute rounded-full bg-[var(--color-accent)] opacity-40"
-              style={{
-                top: d.top,
-                insetInlineStart: d.start,
-                width: d.size,
-                height: d.size,
-                animationDuration: `${d.dur}s`,
-                animationDelay: `${d.delay}s`,
-              }}
-            />
-          ))}
-          {RINGS.map((r, i) => (
-            <span
-              key={i}
-              aria-hidden
-              className="animate-float-bob absolute rounded-full opacity-60"
-              style={{
-                top: r.top,
-                insetInlineStart: r.start,
-                width: r.size,
-                height: r.size,
-                border: `2px ${r.dashed ? "dashed" : "solid"} var(--color-accent)`,
-                animationDuration: `${r.dur}s`,
-                animationDelay: `${r.delay}s`,
-              }}
-            />
-          ))}
-
+          <Parallax
+            speed={LAYERS[0]}
+            className="pointer-events-none absolute inset-0"
+            innerClassName="absolute inset-0"
+          >
+            {DOTS.map((d, i) => (
+              <span
+                key={`dot-${i}`}
+                aria-hidden
+                className={cn(
+                  "animate-float-bob absolute rounded-full bg-[var(--tone-base)] opacity-75",
+                  toneClass(accentTone(i)),
+                )}
+                style={{
+                  top: d.top,
+                  insetInlineStart: d.start,
+                  width: d.size,
+                  height: d.size,
+                  animationDuration: `${d.dur}s`,
+                  animationDelay: `${d.delay}s`,
+                }}
+              />
+            ))}
+            {RINGS.map((r, i) => (
+              <span
+                key={`ring-${i}`}
+                aria-hidden
+                className={cn("animate-float-bob absolute rounded-full opacity-70", toneClass(accentTone(i * 2)))}
+                style={{
+                  top: r.top,
+                  insetInlineStart: r.start,
+                  width: r.size,
+                  height: r.size,
+                  border: `2px ${r.dashed ? "dashed" : "solid"} var(--tone-base)`,
+                  animationDuration: `${r.dur}s`,
+                  animationDelay: `${r.delay}s`,
+                }}
+              />
+            ))}
+          </Parallax>
           {photos.map((photo, i) => {
             const b = BUBBLES[i];
+            const layer = layerOf(b.size);
             return (
-              <motion.button
+              <Parallax
                 key={photo.id}
-                type="button"
-                onClick={() => setActive(photo)}
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300, damping: 18 }}
-                className="bubble-card photo photo-plain cursor-pointer rounded-[2rem]"
-                style={
-                  {
-                    top: b.top,
-                    insetInlineStart: b.start,
-                    width: b.size,
-                    height: b.size,
-                    "--bubble-rot": `${b.rot}deg`,
-                    "--bubble-dur": `${b.dur}s`,
-                    "--bubble-delay": `${b.delay}s`,
-                  } as React.CSSProperties
-                }
-                aria-label={photo.alt}
+                speed={LAYERS[layer]}
+                className={cn("pointer-events-none absolute inset-0", LAYER_Z[layer])}
+                innerClassName="absolute inset-0"
               >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  sizes="240px"
-                  className="object-cover"
-                />
-              </motion.button>
+                <motion.button
+                  type="button"
+                  onClick={() => setActive(photo)}
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                  className={cn(
+                    "bubble-card photo photo-plain pointer-events-auto cursor-pointer rounded-[2rem]",
+                    toneClass(accentTone(i)),
+                  )}
+                  style={
+                    {
+                      top: b.top,
+                      insetInlineStart: b.start,
+                      width: b.size,
+                      height: b.size,
+                      "--bubble-rot": `${b.rot}deg`,
+                      "--bubble-dur": `${b.dur}s`,
+                      "--bubble-delay": `${b.delay}s`,
+                    } as React.CSSProperties
+                  }
+                  aria-label={photo.alt}
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes="240px"
+                    className="object-cover"
+                  />
+                </motion.button>
+              </Parallax>
             );
           })}
         </div>
 
-        {/* Mobile: snap-scroll bubble row */}
-        <div className="-mx-6 flex gap-4 overflow-x-auto px-6 pb-4 md:hidden">
-          {photos.map((photo) => (
+        {/* Mobile: snap-scroll bubble row, bled to the viewport edge inside its own scroller */}
+        <div className="-mx-[var(--container-padding)] flex snap-x snap-mandatory scroll-px-[var(--container-padding)] gap-4 overflow-x-auto overscroll-x-contain px-[var(--container-padding)] pb-4 md:hidden">
+          {photos.map((photo, i) => (
             <button
               key={photo.id}
               type="button"
               onClick={() => setActive(photo)}
-              className="relative h-36 w-36 shrink-0 overflow-hidden rounded-[1.6rem] border-[3px] border-[var(--color-surface)] shadow-lg"
+              className={cn(
+                "relative h-36 w-36 shrink-0 snap-start overflow-hidden rounded-[1.6rem] border-[3px] border-[var(--tone-base)] shadow-lg",
+                toneClass(accentTone(i)),
+              )}
               aria-label={photo.alt}
             >
               <Image
@@ -219,46 +261,51 @@ export function GalleryTeaser() {
         </div>
       </div>
 
-      {/* Popup lightbox */}
-      <AnimatePresence>
-        {active && (
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label={active.alt}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setActive(null)}
-            className="fixed inset-0 z-[80] flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm"
-          >
+      {/* Popup lightbox — portaled to <body>: <main> is its own z-10 stacking
+          context, so z-80 only outranks the header (50) at the root. Mounted
+          after hydration so the portal never takes part in SSR. */}
+      {hydrated && createPortal(
+        <AnimatePresence>
+          {active && (
             <motion.div
-              initial={{ scale: 0.5, opacity: 0, y: 40 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.6, opacity: 0, y: 20 }}
-              transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative h-[min(78vh,640px)] w-[min(92vw,900px)] overflow-hidden rounded-[2rem] border-4 border-[var(--color-surface)] bg-[var(--color-ink)] shadow-2xl"
+              role="dialog"
+              aria-modal="true"
+              aria-label={active.alt}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActive(null)}
+              className="fixed inset-0 z-[80] flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm"
             >
-              <Image
-                src={active.src}
-                alt={active.alt}
-                fill
-                sizes="(max-width: 900px) 92vw, 900px"
-                className="object-contain"
-              />
-              <button
-                type="button"
-                onClick={() => setActive(null)}
-                aria-label="Close"
-                className="absolute end-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white transition-colors hover:bg-[var(--color-accent)]"
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0, y: 40 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.6, opacity: 0, y: 20 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative h-[min(78vh,640px)] w-[min(92vw,900px)] overflow-hidden rounded-[2rem] border-4 border-[var(--color-surface)] bg-[var(--color-ink)] shadow-2xl"
               >
-                <X className="h-5 w-5" />
-              </button>
+                <Image
+                  src={active.src}
+                  alt={active.alt}
+                  fill
+                  sizes="(max-width: 900px) 92vw, 900px"
+                  className="object-contain"
+                />
+                <button
+                  type="button"
+                  onClick={() => setActive(null)}
+                  aria-label="Close"
+                  className="absolute end-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white transition-colors hover:bg-[var(--color-accent)]"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </section>
   );
 }

@@ -4,6 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import { company } from "@/content/company";
 import { getServices } from "@/content/services";
 import { MaskReveal } from "@/components/motion/MaskReveal";
+import { cn } from "@/lib/utils";
+import { toneClass, toneCycle } from "@/lib/tones";
 
 export async function Footer() {
   const locale = await getLocale();
@@ -20,9 +22,12 @@ export async function Footer() {
       <div className="container-wide pb-16 pt-16 md:pb-24 md:pt-24 lg:pb-28 lg:pt-28">
         <div className="grid gap-12 md:gap-16 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            <p className="eyebrow mb-6">{tNav("contact")} · 2026</p>
+            <p className="eyebrow mb-6 flex items-center gap-3">
+              <span aria-hidden className="spectrum-rule" />
+              {tNav("contact")} · 2026
+            </p>
             <MaskReveal>
-              <h2 className="display-1 text-balance text-[var(--color-bg)]">
+              <h2 className="display-1 text-balance text-ink">
                 {t("letsTalk")}
               </h2>
             </MaskReveal>
@@ -30,14 +35,17 @@ export async function Footer() {
             <div className="mt-12 flex flex-col gap-4">
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-3 self-start border-b border-[color-mix(in_srgb,var(--color-bg)_22%,transparent)] pb-2 font-serif text-2xl font-semibold tracking-[-0.02em] text-[var(--color-bg)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] md:text-3xl"
+                className={cn(
+                  "group inline-flex items-center gap-3 self-start border-b border-ink/25 pb-2 font-serif text-2xl font-semibold tracking-[-0.02em] text-ink transition-colors duration-300 ease-[var(--ease-brand)] hover:border-tone-strong hover:text-tone-strong md:text-3xl",
+                  toneClass("violet")
+                )}
               >
                 {company.email}
-                <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                <ArrowUpRight className="h-5 w-5 transition-transform duration-300 ease-[var(--ease-brand)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
               </Link>
               <a
                 href={`tel:${company.phone.replace(/\s/g, "")}`}
-                className="text-[0.92rem] font-medium tracking-[-0.005em] text-[color-mix(in_srgb,var(--color-bg)_68%,transparent)] transition-colors hover:text-[var(--color-bg)]"
+                className="text-[0.92rem] font-medium tracking-[-0.005em] text-ink/85 transition-colors hover:text-ink"
               >
                 {company.phone}
               </a>
@@ -52,7 +60,7 @@ export async function Footer() {
                   <li key={s.slug}>
                     <Link
                       href={`/services/${s.slug}`}
-                      className="link-wipe text-[var(--color-bg)]"
+                      className="link-wipe text-ink"
                     >
                       {s.title}
                     </Link>
@@ -63,9 +71,9 @@ export async function Footer() {
             <div>
               <p className="eyebrow mb-5">{t("company")}</p>
               <ul className="space-y-2.5 text-sm">
-                <li><Link href="/about" className="link-wipe text-[var(--color-bg)]">{tNav("about")}</Link></li>
-                <li><Link href="/process" className="link-wipe text-[var(--color-bg)]">{tNav("process")}</Link></li>
-                <li><Link href="/contact" className="link-wipe text-[var(--color-bg)]">{tNav("contact")}</Link></li>
+                <li><Link href="/about" className="link-wipe text-ink">{tNav("about")}</Link></li>
+                <li><Link href="/process" className="link-wipe text-ink">{tNav("process")}</Link></li>
+                <li><Link href="/contact" className="link-wipe text-ink">{tNav("contact")}</Link></li>
               </ul>
 
               <p className="eyebrow mt-10 mb-5">{t("social")}</p>
@@ -76,7 +84,7 @@ export async function Footer() {
                       href={s.href}
                       target="_blank"
                       rel="noreferrer"
-                      className="link-wipe inline-flex items-center gap-1.5 text-[var(--color-bg)]"
+                      className="link-wipe inline-flex items-center gap-1.5 text-ink"
                     >
                       {s.label}
                       <ArrowUpRight className="h-3 w-3" />
@@ -89,20 +97,20 @@ export async function Footer() {
         </div>
 
         {/* Meta strip */}
-        <div className="mt-16 grid gap-8 border-t border-[color-mix(in_srgb,var(--color-bg)_15%,transparent)] pt-10 text-[0.92rem] text-[color-mix(in_srgb,var(--color-bg)_60%,transparent)] sm:grid-cols-2 md:mt-20 md:grid-cols-4">
+        <div className="mt-16 grid gap-8 border-t border-ink/15 pt-10 text-[0.92rem] text-ink/85 sm:grid-cols-2 md:mt-20 md:grid-cols-4">
           <div>
             <p className="eyebrow mb-2">{company.shortName}</p>
-            <p className="text-[var(--color-bg)]">{company.address.line1}</p>
+            <p className="text-ink">{company.address.line1}</p>
             <p>{company.address.line2}</p>
           </div>
           <div>
             <p className="eyebrow mb-2">Hours</p>
-            <p className="text-[var(--color-bg)]">Sun – Thu</p>
+            <p className="text-ink">Sun – Thu</p>
             <p>09:00 – 18:00 GST</p>
           </div>
           <div>
             <p className="eyebrow mb-2">{tCommon("estYear").split(" ")[0]}</p>
-            <p className="text-[var(--color-bg)]">{tCommon("estYear")}</p>
+            <p className="text-ink">{tCommon("estYear")}</p>
             <p>UAE-first · Dubai</p>
           </div>
           <div className="flex flex-wrap items-end gap-x-6 gap-y-3 sm:gap-x-4 md:justify-end md:gap-8">
@@ -114,15 +122,24 @@ export async function Footer() {
       </div>
 
       {/* Oversized wordmark */}
-      <div aria-hidden className="pointer-events-none select-none overflow-hidden border-t border-[color-mix(in_srgb,var(--color-bg)_15%,transparent)]">
+      <div aria-hidden className="pointer-events-none select-none overflow-hidden border-t border-ink/15">
         <p
-          className="mega whitespace-nowrap py-6 text-center text-[var(--color-bg)] opacity-[0.95] md:py-8"
+          className="mega whitespace-nowrap py-6 text-center text-ink opacity-[0.95] md:py-8"
         >
-          <span className="opacity-95">Regalia</span>
-          <span className="mx-1.5 text-[var(--color-accent)] sm:mx-3 md:mx-6">·</span>
-          <span className="opacity-95">Vows</span>
-          <span className="mx-1.5 text-[var(--color-accent)] sm:mx-3 md:mx-6">·</span>
-          <span className="opacity-95">Tech</span>
+          {["Regalia", "Vows", "Tech"].map((word, i) => [
+            i > 0 && (
+              <span
+                key={`dot-${word}`}
+                className={cn(
+                  "tone-dot mx-2.5 size-[0.16em] align-middle sm:mx-4 md:mx-7",
+                  toneClass(toneCycle(i - 1, { set: "jewel" }))
+                )}
+              />
+            ),
+            <span key={word} className="opacity-95">
+              {word}
+            </span>,
+          ])}
         </p>
       </div>
     </footer>

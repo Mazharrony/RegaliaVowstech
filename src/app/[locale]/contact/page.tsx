@@ -3,6 +3,8 @@ import { ArrowUpRight, MessageCircle, Calendar, Plus } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { company } from "@/content/company";
+import { cn } from "@/lib/utils";
+import { toneClass, toneCycle } from "@/lib/tones";
 
 export async function generateMetadata({
   params,
@@ -89,13 +91,13 @@ export default async function ContactPage({
               </div>
               <div>
                 <p className="eyebrow mb-4 inline-flex items-center gap-2">
-                  <span className="inline-block h-px w-6 bg-[var(--color-accent)]" />
+                  <span aria-hidden className="spectrum-rule" />
                   {t("nextStepsEyebrow")}
                 </p>
                 <ol className="space-y-4 text-sm text-[var(--color-muted)]">
                   {[1, 2, 3].map((n) => (
                     <li key={n} className="flex gap-4 border-b hairline pb-4">
-                      <span className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-accent)]">
+                      <span className={cn("tone-badge shrink-0 font-mono", toneClass(toneCycle(n - 1, { set: "jewel" })))}>
                         {String(n).padStart(2, "0")}
                       </span>
                       <span className="text-[var(--color-ink)]">{t(`nextStep${n}`)}</span>
@@ -122,34 +124,34 @@ export default async function ContactPage({
               {t("channelsBody")}
             </p>
           </Reveal>
-          <div className="grid gap-px bg-[var(--color-line)] lg:col-span-8 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:col-span-8">
             <Reveal>
               <a
                 href={`https://wa.me/${company.phone.replace(/\D/g, "")}?text=${encodeURIComponent(t("whatsappMessage"))}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full flex-col gap-4 bg-[var(--color-bg)] p-8 transition-colors hover:bg-[var(--color-bg-alt)]"
+                className="tone-card tone-teal group flex h-full flex-col gap-4 rounded-[var(--radius-xl)] p-8 md:p-10"
               >
-                <MessageCircle className="h-6 w-6" />
-                <h3 className="font-serif text-xl md:text-2xl">{t("whatsappLabel")}</h3>
-                <p className="text-[var(--color-muted)]">{t("whatsappBody")}</p>
-                <span className="mt-auto inline-flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.22em]">
+                <MessageCircle aria-hidden className="h-7 w-7" />
+                <h3 className="mt-6 font-serif text-[length:var(--step-3)] tracking-tight">{t("whatsappLabel")}</h3>
+                <p className="text-tone-ink-soft">{t("whatsappBody")}</p>
+                <span className="mt-auto inline-flex items-center gap-2 pt-4 font-mono text-[0.7rem] uppercase tracking-[0.22em]">
                   {t("whatsappCta")}
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
                 </span>
               </a>
             </Reveal>
             <Reveal delay={0.05}>
               <a
                 href={`mailto:${company.email}?subject=${encodeURIComponent(t("bookingSubject"))}&body=${t("bookingBodyText")}`}
-                className="group flex h-full flex-col gap-4 bg-[var(--color-bg)] p-8 transition-colors hover:bg-[var(--color-bg-alt)]"
+                className="tone-card tone-citrus group flex h-full flex-col gap-4 rounded-[var(--radius-xl)] p-8 md:p-10"
               >
-                <Calendar className="h-6 w-6" />
-                <h3 className="font-serif text-xl md:text-2xl">{t("bookingLabel")}</h3>
-                <p className="text-[var(--color-muted)]">{t("bookingBody")}</p>
-                <span className="mt-auto inline-flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.22em]">
+                <Calendar aria-hidden className="h-7 w-7" />
+                <h3 className="mt-6 font-serif text-[length:var(--step-3)] tracking-tight">{t("bookingLabel")}</h3>
+                <p className="text-tone-ink-soft">{t("bookingBody")}</p>
+                <span className="mt-auto inline-flex items-center gap-2 pt-4 font-mono text-[0.7rem] uppercase tracking-[0.22em]">
                   {t("bookingCta")}
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
                 </span>
               </a>
             </Reveal>

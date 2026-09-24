@@ -1,7 +1,10 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
+import { Parallax } from "@/components/motion/Parallax";
 import { Reveal } from "@/components/motion/Reveal";
 import { CTASection } from "@/components/sections/home/CTASection";
+import { cn } from "@/lib/utils";
+import { toneClass, toneCycle } from "@/lib/tones";
 
 const gallery = [
   "https://i.ibb.co/qYZ92V6w/Model1.jpg",
@@ -54,6 +57,22 @@ const gallery = [
   "https://i.ibb.co/JjvyppXn/Model60.jpg",
 ];
 
+/**
+ * md+: four column stacks drifting at their own speeds. Below md each stack
+ * dissolves (`contents`) so the tiles flow into a plain two-column grid.
+ */
+const COLUMN_SPEEDS = [0.5, -0.3, 0.7, -0.15];
+const COLS = COLUMN_SPEEDS.length;
+const columns = COLUMN_SPEEDS.map((speed, c) => ({
+  speed,
+  tiles: gallery.flatMap((src, i) => (i % COLS === c ? [{ src, i }] : [])),
+}));
+/**
+ * Tiles in the first viewport of either flow: the md+ first row (i 0–3), and
+ * below md — where the stacks flow column-major — column 0's first four (i 0, 4, 8, 12).
+ */
+const isEager = (i: number) => i < COLS || (i % COLS === 0 && i < COLS * 4);
+
 export async function generateMetadata({
   params,
 }: {
@@ -105,35 +124,66 @@ export default async function ModelsPage({
           <p className="mt-10 max-w-3xl text-[var(--color-muted)] md:text-lg">{t("body")}</p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-2 gap-3 md:mt-16 md:grid-cols-4 md:gap-4">
-          {gallery.map((src, i) => (
-            <Reveal key={src} delay={Math.min(0.25 + i * 0.03, 0.8)}>
-              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[var(--radius-xl)] border hairline">
-                <Image
-                  src={src}
-                  alt={t("title")}
-                  fill
-                  priority={i < 4}
-                  sizes="(min-width: 768px) 25vw, 50vw"
-                  className="object-cover transition-transform duration-700 hover:scale-105"
-                />
-              </div>
-            </Reveal>
+        <div className="mt-12 grid grid-cols-2 gap-3 md:mt-24 md:grid-cols-4 md:gap-4">
+          {columns.map(({ speed, tiles }) => (
+            <Parallax
+              key={speed}
+              speed={speed}
+              rest="load"
+              query="(min-width: 768px)"
+              className="max-md:contents"
+              innerClassName="max-md:contents md:flex md:flex-col md:gap-4"
+            >
+              {tiles.map(({ src, i }) => (
+                <div
+                  key={src}
+                  className="relative aspect-[3/4] w-full overflow-hidden rounded-[var(--radius-xl)] border hairline"
+                >
+                  <Image
+                    src={src}
+                    alt={t("title")}
+                    fill
+                    preload={i === 0}
+                    loading={i > 0 && isEager(i) ? "eager" : undefined}
+                    sizes="(min-width: 768px) 25vw, 50vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
+              ))}
+            </Parallax>
           ))}
         </div>
       </section>
 
       <section className="border-t hairline">
         <div className="container-x py-20 md:py-28">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
             {items.map((item, i) => (
-              <Reveal key={item.name} delay={i * 0.04}>
-                <div className="group flex h-full flex-col rounded-[var(--radius-xl)] border surface-card p-7 transition-colors md:p-8">
-                  <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
+              <Reveal
+                key={item.name}
+                delay={Math.min(i, 7) * 0.05}
+                className={i === 0 ? "md:col-span-2" : undefined}
+              >
+                {/* Six tones from the models hue; period 6 keeps row and column neighbours apart */}
+                <div
+                  className={cn(
+                    "tone-card flex h-full flex-col rounded-[var(--radius-xl)] p-7 md:p-8",
+                    i === 0 && "md:min-h-[18rem] md:justify-end md:p-10",
+                    toneClass(toneCycle(i % 6, { anchor: "magenta" })),
+                  )}
+                >
+                  <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-tone-ink-soft">
                     {String(i + 1).padStart(2, "0")}
                   </p>
-                  <h2 className="mt-4 font-serif text-xl tracking-tight md:text-2xl">{item.name}</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+                  <h2
+                    className={cn(
+                      "mt-4 font-serif tracking-tight",
+                      i === 0 ? "text-[length:var(--step-4)]" : "text-[length:var(--step-3)]",
+                    )}
+                  >
+                    {item.name}
+                  </h2>
+                  <p className={cn("mt-3 leading-relaxed text-tone-ink-soft", i === 0 ? "max-w-xl md:text-lg" : "text-sm")}>
                     {item.description}
                   </p>
                 </div>

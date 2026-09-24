@@ -1,11 +1,13 @@
-"use client";
-
-import { useMemo } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { Reveal } from "@/components/motion/Reveal";
+import { ScrubReveal } from "@/components/motion/ScrubReveal";
 import { getServices } from "@/content/services";
+import { getPhotosByCategory } from "@/content/gallery";
+import { serviceTone, toneClass } from "@/lib/tones";
+import { cn } from "@/lib/utils";
+import { ServicesDeck } from "./services/ServicesDeck";
 
 /**
  * Key service words highlighted inside each card description (EN + AR).
@@ -51,7 +53,7 @@ function emphasize(text: string, words?: string[]) {
     .join("|");
   return text.split(new RegExp(`(${pattern})`, "gi")).map((part, i) =>
     i % 2 === 1 ? (
-      <em key={i} className="font-bold italic text-white">
+      <em key={i} className="font-bold italic text-tone-ink">
         {part}
       </em>
     ) : (
@@ -65,93 +67,102 @@ export function ServicesGrid() {
   const t = useTranslations("home");
   const tCommon = useTranslations("common");
   const tModels = useTranslations("models");
-  const services = useMemo(() => getServices(locale), [locale]);
+  const services = getServices(locale);
   const serviceCount = String(services.length + 1).padStart(2, "0"); // +1 for models
 
-  const cards = useMemo(() => {
-    const list = services.map((s) => ({
+  const cards = [
+    ...services.map((s) => ({
       key: s.slug as string,
       href: `/services/${s.slug}`,
       number: s.number,
       title: s.title,
       tagline: s.tagline,
       description: s.summary,
-    }));
-    list.push({
+      image: s.image,
+    })),
+    {
       key: "models",
       href: "/models",
       number: "05",
       title: tModels("title"),
       tagline: tModels("eyebrow"),
       description: tModels("body"),
-    });
-    return list.sort((a, b) => a.number.localeCompare(b.number));
-  }, [services, tModels]);
+      // Models has no service entry; its first portfolio shot keeps the card on-subject.
+      image: getPhotosByCategory("model")[0].src,
+    },
+  ].sort((a, b) => a.number.localeCompare(b.number));
+
+  const header = (
+    <div className="mb-16 grid gap-10 md:mb-20 lg:grid-cols-12 lg:items-end">
+      <ScrubReveal className="lg:col-span-7">
+        <p className="eyebrow mb-5 inline-flex items-center gap-2">
+          <span aria-hidden className="spectrum-rule" />
+          {t("servicesEyebrow")} · {serviceCount}
+        </p>
+        <h2 id="home-services-title" className="display-1 max-w-[14ch] text-balance">
+          {t("servicesTitle")}
+        </h2>
+      </ScrubReveal>
+      <ScrubReveal variant="slide-start" className="lg:col-span-4 lg:col-start-9">
+        <p className="text-[var(--color-muted)]" style={{ fontSize: "var(--step-1)" }}>
+          {t("servicesBody")}
+        </p>
+        <Link href="/services" className="btn btn-ink btn-sm mt-6">
+          {tCommon("allServices")}
+          <ArrowUpRight className="h-3.5 w-3.5 rtl:-scale-x-100" />
+        </Link>
+      </ScrubReveal>
+    </div>
+  );
 
   return (
-    <section className="section-pad relative">
-      <div className="container-wide">
-        {/* Header */}
-        <div className="mb-16 grid gap-10 md:mb-20 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-7">
-            <Reveal>
-              <p className="eyebrow mb-5 inline-flex items-center gap-2">
-                <span className="inline-block h-px w-8 bg-[var(--color-accent)]" />
-                {t("servicesEyebrow")} · {serviceCount}
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="display-1 max-w-[14ch] text-balance">{t("servicesTitle")}</h2>
-            </Reveal>
-          </div>
-          <Reveal delay={0.2} className="lg:col-span-4 lg:col-start-9">
-            <p className="text-[var(--color-muted)]" style={{ fontSize: "var(--step-1)" }}>
-              {t("servicesBody")}
-            </p>
-            <Link
-              href="/services"
-              className="btn btn-soft btn-sm mt-6"
-            >
-              {tCommon("allServices")}
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
-          </Reveal>
-        </div>
-
-        {/* Capability cards */}
-        <div className="grid gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-          {cards.map((card, i) => (
-            <Reveal key={card.key} delay={0.05 * i} className="h-full">
-              <Link
-                href={card.href}
-                className="cap-card group flex h-full flex-col p-7 md:p-8"
+    <section aria-labelledby="home-services-title" className="relative">
+      <ServicesDeck tones={cards.map((c) => serviceTone(c.key))} header={header}>
+        {cards.map((card) => (
+          <Link
+            key={card.key}
+            href={card.href}
+            className={cn(
+              "tone-card group grid h-[clamp(460px,72svh,520px)] grid-rows-[8.5rem_minmax(0,1fr)] rounded-[var(--radius-xl)] md:h-[clamp(420px,62svh,560px)] md:grid-cols-12 md:grid-rows-1",
+              toneClass(serviceTone(card.key)),
+            )}
+          >
+            {/* Photo: end side on desktop, where the tone's bloom glows around it */}
+            <div className="relative m-2 overflow-hidden rounded-[calc(var(--radius-xl)-8px)] md:order-last md:col-span-5 md:m-3 md:rounded-[calc(var(--radius-xl)-12px)]">
+              <Image
+                src={card.image}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="object-cover transition-transform duration-300 ease-brand group-hover:scale-[1.04]"
+              />
+              <span aria-hidden className="absolute inset-0 bg-linear-to-t from-tone-deep/45 to-transparent to-60%" />
+              <span
+                aria-hidden
+                className="absolute end-3 top-3 grid size-11 place-items-center rounded-full bg-[var(--tone-on)] text-[var(--tone-on-ink)] md:end-4 md:top-4"
               >
-                <span aria-hidden className="cap-card-gradient" />
+                <ArrowUpRight className="h-5 w-5 transition-transform duration-300 ease-brand group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
+              </span>
+            </div>
 
-                <div className="relative flex items-start justify-between gap-4">
-                  <span className="font-mono text-[0.7rem] tabular-nums text-white/70 md:text-sm">
-                    {card.number}
-                  </span>
-                  <ArrowUpRight className="h-5 w-5 shrink-0 text-white/70 transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" />
-                </div>
-
-                <h3
-                  className="relative mt-10 font-serif tracking-tight text-balance text-white md:mt-14"
-                  style={{ fontSize: "var(--step-3)", lineHeight: 1.1 }}
-                >
-                  {card.title}
-                </h3>
-                <p className="relative mt-3 font-mono text-[0.66rem] uppercase tracking-[0.22em] text-[color-mix(in_srgb,var(--ramp-0)_65%,#ffffff)]">
-                  {card.tagline}
-                </p>
-                <p className="relative mt-4 text-sm leading-relaxed text-white/90">
-                  {emphasize(card.description, CARD_KEYWORDS[card.key])}
-                </p>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </div>
+            <div className="flex min-h-0 flex-col p-6 pt-4 md:col-span-7 md:p-10 lg:p-12">
+              <span className="font-mono text-sm tabular-nums text-tone-ink-soft">{card.number}</span>
+              <h3
+                className="mt-auto font-serif tracking-tight text-balance text-tone-ink"
+                style={{ fontSize: "var(--step-4)", lineHeight: 1.05 }}
+              >
+                {card.title}
+              </h3>
+              <p className="mt-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-tone-ink-soft">
+                {card.tagline}
+              </p>
+              <p className="mt-4 line-clamp-4 max-w-[60ch] text-sm leading-relaxed text-tone-ink-soft md:line-clamp-none md:text-base">
+                {emphasize(card.description, CARD_KEYWORDS[card.key])}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </ServicesDeck>
     </section>
   );
 }

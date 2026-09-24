@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { easings } from "@/lib/utils";
+import { useReducedMotionSafe } from "./hooks";
 
 type Props = {
   text: string;
@@ -11,7 +12,8 @@ type Props = {
 };
 
 export function TextSplit({ text, className, delay = 0, as = "h1" }: Props) {
-  const reduce = useReducedMotion();
+  // Hydrates as the split markup, then swaps to plain text under reduced motion
+  const reduce = useReducedMotionSafe();
   const words = text.split(" ");
   const Tag = motion[as];
 

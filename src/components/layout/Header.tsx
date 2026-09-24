@@ -8,7 +8,8 @@ import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { cn, easings } from "@/lib/utils";
 import { company } from "@/content/company";
-import { getServices } from "@/content/services";
+import { getServices, type ServiceSlug } from "@/content/services";
+import { SERVICE_TONES, toneClass, toneCycle } from "@/lib/tones";
 
 type NavKey =
   | "services"
@@ -93,7 +94,13 @@ function CapabilitiesMenu({
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const items = useMemo(() => {
-    const list = getServices(locale).map((s) => ({
+    const list: {
+      key: ServiceSlug | "models";
+      href: string;
+      number: string;
+      title: string;
+      tagline: string;
+    }[] = getServices(locale).map((s) => ({
       key: s.slug,
       href: `/services/${s.slug}`,
       number: s.number,
@@ -101,7 +108,7 @@ function CapabilitiesMenu({
       tagline: s.tagline,
     }));
     list.push({
-      key: "models" as (typeof list)[number]["key"],
+      key: "models",
       href: "/models",
       number: "05",
       title: tModels("title"),
@@ -199,18 +206,21 @@ function CapabilitiesMenu({
                   href={item.href}
                   role="menuitem"
                   onClick={() => setOpen(false)}
-                  className="cap-card group/cap relative flex flex-col overflow-hidden rounded-[var(--radius-md)] p-4 text-white transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
+                  className={cn(
+                    "tone-card group/cap flex min-h-[8.5rem] flex-col rounded-[var(--radius-md)] p-4",
+                    toneClass(SERVICE_TONES[item.key])
+                  )}
                 >
                   <span className="flex items-center justify-between">
-                    <span className="font-mono text-[0.62rem] tabular-nums text-white/75">
+                    <span className="font-mono text-[0.62rem] tabular-nums text-tone-ink-soft">
                       {item.number}
                     </span>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-white/75 transition-all duration-300 group-hover/cap:-translate-y-0.5 group-hover/cap:translate-x-0.5 group-hover/cap:text-white rtl:group-hover/cap:-translate-x-0.5" />
+                    <ArrowUpRight className="h-4 w-4 text-tone-ink-soft transition-all duration-300 ease-[var(--ease-brand)] group-hover/cap:-translate-y-0.5 group-hover/cap:translate-x-0.5 group-hover/cap:text-tone-ink rtl:group-hover/cap:-translate-x-0.5 rtl:-scale-x-100" />
                   </span>
-                  <span className="mt-4 block text-[0.92rem] font-semibold leading-tight tracking-[-0.015em]">
+                  <span className="mt-auto block pt-5 font-serif text-[1.15rem] font-semibold leading-tight tracking-[-0.02em]">
                     {item.title}
                   </span>
-                  <span className="mt-1 block text-[0.74rem] leading-snug text-white/85">
+                  <span className="mt-1 block text-[0.74rem] leading-snug text-tone-ink-soft">
                     {item.tagline}
                   </span>
                 </Link>
@@ -223,7 +233,7 @@ function CapabilitiesMenu({
               className="group/all mt-2 flex items-center justify-between rounded-[var(--radius-md)] px-4 py-3 text-[0.85rem] font-medium text-[var(--color-ink)] transition-colors hover:bg-[color-mix(in_srgb,var(--color-ink)_5%,transparent)]"
             >
               <span>{allLabel}</span>
-              <ArrowUpRight className="h-4 w-4 text-[var(--color-muted)] transition-all duration-300 group-hover/all:-translate-y-0.5 group-hover/all:translate-x-0.5 group-hover/all:text-[var(--color-accent)] rtl:group-hover/all:-translate-x-0.5" />
+              <ArrowUpRight className="h-4 w-4 text-[var(--color-muted)] transition-all duration-300 group-hover/all:-translate-y-0.5 group-hover/all:translate-x-0.5 group-hover/all:text-[var(--color-accent)] rtl:group-hover/all:-translate-x-0.5 rtl:-scale-x-100" />
             </Link>
           </motion.div>
         )}
@@ -574,7 +584,11 @@ export function Header() {
                       <span className="font-serif text-4xl tracking-tight">
                         {t(item.key)}
                       </span>
-                      <span className="font-mono text-xs text-[var(--color-muted)] tabular-nums">
+                      <span className="inline-flex items-center gap-2 font-mono text-xs text-[var(--color-muted)] tabular-nums">
+                        <span
+                          aria-hidden
+                          className={cn("tone-dot", toneClass(toneCycle(i)))}
+                        />
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </Link>
@@ -609,7 +623,7 @@ export function Header() {
                             )}
                           </span>
                         </span>
-                        <ArrowUpRight className="mt-1.5 h-4 w-4 shrink-0 text-[var(--color-muted)] transition-all duration-300 group-hover/m:-translate-y-0.5 group-hover/m:translate-x-0.5 group-hover/m:text-[var(--color-ink)] rtl:group-hover/m:-translate-x-0.5" />
+                        <ArrowUpRight className="mt-1.5 h-4 w-4 shrink-0 text-[var(--color-muted)] transition-all duration-300 group-hover/m:-translate-y-0.5 group-hover/m:translate-x-0.5 group-hover/m:text-[var(--color-ink)] rtl:group-hover/m:-translate-x-0.5 rtl:-scale-x-100" />
                       </Link>
                     ))}
                   </nav>

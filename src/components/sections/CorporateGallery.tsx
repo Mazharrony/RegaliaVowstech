@@ -1,12 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import type { GalleryCategory, Photo } from "@/content/gallery";
 import { galleryCategories } from "@/content/gallery";
 import { cn } from "@/lib/utils";
+import { SERVICE_TONES, toneClass, type Tone } from "@/lib/tones";
 
 interface Props {
   photos: Photo[];
@@ -14,6 +16,19 @@ interface Props {
 }
 
 const PHOTOS_PER_PAGE = 12;
+
+/** Each category wears its service hue; "All" takes a neutral third jewel. */
+const ALL_TONE: Tone = "violet";
+const CATEGORY_TONES: Record<GalleryCategory, Tone> = {
+  corporate: SERVICE_TONES["corporate-events"],
+  model: SERVICE_TONES.models,
+};
+
+const PILL =
+  "inline-flex h-11 items-center gap-2 rounded-full px-4 text-[0.8rem] tracking-[-0.005em] transition-colors duration-300 ease-[var(--ease-brand)]";
+const PILL_ACTIVE = "bg-tone-base font-semibold text-tone-ink";
+const PILL_IDLE =
+  "border border-[var(--color-line)] bg-[var(--color-surface-muted)] font-medium text-[var(--color-muted)] hover:text-[var(--color-ink)]";
 
 export function CorporateGallery({ photos: allPhotos, limit }: Props) {
   const t = useTranslations("gallery");
@@ -47,15 +62,15 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
   }, [allPhotos, activeCategory, limit]);
 
   const [page, setPage] = useState(1);
+  const selectCategory = (cat: GalleryCategory | null) => {
+    setActiveCategory(cat);
+    setPage(1);
+  };
+  // Clamped during render, so a shrinking photo set never strands the page
   const totalPages = Math.max(1, Math.ceil(photos.length / PHOTOS_PER_PAGE));
   const currentPage = Math.min(page, totalPages);
   const pageStart = (currentPage - 1) * PHOTOS_PER_PAGE;
   const pagePhotos = photos.slice(pageStart, pageStart + PHOTOS_PER_PAGE);
-
-  // Reset to page 1 when category changes
-  useEffect(() => {
-    setPage(1);
-  }, [activeCategory]);
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -72,11 +87,6 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
   const next = useCallback(() => {
     setLightboxIndex((i) => (i === null ? null : (i + 1) % pagePhotos.length));
   }, [pagePhotos.length]);
-
-  useEffect(() => {
-    setPage((current) => Math.min(current, totalPages));
-  }, [totalPages]);
-
 
   // Keyboard navigation
   useEffect(() => {
@@ -113,21 +123,18 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
       {!limit && visibleCategories.length > 1 && (
         <div className="mb-8 flex flex-wrap items-center gap-x-6 gap-y-4 md:mb-10">
           <p className="eyebrow inline-flex items-center gap-2">
-            <span aria-hidden className="inline-block h-px w-6 bg-[var(--color-accent)]" />
+            <span aria-hidden className="spectrum-rule" />
             {t("filterEyebrow")}
           </p>
           <ul className="flex flex-wrap gap-2">
             <li>
               <button
                 type="button"
-                onClick={() => setActiveCategory(null)}
+                onClick={() => selectCategory(null)}
                 aria-pressed={activeCategory === null}
-                className={
-                  activeCategory === null
-                    ? "inline-flex h-8 items-center rounded-full bg-[var(--color-ink)] px-3.5 text-[0.75rem] font-semibold tracking-[-0.005em] text-[var(--color-bg)]"
-                    : "inline-flex h-8 items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-muted)] px-3.5 text-[0.75rem] font-medium tracking-[-0.005em] text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
-                }
+                className={cn(PILL, toneClass(ALL_TONE), activeCategory === null ? PILL_ACTIVE : PILL_IDLE)}
               >
+                {activeCategory !== null && <span aria-hidden className="tone-dot" />}
                 {t("filterAll")} · {allPhotos.length}
               </button>
             </li>
@@ -137,14 +144,11 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
                 <li key={cat}>
                   <button
                     type="button"
-                    onClick={() => setActiveCategory(active ? null : cat)}
+                    onClick={() => selectCategory(active ? null : cat)}
                     aria-pressed={active}
-                    className={
-                      active
-                        ? "inline-flex h-8 items-center rounded-full bg-[var(--color-ink)] px-3.5 text-[0.75rem] font-semibold tracking-[-0.005em] text-[var(--color-bg)]"
-                        : "inline-flex h-8 items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-muted)] px-3.5 text-[0.75rem] font-medium tracking-[-0.005em] text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
-                    }
+                    className={cn(PILL, toneClass(CATEGORY_TONES[cat]), active ? PILL_ACTIVE : PILL_IDLE)}
                   >
+                    {!active && <span aria-hidden className="tone-dot" />}
                     {t(`category.${cat}`)} · {categoryCounts[cat]}
                   </button>
                 </li>
@@ -164,7 +168,10 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
             key={photo.id}
             type="button"
             onClick={() => open(idx)}
-            className="group mb-3 block w-full cursor-zoom-in overflow-hidden rounded-[var(--radius-lg)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+            className={cn(
+              "group mb-3 block w-full cursor-zoom-in overflow-hidden rounded-[var(--radius-lg)] ring-3 ring-transparent ring-offset-2 ring-offset-[var(--color-bg)] transition-shadow duration-300 ease-[var(--ease-brand)] hover:ring-tone-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tone-base",
+              toneClass(CATEGORY_TONES[photo.category]),
+            )}
             aria-label={photo.alt}
           >
             <div className="photo photo-plain relative w-full overflow-hidden">
@@ -175,7 +182,7 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
                 height={400}
                 sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className="h-auto w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading={pageStart + idx < 8 ? "eager" : "lazy"}
+                loading={!limit && pageStart + idx < 8 ? "eager" : "lazy"}
               />
             </div>
           </button>
@@ -196,7 +203,7 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
           <div className="flex flex-wrap items-center justify-center gap-2">
             <button
               type="button"
-              onClick={() => setPage((current) => Math.max(1, current - 1))}
+              onClick={() => setPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
               className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--color-line)] px-4 text-sm font-medium text-[var(--color-ink)] transition-colors hover:bg-[color-mix(in_srgb,var(--color-ink)_4%,transparent)] disabled:cursor-not-allowed disabled:opacity-40"
             >
@@ -226,7 +233,7 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
 
             <button
               type="button"
-              onClick={() => setPage((current) => Math.min(totalPages, current + 1))}
+              onClick={() => setPage(Math.min(totalPages, currentPage + 1))}
               disabled={currentPage === totalPages}
               className="inline-flex h-10 items-center gap-2 rounded-full border border-[var(--color-line)] px-4 text-sm font-medium text-[var(--color-ink)] transition-colors hover:bg-[color-mix(in_srgb,var(--color-ink)_4%,transparent)] disabled:cursor-not-allowed disabled:opacity-40"
             >
@@ -237,13 +244,15 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
         </nav>
       )}
 
-      {/* Lightbox */}
-      {currentPhoto && (
+      {/* Lightbox — portaled to <body>: <main> is its own z-10 stacking context,
+          so z-80 only outranks the header (50) and scroll bar (60) at the root.
+          Client-only: it can't render until a tile is clicked. */}
+      {currentPhoto && createPortal(
         <div
           role="dialog"
           aria-modal="true"
           aria-label={currentPhoto.alt}
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/90 backdrop-blur-sm"
           onClick={close}
         >
           {/* Counter */}
@@ -288,7 +297,7 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
               height={900}
               sizes="90vw"
               className="max-h-[90vh] w-auto max-w-[90vw] rounded-[var(--radius-lg)] object-contain shadow-2xl"
-              priority
+              loading="eager"
             />
           </div>
 
@@ -304,7 +313,8 @@ export function CorporateGallery({ photos: allPhotos, limit }: Props) {
           >
             {isRtl ? <ChevronLeft className="h-6 w-6" /> : <ChevronRight className="h-6 w-6" />}
           </button>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );
